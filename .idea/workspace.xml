@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3aaae245-2adf-43e6-8253-6a90a2fe4539" name="Changes" comment="Commit Prueba branch" />
+    <list default="true" id="3aaae245-2adf-43e6-8253-6a90a2fe4539" name="Changes" comment="Commit Prueba branch">
+      <change afterPath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/es/cesur/progprojectpok/view/equipo-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/es/cesur/progprojectpok/view/equipo-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/es/cesur/progprojectpok/view/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/es/cesur/progprojectpok/view/login-view.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,7 +48,7 @@
       <recent name="es.cesur.progprojectpok.controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SplashApplication">
+  <component name="RunManager" selected="Application.HelloApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="es.cesur.progprojectpok.HelloApplication" />
       <module name="PROG-PROJECT-POK" />
@@ -72,8 +77,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SplashApplication" />
         <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.SplashApplication" />
         <item itemvalue="Application.SplashApplication" />
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.SplashApplication" />
