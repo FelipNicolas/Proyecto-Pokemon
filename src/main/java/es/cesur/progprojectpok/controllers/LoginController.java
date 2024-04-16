@@ -31,9 +31,18 @@ public class LoginController implements Initializable {
     @FXML
     private TextField userId;
 
+    @FXML
+    private Label usuarioCorrecto;
+
 
     @FXML
     void loginUser(ActionEvent event) {
+        if(userId.getText().equals("felipe") || passUser.getText().equals("1234")) {
+
+
+        }
+
+
 
     }
 

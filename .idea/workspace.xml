@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3aaae245-2adf-43e6-8253-6a90a2fe4539" name="Changes" comment="Commit Prueba branch">
-      <change afterPath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/controllers/LoginController.java" afterDir="false" />
+    <list default="true" id="3aaae245-2adf-43e6-8253-6a90a2fe4539" name="Changes" comment="Commit View login y equipo&#10;Controller login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/es/cesur/progprojectpok/view/equipo-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/es/cesur/progprojectpok/view/equipo-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/es/cesur/progprojectpok/view/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/es/cesur/progprojectpok/view/login-view.fxml" afterDir="false" />
     </list>
@@ -43,6 +44,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\FelipeAlmansaNicolás\IdeaProjects\Proyecto-Pokemon_PokerStar-Felipe-Branch\src\main\resources\es\cesur\progprojectpok\view" />
+    </key>
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="es.cesur.progprojectpok.database.ConfigDB" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="es.cesur.progprojectpok.controllers" />
@@ -110,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713167713096</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Commit View login y equipo&#10;Controller login">
+      <option name="closed" value="true" />
+      <created>1713183004228</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713183004228</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,6 +150,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commit Prueba branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit Prueba branch" />
+    <MESSAGE value="Commit View login y equipo&#10;Controller login" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit View login y equipo&#10;Controller login" />
   </component>
 </project>
