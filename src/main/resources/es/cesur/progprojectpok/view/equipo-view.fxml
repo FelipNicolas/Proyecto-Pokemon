@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
@@ -19,7 +18,7 @@
       </ImageView>
       <AnchorPane layoutX="619.0" layoutY="101.0" opacity="0.93" prefHeight="384.0" prefWidth="295.0" style="-fx-border-color: black; -fx-background-color: #43CEB5; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 3;">
          <children>
-            <AnchorPane layoutX="25.0" layoutY="23.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10;">
+            <AnchorPane layoutX="25.0" layoutY="23.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
                <children>
                   <ImageView fitHeight="65.0" fitWidth="67.0" layoutX="18.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -28,7 +27,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="162.0" layoutY="23.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10;">
+            <AnchorPane layoutX="162.0" layoutY="23.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
                <children>
                   <ImageView fitHeight="65.0" fitWidth="67.0" layoutX="18.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -37,7 +36,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="25.0" layoutY="143.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10;">
+            <AnchorPane layoutX="25.0" layoutY="143.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
                <children>
                   <ImageView fitHeight="65.0" fitWidth="67.0" layoutX="18.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +45,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="162.0" layoutY="143.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10;">
+            <AnchorPane layoutX="162.0" layoutY="143.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
                <children>
                   <ImageView fitHeight="65.0" fitWidth="67.0" layoutX="18.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -55,7 +54,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="25.0" layoutY="261.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10;">
+            <AnchorPane layoutX="25.0" layoutY="261.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
                <children>
                   <ImageView fitHeight="65.0" fitWidth="67.0" layoutX="18.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -64,7 +63,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="162.0" layoutY="261.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10;">
+            <AnchorPane layoutX="162.0" layoutY="261.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
                <children>
                   <ImageView fitHeight="65.0" fitWidth="67.0" layoutX="18.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -83,27 +82,34 @@
             <InnerShadow />
          </effect>
       </Label>
-      <AnchorPane layoutX="83.0" layoutY="127.0" prefHeight="333.0" prefWidth="500.0" style="-fx-background-color: #43CEB5;">
+      <AnchorPane layoutX="89.0" layoutY="120.0" prefHeight="333.0" prefWidth="500.0" style="-fx-background-color: #43CEB5; -fx-border-color: #21C190; -fx-border-width: 8;">
          <children>
             <ImageView fitHeight="119.0" fitWidth="119.0" layoutX="36.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Gif-Pok.gif" />
                </image>
             </ImageView>
-            <TextArea layoutX="36.0" layoutY="215.0" prefHeight="98.0" prefWidth="443.0" />
-            <AnchorPane layoutX="160.0" layoutY="36.0" prefHeight="131.0" prefWidth="0.0" style="-fx-border-color: LIGHTBLUE;">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </AnchorPane>
-            <ProgressBar layoutX="183.0" layoutY="158.0" prefWidth="200.0" progress="0.0" />
-            <Label layoutX="183.0" layoutY="36.0" prefHeight="41.0" prefWidth="260.0" text="CHARIZARD" />
-            <ImageView fitHeight="41.0" fitWidth="42.0" layoutX="183.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+            <ProgressBar layoutX="183.0" layoutY="158.0" prefHeight="18.0" prefWidth="198.0" progress="1.0" />
+            <Label layoutX="183.0" layoutY="30.0" prefHeight="33.0" prefWidth="260.0" text="CHARIZARD">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="183.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../Downloads/Type_Tierra.jpeg" />
+                  <Image url="@../images/IconosTipos/icoFuego.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="42.0" layoutX="237.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="225.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/IconosTipos/icoVolador.png" />
+               </image></ImageView>
+            <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="187.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/imagen.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="156.0" layoutY="39.0" prefHeight="134.0" prefWidth="3.0" style="-fx-background-color: black; -fx-background-radius: 10;" />
+            <TextArea layoutX="65.0" layoutY="207.0" prefHeight="98.0" prefWidth="370.0" />
          </children>
          <effect>
             <InnerShadow />

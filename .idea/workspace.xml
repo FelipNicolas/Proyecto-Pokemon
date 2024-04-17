@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3aaae245-2adf-43e6-8253-6a90a2fe4539" name="Changes" comment="Commit View login y equipo&#10;Controller login">
+    <list default="true" id="3aaae245-2adf-43e6-8253-6a90a2fe4539" name="Changes" comment="Commit Clases conexion BD">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/cesur/progprojectpok/controllers/LoginController.java" afterDir="false" />
@@ -52,7 +52,7 @@
       <recent name="es.cesur.progprojectpok.controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.HelloApplication">
+  <component name="RunManager" selected="Application.SplashApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="es.cesur.progprojectpok.HelloApplication" />
       <module name="PROG-PROJECT-POK" />
@@ -81,8 +81,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.SplashApplication" />
+        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.SplashApplication" />
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.SplashApplication" />
@@ -122,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713183004228</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Commit Clases conexion BD">
+      <option name="closed" value="true" />
+      <created>1713270053377</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713270053377</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,6 +159,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commit Prueba branch" />
     <MESSAGE value="Commit View login y equipo&#10;Controller login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit View login y equipo&#10;Controller login" />
+    <MESSAGE value="Commit Clases conexion BD" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Clases conexion BD" />
   </component>
 </project>
