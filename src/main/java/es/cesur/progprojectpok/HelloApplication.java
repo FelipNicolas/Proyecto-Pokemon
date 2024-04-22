@@ -20,13 +20,13 @@ public class HelloApplication extends Application {
 
 
         //Preparar consulta
-        String sql = "SELECT * FROM USUARIO";
+        String sql = "SELECT * FROM ENTRENADOR";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) { //mientras tenga siguiente va recorriendo
-                int idUser = resultSet.getInt("ID_USER");
-                String nombreUser = resultSet.getString("NOMBRE_USER");
+                String idUser = resultSet.getString("NOMBRE_USER  ");
+                String nombreUser = resultSet.getString("PASS_USER");
 
                 System.out.println(idUser + " " + nombreUser);
             }
@@ -40,7 +40,7 @@ public class HelloApplication extends Application {
         //Ejecutar
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/equipo-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Login");
         stage.setScene(scene);
