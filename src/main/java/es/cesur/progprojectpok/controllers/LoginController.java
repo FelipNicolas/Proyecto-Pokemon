@@ -140,10 +140,7 @@ public class LoginController implements Initializable {
         System.exit(0);
     }
 
-    @FXML
-    protected void onHelloButtonClick() {
 
-    }
 
 
 }
