@@ -78,7 +78,7 @@ public class LoginController implements Initializable {
             if (userId.getText().equals(nomEntrenador) && passUser.getText().equals(passEntrenador)) {
 
                 fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/equipo-view.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+                Scene scene = new Scene(fxmlLoader.load(), 925, 580);
                 stage.setTitle("Login");
                 stage.setScene(scene);
                 stage.show();
