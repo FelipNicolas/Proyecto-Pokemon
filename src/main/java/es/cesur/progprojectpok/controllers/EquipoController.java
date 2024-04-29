@@ -1,6 +1,7 @@
 package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.ImageData;
+import es.cesur.progprojectpok.database.ConfigDB;
 import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
 import javafx.fxml.FXML;
@@ -21,7 +22,25 @@ import java.util.ResourceBundle;
 public class EquipoController implements Initializable {
 
     @FXML
-    private ImageView equipoPok1;
+    private ImageView img1;
+
+    @FXML
+    private ImageView img2;
+
+    @FXML
+    private ImageView img3;
+
+    @FXML
+    private ImageView img4;
+
+    @FXML
+    private ImageView img5;
+
+    @FXML
+    private ImageView img6;
+
+    @FXML
+    private ImageView imgFinal;
 
 
 
@@ -32,28 +51,60 @@ public class EquipoController implements Initializable {
 
         PreparedStatement preparedStatement = null;
 
-        String sql = "SELECT IMAGEN FROM POKEDEX WHERE NUM_POKEDEX = 7";
+        String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0";
+
 
         try {
             preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            File fileImageFondo = new File("src/main/resources/es/cesur/progprojectpok/images/blastoise-frente.gif");
-            equipoPok1.setImage(new Image(fileImageFondo.getAbsolutePath()));
+            String[] imgPok = new String[5];
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            String ImagenUrlPokemonGenerado = "";
+
+
+            for (int i = 0; i < imgPok.length; i++) {
+
+
+                while (resultSet.next()) {
+                    int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
+                    String NOM_POKEMON = resultSet.getString("NOM_POKEMON");
+                    String TIPO1 = resultSet.getString("TIPO1");
+                    String TIPO2 = resultSet.getString("TIPO2");
+                    ImagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
+                    String SONIDO = resultSet.getString("SONIDO");
+                    int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
+                    int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
+
+                    //System.out.println(NUM_POKEDEX + " " + NOM_POKEMON + " " + TIPO1 + " " + TIPO2 + " " +
+                     //       ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO);
+
+                    //Cambio de imagen
+                    break;
+
+                }
+
+                imgPok[i] = ConfigDB.URL_POK + ImagenUrlPokemonGenerado;
+
+                System.out.println(imgPok[i].toString());
+
+            }
+
+            File fileImageFondo1 = new File(imgPok[0]);
+
+            System.out.println("Posicion 1 = " + imgPok[0]);
+            System.out.println("Posicion 2 = " + imgPok[1]);
+
+            File fileImageFondo2 = new File(imgPok[1]);
+
+            img1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+            img2.setImage(new Image(fileImageFondo2.getAbsolutePath()));
+
+
+            } catch(SQLException e){
+                throw new RuntimeException(e);
+            }
+
+
         }
-
-
-
-
     }
-
-    @FXML
-    protected void onHelloButtonClick() {
-
-    }
-
-
-}
