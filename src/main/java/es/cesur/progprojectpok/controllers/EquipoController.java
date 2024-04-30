@@ -1,6 +1,7 @@
 package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.ImageData;
+import es.cesur.progprojectpok.clases.Entrenador;
 import es.cesur.progprojectpok.database.ConfigDB;
 import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
@@ -77,6 +78,10 @@ public class EquipoController implements Initializable {
 
     String[] NOM_POKEMON = new String[6];
 
+    String[] TIPO1 = new String[6];
+    String[] TIPO2 = new String[6];
+
+
 
 
     @Override
@@ -84,12 +89,16 @@ public class EquipoController implements Initializable {
 
         Connection connection = DBConnection.getConnection();
 
+
+
         PreparedStatement preparedStatement = null;
 
-        String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0";
+        String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0" +
+                "AND ID_USER = ?";
+
+
 
         String[] imgPok = new String[6];
-
         String ImagenUrlPokemonGenerado = "";
 
 
@@ -102,6 +111,9 @@ public class EquipoController implements Initializable {
 
 
 
+
+
+
             for (int i = 0; i < imgPok.length; i++) {
 
 
@@ -109,8 +121,8 @@ public class EquipoController implements Initializable {
 
                     int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
                     NOM_POKEMON[i] = resultSet.getString("NOM_POKEMON");
-                    String TIPO1 = resultSet.getString("TIPO1");
-                    String TIPO2 = resultSet.getString("TIPO2");
+                    TIPO1[i] = resultSet.getString("TIPO1");
+                    TIPO2[i] = resultSet.getString("TIPO2");
                     ImagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
                     String SONIDO = resultSet.getString("SONIDO");
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
@@ -164,7 +176,10 @@ public class EquipoController implements Initializable {
                 throw new RuntimeException(e);
             }
 
+
         }
+
+
 
     @FXML
     void clickPok1(MouseEvent event) {
