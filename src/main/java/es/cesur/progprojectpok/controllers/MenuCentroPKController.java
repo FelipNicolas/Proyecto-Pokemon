@@ -38,7 +38,7 @@ public class MenuCentroPKController implements Initializable {
     void btnEquipo(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/equipo-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 925, 580);
+        Scene scene = new Scene(fxmlLoader.load(), 955, 510);
         stage.setTitle("Menu-principal-view");
         stage.setScene(scene);
         stage.show();
@@ -51,7 +51,7 @@ public class MenuCentroPKController implements Initializable {
     void btnPC(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/pc-pokemon-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 925, 580);
+        Scene scene = new Scene(fxmlLoader.load(), 940, 550);
         stage.setTitle("Menu-principal-view");
         stage.setScene(scene);
         stage.show();
@@ -63,7 +63,7 @@ public class MenuCentroPKController implements Initializable {
     @FXML
     void btnCurar(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/centro-pokemon-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 925, 580);
+        Scene scene = new Scene(fxmlLoader.load(), 825, 460);
         stage.setTitle("Menu-principal-view");
         stage.setScene(scene);
         stage.show();
