@@ -1,19 +1,41 @@
 package es.cesur.progprojectpok.clases;
 
+import es.cesur.progprojectpok.database.DBConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Entrenador {
 
     private String nombreEntrenador;
+
+    private String pass;
+    private int idEntrenador;
     private Pokemon[] equipo;
     private Pc caja;
     private int pokedollars;
     private Objeto[] listObjetos;
 
-    public Entrenador(String nombreEntrenador, Pokemon[] equipo, Pc caja, int pokedollars, Objeto[] listObjetos) {
+    public Entrenador() {
+        this.nombreEntrenador = "";
+        this.pass = "";
+        this.idEntrenador = idEntrenador;
+        this.equipo = null;
+        this.caja = null;
+        this.pokedollars = 500;
+        this.listObjetos = null;
+    }
+
+    public Entrenador(String nombreEntrenador, String pass, int idEntrenador) {
         this.nombreEntrenador = nombreEntrenador;
-        this.equipo = equipo;
-        this.caja = caja;
-        this.pokedollars = pokedollars;
-        this.listObjetos = listObjetos;
+        this.pass = pass;
+        this.idEntrenador = idEntrenador;
+        this.equipo = null;
+        this.caja = null;
+        this.pokedollars = 500;
+        this.listObjetos = null;
     }
 
     public String getNombreEntrenador() {
@@ -56,9 +78,65 @@ public class Entrenador {
         this.listObjetos = listObjetos;
     }
 
-    public void capturar(){
+
+    public int getIdEntrenador() {
+        return idEntrenador;
+    }
+
+    public void setIdEntrenador(int idEntrenador) {
+        this.idEntrenador = idEntrenador;
+    }
+
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public void capturar(Pokemon pokemonCaptura){
+
+        for (int i = 0; i < equipo.length; i++) {
+
+            if (equipo[i] == null) {
+
+                equipo[i] = pokemonCaptura;
+            }
+        }
+    }
+
+
+    public int infoEntrenador(int idEntrenadorLogin){
+
+        Connection connection = DBConnection.getConnection();
+
+        ResultSet resultSet;
+
+        String sql = "SELECT * FROM ENTRENADOR WHERE ID_USER = ?";
+
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            preparedStatement.setInt(1, idEntrenadorLogin);
+
+            idEntrenador = resultSet.getInt("ID_USER");
+            nombreEntrenador = resultSet.getString("NOM_POKEMON");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return idEntrenador;
 
     }
+
+
+
+
+
 
 
 

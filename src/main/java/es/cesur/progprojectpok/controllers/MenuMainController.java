@@ -2,6 +2,7 @@ package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.HelloApplication;
 import es.cesur.progprojectpok.ImageData;
+import es.cesur.progprojectpok.clases.Entrenador;
 import es.cesur.progprojectpok.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.xml.stream.events.EntityReference;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +31,15 @@ public class MenuMainController implements Initializable {
     @FXML
     private AnchorPane cerrarMenuMain;
 
+    private Entrenador entrenadorMenuPrincipal;
+
+    public Entrenador getEntrenadorMenuPrincipal() {
+        return entrenadorMenuPrincipal;
+    }
+
+    public void setEntrenadorMenuPrincipal(Entrenador entrenadorMenuPrincipal) {
+        this.entrenadorMenuPrincipal = entrenadorMenuPrincipal;
+    }
 
     @FXML
     void btnLucha(ActionEvent event) throws IOException {
@@ -55,6 +66,8 @@ public class MenuMainController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load(), 715, 700);
         stage.setTitle("Menu-CentroPK-view");
         stage.setScene(scene);
+        MenuCentroPKController menuCentroPKController = fxmlLoader.getController();
+        menuCentroPKController.setEntrenadorMenu(entrenadorMenuPrincipal);
         stage.show();
 
         Stage stageAnterior = (Stage) cerrarMenuMain.getScene().getWindow();

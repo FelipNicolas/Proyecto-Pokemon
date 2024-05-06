@@ -3,6 +3,7 @@ package es.cesur.progprojectpok.controllers;
 import es.cesur.progprojectpok.HelloApplication;
 import es.cesur.progprojectpok.ImageData;
 import es.cesur.progprojectpok.SplashApplication;
+import es.cesur.progprojectpok.clases.Entrenador;
 import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
 import javafx.event.ActionEvent;
@@ -45,25 +46,35 @@ public class LoginController implements Initializable {
     @FXML
     private Label usuarioCorrecto;
 
+    protected Entrenador entrenadorLogin;
+
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
 
     }
 
 
     @FXML
-    void loginUser() throws SQLException, IOException {
+     void loginUser() throws SQLException, IOException {
 
         Connection connection = DBConnection.getConnection();
 
-        String sql = "SELECT NOMBRE_USER, PASS_USER FROM ENTRENADOR";
+        String sql = "SELECT NOMBRE_USER, PASS_USER, ID_USER FROM ENTRENADOR";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
 
 
+
         String nomEntrenador;
         String passEntrenador;
+        int idEntrenador;
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = null;
@@ -71,17 +82,35 @@ public class LoginController implements Initializable {
 
 
         while (resultSet.next()) {
+
             nomEntrenador = resultSet.getString("NOMBRE_USER");
             passEntrenador = resultSet.getString("PASS_USER");
+            idEntrenador = resultSet.getInt("ID_USER");
 
 
             if (userId.getText().equals(nomEntrenador) && passUser.getText().equals(passEntrenador)) {
 
+
+                entrenadorLogin = new Entrenador(nomEntrenador, passEntrenador, idEntrenador);
+
+
+                System.out.println(" entrenador login" + entrenadorLogin.getIdEntrenador());
+
+
                 fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/menu-view-principal.fxml"));
+
                 Scene scene = new Scene(fxmlLoader.load(), 715, 700);
+
+                // Enviar el id de entrenador a la siguente pantalla (equipo controller)
+
                 stage.setTitle("Login");
                 stage.setScene(scene);
+                MenuMainController menuMainController = fxmlLoader.getController();
+                menuMainController.setEntrenadorMenuPrincipal(entrenadorLogin);
                 stage.show();
+
+
+                System.out.println(entrenadorLogin.getIdEntrenador());
 
                 Stage stageAnterior = (Stage) usuarioCorrecto.getScene().getWindow();
                 stageAnterior.close();
@@ -91,17 +120,13 @@ public class LoginController implements Initializable {
                 connection.close();
 
             }else usuarioCorrecto.setText("Incorrecto");
-
-
-
         }
 
-
-
-
-
-
     }
+
+
+
+
 
     @FXML
     void registerUser(ActionEvent event) {
