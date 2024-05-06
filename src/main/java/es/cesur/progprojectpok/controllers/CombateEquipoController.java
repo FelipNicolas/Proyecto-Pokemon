@@ -1,5 +1,6 @@
 package es.cesur.progprojectpok.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -41,24 +42,6 @@ public class CombateEquipoController implements Initializable {
 
     @FXML
     private ImageView Pok6;
-
-    @FXML
-    private Button btnPK1;
-
-    @FXML
-    private Button btnPK2;
-
-    @FXML
-    private Button btnPK32;
-
-    @FXML
-    private Button btnPK4;
-
-    @FXML
-    private Button btnPK5;
-
-    @FXML
-    private Button btnPK6;
 
     @FXML
     private ImageView img1;
@@ -117,6 +100,40 @@ public class CombateEquipoController implements Initializable {
     @FXML
     private ProgressBar prgrsBar2;
 
+    @FXML
+    void btnBACK(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnPK1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnPK2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnPK3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnPK4(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnPK5(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnPK6(ActionEvent event) {
+
+    }
 
 
     @Override

@@ -76,17 +76,40 @@ public class CombateController implements Initializable {
     private Label lblNombre1;
 
     @FXML
-    void btnLuchar(ActionEvent event) {
+    void btnLuchar(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/combate-luchar-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1015, 685);
+        stage.setTitle("movimientos-view");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage stageAnterior = (Stage) cerrarCombatePK.getScene().getWindow();
+        stageAnterior.close();
 
     }
 
     @FXML
-    void btnPK(ActionEvent event) {
+    void btnPK(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/combate-equipo-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1015, 685);
+        stage.setTitle("pokemons-view");
+        stage.setScene(scene);
+        stage.show();
 
+        Stage stageAnterior = (Stage) cerrarCombatePK.getScene().getWindow();
+        stageAnterior.close();
     }
 
     @FXML
-    void btnMochila(ActionEvent event) {
+    void btnMochila(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/combate-mochila-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1015, 685);
+        stage.setTitle("mochila-view");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage stageAnterior = (Stage) cerrarCombatePK.getScene().getWindow();
+        stageAnterior.close();
 
     }
 
@@ -94,7 +117,7 @@ public class CombateController implements Initializable {
     void btnHuir(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/menu-view-lucha.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 715, 700);
-        stage.setTitle("Menu-lucha-view");
+        stage.setTitle("boton-huir-view");
         stage.setScene(scene);
         stage.show();
 

@@ -2,6 +2,7 @@ package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.ImageData;
 import es.cesur.progprojectpok.utils.Utils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -46,16 +47,28 @@ public class CombateLucharController implements Initializable {
     private ImageView Pok6;
 
     @FXML
-    private Button btn1;
+    private ImageView imgATK1;
 
     @FXML
-    private Button btn2;
+    private ImageView imgATK2;
 
     @FXML
-    private Button btn3;
+    private ImageView imgATK3;
 
     @FXML
-    private Button btn4;
+    private ImageView imgATK4;
+
+    @FXML
+    private Label lblATK1;
+
+    @FXML
+    private Label lblATK2;
+
+    @FXML
+    private Label lblATK3;
+
+    @FXML
+    private Label lblATK4;
 
     @FXML
     private Label lblComb1;
@@ -78,6 +91,30 @@ public class CombateLucharController implements Initializable {
     @FXML
     private ProgressBar prgrsBar2;
 
+    @FXML
+    void btn1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btn4(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnBACK(ActionEvent event) {
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

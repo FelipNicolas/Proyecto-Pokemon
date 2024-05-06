@@ -18,7 +18,7 @@
       </ImageView>
       <AnchorPane layoutY="521.0" prefHeight="160.0" prefWidth="1013.0" style="-fx-background-color: #742005; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;">
          <children>
-            <Button fx:id="btnPK2" alignment="TOP_LEFT" layoutX="625.0" layoutY="11.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok2" textFill="#614747">
+            <Button alignment="TOP_LEFT" layoutX="625.0" layoutY="11.0" mnemonicParsing="false" onAction="#btnPK2" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok2" textFill="#614747">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -26,7 +26,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Button fx:id="btnPK5" alignment="TOP_LEFT" layoutX="625.0" layoutY="81.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok5" textFill="#614848">
+            <Button alignment="TOP_LEFT" layoutX="625.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnPK5" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok5" textFill="#614848">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -34,7 +34,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Button fx:id="btnPK32" alignment="TOP_LEFT" layoutX="819.0" layoutY="11.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok3" textFill="#614848">
+            <Button alignment="TOP_LEFT" layoutX="819.0" layoutY="11.0" mnemonicParsing="false" onAction="#btnPK3" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok3" textFill="#614848">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -42,7 +42,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Button fx:id="btnPK6" alignment="TOP_LEFT" layoutX="819.0" layoutY="81.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok6" textFill="#614848">
+            <Button alignment="TOP_LEFT" layoutX="819.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnPK6" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok6" textFill="#614848">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -59,7 +59,7 @@
             <ImageView fx:id="img6" fitHeight="35.0" fitWidth="34.0" layoutX="954.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="img10" fitHeight="35.0" fitWidth="34.0" layoutX="758.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="img12" fitHeight="35.0" fitWidth="34.0" layoutX="954.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="btnPK1" alignment="TOP_LEFT" layoutX="431.0" layoutY="11.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok1" textFill="#614747">
+            <Button alignment="TOP_LEFT" layoutX="431.0" layoutY="11.0" mnemonicParsing="false" onAction="#btnPK1" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok1" textFill="#614747">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -67,7 +67,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Button fx:id="btnPK4" alignment="TOP_LEFT" layoutX="431.0" layoutY="81.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok4" textFill="#614848">
+            <Button alignment="TOP_LEFT" layoutX="431.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnPK4" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="Pok4" textFill="#614848">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -167,5 +167,13 @@
             <InnerShadow />
          </effect>
       </AnchorPane>
+      <Button alignment="CENTER" layoutX="893.0" layoutY="32.0" mnemonicParsing="false" onAction="#btnBACK" prefHeight="49.0" prefWidth="120.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="←Volver" textFill="#614747">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>
