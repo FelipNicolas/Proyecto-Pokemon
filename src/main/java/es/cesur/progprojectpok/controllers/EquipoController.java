@@ -169,6 +169,8 @@ public class EquipoController implements Initializable {
             File fileImageFondo6 = new File(imgPok[5]);
 
 
+
+
             System.out.println("Posicion 1 = " + imgPok[0]);
             System.out.println("Posicion 2 = " + imgPok[1]);
 
@@ -181,9 +183,16 @@ public class EquipoController implements Initializable {
             img6.setImage(new Image(fileImageFondo6.getAbsolutePath()));
 
 
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+
+
         } catch(SQLException e){
             throw new RuntimeException(e);
         }
+
+
 
 
     }

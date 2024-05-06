@@ -97,23 +97,17 @@ public class LoginController implements Initializable {
                 System.out.println(" entrenador login" + entrenadorLogin.getIdEntrenador());
 
 
-                fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/equipo-view.fxml"));
+                fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/menu-view-principal.fxml"));
 
-                Scene scene = new Scene(fxmlLoader.load(), 925, 580);
+                Scene scene = new Scene(fxmlLoader.load(), 715, 700);
 
                 // Enviar el id de entrenador a la siguente pantalla (equipo controller)
 
                 stage.setTitle("Login");
                 stage.setScene(scene);
-                EquipoController equipoController = fxmlLoader.getController();
-                equipoController.setEntrenadorEquipo(entrenadorLogin);
+                MenuMainController menuMainController = fxmlLoader.getController();
+                menuMainController.setEntrenadorMenuPrincipal(entrenadorLogin);
                 stage.show();
-
-
-                System.out.println();
-
-
-
 
 
                 System.out.println(entrenadorLogin.getIdEntrenador());

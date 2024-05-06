@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="944.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="944.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.cesur.progprojectpok.controllers.PcController">
     <children>
         <ImageView fitHeight="558.0" fitWidth="968.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -125,7 +125,7 @@
                   <Image url="@../images/91873.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="52.0" fitWidth="165.0" layoutX="319.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="cerrarPC" fitHeight="52.0" fitWidth="165.0" layoutX="319.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/logo-pixel.png" />
                </image>
@@ -188,7 +188,7 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-      <Button fx:id="btnBACK" layoutX="45.0" layoutY="14.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="129.0" style="-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: D62E2E;" text="VOLVER" textFill="WHITE">
+      <Button layoutX="45.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBACK" prefHeight="52.0" prefWidth="129.0" style="-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: D62E2E;" text="VOLVER" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
