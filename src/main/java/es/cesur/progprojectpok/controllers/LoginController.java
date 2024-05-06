@@ -46,7 +46,8 @@ public class LoginController implements Initializable {
     @FXML
     private Label usuarioCorrecto;
 
-    protected Entrenador entrenador;
+    protected Entrenador entrenadorLogin;
+
 
 
 
@@ -69,7 +70,7 @@ public class LoginController implements Initializable {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        entrenador = new Entrenador();
+
 
         String nomEntrenador;
         String passEntrenador;
@@ -89,18 +90,33 @@ public class LoginController implements Initializable {
 
             if (userId.getText().equals(nomEntrenador) && passUser.getText().equals(passEntrenador)) {
 
+
+                entrenadorLogin = new Entrenador(nomEntrenador, passEntrenador, idEntrenador);
+
+
+                System.out.println(" entrenador login" + entrenadorLogin.getIdEntrenador());
+
+
                 fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/equipo-view.fxml"));
+
                 Scene scene = new Scene(fxmlLoader.load(), 925, 580);
+
+                // Enviar el id de entrenador a la siguente pantalla (equipo controller)
+
                 stage.setTitle("Login");
                 stage.setScene(scene);
+                EquipoController equipoController = fxmlLoader.getController();
+                equipoController.setEntrenadorEquipo(entrenadorLogin);
                 stage.show();
 
-                entrenador.setNombreEntrenador(nomEntrenador);
-                entrenador.setPass(passEntrenador);
-                entrenador.setIdEntrenador(idEntrenador);
+
+                System.out.println();
 
 
-                System.out.println(entrenador.getIdEntrenador());
+
+
+
+                System.out.println(entrenadorLogin.getIdEntrenador());
 
                 Stage stageAnterior = (Stage) usuarioCorrecto.getScene().getWindow();
                 stageAnterior.close();

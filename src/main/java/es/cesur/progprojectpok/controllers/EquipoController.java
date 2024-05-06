@@ -71,6 +71,18 @@ public class EquipoController implements Initializable {
     @FXML
     private ProgressBar barVida;
 
+    @FXML
+    private Label idEntrenador;
+
+   private Entrenador entrenadorEquipo;
+
+    public Entrenador getEntrenadorEquipo() {
+        return entrenadorEquipo;
+    }
+
+    public void setEntrenadorEquipo(Entrenador entrenadorEquipo) {
+        this.entrenadorEquipo = entrenadorEquipo;
+    }
 
     String[] imgPok = new String[6];
 
@@ -84,33 +96,33 @@ public class EquipoController implements Initializable {
 
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+        }
+
+    @FXML
+    void cargarEquipo(ActionEvent a) {
+
+        System.out.println("id equipo" + entrenadorEquipo);
+
         Connection connection = DBConnection.getConnection();
-
-
 
         PreparedStatement preparedStatement = null;
 
-        String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0" +
-                "AND ID_USER = ?";
-
-
+        String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0 AND ID_USER = ?;";
 
         String[] imgPok = new String[6];
         String ImagenUrlPokemonGenerado = "";
 
 
-
-
         try {
             preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, entrenadorEquipo.getIdEntrenador());
+
             ResultSet resultSet = preparedStatement.executeQuery();
-
-
-
-
 
 
 
@@ -149,15 +161,12 @@ public class EquipoController implements Initializable {
 
             }
 
-
             File fileImageFondo1 = new File(imgPok[0]);
             File fileImageFondo2 = new File(imgPok[1]);
             File fileImageFondo3 = new File(imgPok[2]);
             File fileImageFondo4 = new File(imgPok[3]);
             File fileImageFondo5 = new File(imgPok[4]);
             File fileImageFondo6 = new File(imgPok[5]);
-
-
 
 
             System.out.println("Posicion 1 = " + imgPok[0]);
@@ -172,12 +181,12 @@ public class EquipoController implements Initializable {
             img6.setImage(new Image(fileImageFondo6.getAbsolutePath()));
 
 
-            } catch(SQLException e){
-                throw new RuntimeException(e);
-            }
-
-
+        } catch(SQLException e){
+            throw new RuntimeException(e);
         }
+
+
+    }
 
 
 

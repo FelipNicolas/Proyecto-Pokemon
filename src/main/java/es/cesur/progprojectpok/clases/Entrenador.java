@@ -28,6 +28,16 @@ public class Entrenador {
         this.listObjetos = null;
     }
 
+    public Entrenador(String nombreEntrenador, String pass, int idEntrenador) {
+        this.nombreEntrenador = nombreEntrenador;
+        this.pass = pass;
+        this.idEntrenador = idEntrenador;
+        this.equipo = null;
+        this.caja = null;
+        this.pokedollars = 500;
+        this.listObjetos = null;
+    }
+
     public String getNombreEntrenador() {
         return nombreEntrenador;
     }
@@ -86,7 +96,40 @@ public class Entrenador {
         this.pass = pass;
     }
 
-    public void capturar(){
+    public void capturar(Pokemon pokemonCaptura){
+
+        for (int i = 0; i < equipo.length; i++) {
+
+            if (equipo[i] == null) {
+
+                equipo[i] = pokemonCaptura;
+            }
+        }
+    }
+
+
+    public int infoEntrenador(int idEntrenadorLogin){
+
+        Connection connection = DBConnection.getConnection();
+
+        ResultSet resultSet;
+
+        String sql = "SELECT * FROM ENTRENADOR WHERE ID_USER = ?";
+
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            preparedStatement.setInt(1, idEntrenadorLogin);
+
+            idEntrenador = resultSet.getInt("ID_USER");
+            nombreEntrenador = resultSet.getString("NOM_POKEMON");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return idEntrenador;
 
     }
 
