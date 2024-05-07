@@ -71,7 +71,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <Label cache="true" contentDisplay="TOP" layoutX="78.0" layoutY="25.0" opacity="0.94" prefHeight="65.0" prefWidth="836.0" style="-fx-background-color: #49D5C6; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1.5;" text=" EQUIPO POKEMON" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="true">
+      <Label fx:id="cerrarEquipo" cache="true" contentDisplay="TOP" layoutX="78.0" layoutY="25.0" opacity="0.94" prefHeight="65.0" prefWidth="836.0" style="-fx-background-color: #49D5C6; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 1.5;" text=" EQUIPO POKEMON" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Arial" size="33.0" />
          </font>
@@ -115,6 +115,14 @@
          </effect>
       </AnchorPane>
       <Label fx:id="idEntrenador" layoutX="540.0" layoutY="49.0" text="Label" visible="false" />
-      <Button layoutX="232.0" layoutY="474.0" mnemonicParsing="false" onAction="#cargarEquipo" prefHeight="41.0" prefWidth="198.0" text="Cargar equipo" />
+      <Button layoutX="272.0" layoutY="473.0" mnemonicParsing="false" onAction="#cargarEquipo" prefHeight="42.0" prefWidth="135.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black; -fx-border-width: 2;" text="Cargar equipo">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+      <Button layoutX="8.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnBACK" prefHeight="42.0" prefWidth="64.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black; -fx-border-width: 2;" text="Salir">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

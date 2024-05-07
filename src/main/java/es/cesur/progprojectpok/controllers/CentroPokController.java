@@ -3,6 +3,7 @@ package es.cesur.progprojectpok.controllers;
 import es.cesur.progprojectpok.HelloApplication;
 import es.cesur.progprojectpok.ImageData;
 import es.cesur.progprojectpok.clases.Entrenador;
+import es.cesur.progprojectpok.clases.Pokemon;
 import es.cesur.progprojectpok.database.ConfigDB;
 import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
@@ -91,6 +92,35 @@ public class CentroPokController implements Initializable {
     @FXML
     void realizarCura(ActionEvent event) {
 
+        Connection connection = DBConnection.getConnection();
+
+        PreparedStatement preparedStatement = null;
+
+        String sql = "UPDATE POKEMON SET VITALIDAD = 100 WHERE CAJA = 0 AND ID_USER = ?;";
+
+
+
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, entrenadorCentroPK.getIdEntrenador());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        pgrsbar1.setProgress(1);
+        pgrsbar2.setProgress(1);
+        pgrsbar3.setProgress(1);
+        pgrsbar4.setProgress(1);
+        pgrsbar5.setProgress(1);
+        pgrsbar6.setProgress(1);
+
+
+
     }
 
     @Override
@@ -110,12 +140,15 @@ public class CentroPokController implements Initializable {
 
     String[] imgPok = new String[6];
 
+    int[] vidaPivote = new int[6];
+
     String ImagenUrlPokemonGenerado = "";
 
     String[] NOM_POKEMON = new String[6];
 
     String[] TIPO1 = new String[6];
     String[] TIPO2 = new String[6];
+    int[] VIDA = new int[6];
 
     @FXML
     void cargarEquipo(ActionEvent event) {
@@ -153,13 +186,13 @@ public class CentroPokController implements Initializable {
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
                     int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
                     String SEXO = resultSet.getString("SEXO");
-                    int VIDA = resultSet.getInt("VITALIDAD");
+                    VIDA[i] = resultSet.getInt("VITALIDAD");
                     int NIVEL = resultSet.getInt("NIVEL");
 
 
 
                     System.out.println(NUM_POKEDEX + " " + NOM_POKEMON + " " + TIPO1 + " " + TIPO2 + " " +
-                            ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + SEXO);
+                            ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + SEXO + " " + VIDA);
 
                     //Cambio de imagen
                     break;
@@ -170,6 +203,26 @@ public class CentroPokController implements Initializable {
                 imgPok[i] = ConfigDB.URL_POK + ImagenUrlPokemonGenerado;
 
                 System.out.println(imgPok[i]);
+
+                for (int j = 0; j < VIDA.length; j++) {
+
+                    vidaPivote[i] = VIDA[i] ;
+
+                }
+
+
+                pgrsbar1.setProgress(((double) vidaPivote[0] / 100));
+                pgrsbar2.setProgress(((double) vidaPivote[1] / 100));
+                pgrsbar3.setProgress(((double) vidaPivote[2] / 100));
+                pgrsbar4.setProgress(((double) vidaPivote[3] / 100));
+                pgrsbar5.setProgress(((double) vidaPivote[4] / 100));
+                pgrsbar6.setProgress(((double) vidaPivote[5] / 100));
+
+
+
+                System.out.println("La chupa a:" + vidaPivote[0]);
+                System.out.println("La chupa a:" + vidaPivote[1]);
+
 
 
             }
@@ -194,15 +247,21 @@ public class CentroPokController implements Initializable {
             imgPok6.setImage(new Image(fileImageFondo6.getAbsolutePath()));
 
 
+
         } catch(SQLException e){
             throw new RuntimeException(e);
         }
+
+
+
     }
 
     public void btnBACK(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/menu-view-centropk.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 715, 700);
-        stage.setTitle("Menu-lucha-view");
+        stage.setTitle("volver-btn");
+        MenuCentroPKController menuCentroPKController = fxmlLoader.getController();
+        menuCentroPKController.setEntrenadorMenu(entrenadorCentroPK);
         stage.setScene(scene);
         stage.show();
 

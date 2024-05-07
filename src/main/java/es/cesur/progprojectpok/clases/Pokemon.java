@@ -22,7 +22,7 @@ public class Pokemon {
 
 
     public Pokemon(String motePok, int vitalidadPok, int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp, int ptsDefensaEsp, int velocidadPok,
-                   int nivelPok, Movimiento[] setMoviminetos, int fertilidad, boolean sexoPok, Objeto objeto, int experiencia) {
+                    int nivelPok, Movimiento[] setMoviminetos, int fertilidad, boolean sexoPok, Objeto objeto, int experiencia) {
 
         this.motePok = motePok;
         this.vitalidadPok = vitalidadPok;
@@ -37,6 +37,24 @@ public class Pokemon {
         this.sexoPok = sexoPok;
         this.objeto = objeto;
         this.experiencia = experiencia;
+
+    }
+
+    public Pokemon() {
+
+        this.motePok = "";
+        this.vitalidadPok = 0;
+        this.ptsAtaque = 0;
+        this.ptsDefensa = 0;
+        this.ptsAtaqueEsp = 0;
+        this.ptsDefensaEsp = 0;
+        this.velocidadPok = 0;
+        this.nivelPok = 1;
+        this.setMoviminetos = null;
+        this.fertilidad = 0;
+        this.sexoPok = true;
+        this.objeto = null;
+        this.experiencia = 0;
 
     }
 

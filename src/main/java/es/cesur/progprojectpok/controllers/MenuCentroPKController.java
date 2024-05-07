@@ -49,7 +49,7 @@ public class MenuCentroPKController implements Initializable {
     void btnEquipo(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/equipo-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 955, 510);
+        Scene scene = new Scene(fxmlLoader.load(), 970, 540);
         stage.setTitle("equipo-view");
         stage.setScene(scene);
         EquipoController equipoController = fxmlLoader.getController();
@@ -67,6 +67,8 @@ public class MenuCentroPKController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load(), 940, 550);
         stage.setTitle("pc-view");
         stage.setScene(scene);
+        PcController pcController = fxmlLoader.getController();
+        pcController.setEntrenadorPc(entrenadorMenu);
         stage.show();
 
         Stage stageAnterior = (Stage) cerrarCentroPK.getScene().getWindow();

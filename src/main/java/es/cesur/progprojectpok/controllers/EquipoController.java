@@ -1,5 +1,6 @@
 package es.cesur.progprojectpok.controllers;
 
+import es.cesur.progprojectpok.HelloApplication;
 import es.cesur.progprojectpok.ImageData;
 import es.cesur.progprojectpok.clases.Entrenador;
 import es.cesur.progprojectpok.database.ConfigDB;
@@ -8,14 +9,18 @@ import es.cesur.progprojectpok.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,6 +29,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class EquipoController implements Initializable {
+
+    Stage stage = new Stage();
+    FXMLLoader fxmlLoader = null;
 
     @FXML
     private ImageView img1;
@@ -73,6 +81,10 @@ public class EquipoController implements Initializable {
 
     @FXML
     private Label idEntrenador;
+
+    @FXML
+    private Label cerrarEquipo;
+
 
    private Entrenador entrenadorEquipo;
 
@@ -186,6 +198,20 @@ public class EquipoController implements Initializable {
         }
 
 
+    }
+
+    @FXML
+    void btnBACK(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/menu-view-centropk.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 715, 700);
+        stage.setTitle("boton-vuelta-view");
+        stage.setScene(scene);
+        MenuCentroPKController menuCentroPKController = fxmlLoader.getController();
+        menuCentroPKController.setEntrenadorMenu(entrenadorEquipo);
+        stage.show();
+
+        Stage stageAnterior = (Stage) cerrarEquipo.getScene().getWindow();
+        stageAnterior.close();
     }
 
 
