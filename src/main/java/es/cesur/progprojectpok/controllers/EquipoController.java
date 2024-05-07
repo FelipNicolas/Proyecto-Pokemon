@@ -62,6 +62,7 @@ public class EquipoController implements Initializable {
     @FXML
     private Label lblNomPok;
 
+
     @FXML
     private TextArea txtDescrip;
 
@@ -88,18 +89,14 @@ public class EquipoController implements Initializable {
 
     String ImagenUrlPokemonGenerado = "";
 
-    String[] NOM_POKEMON = new String[6];
+    String[] nomPokemon = new String[6];
 
-    String[] TIPO1 = new String[6];
-    String[] TIPO2 = new String[6];
-
-
-
+    String[] tipo1 = new String[6];
+    String[] tipo2 = new String[6];
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
 
         }
 
@@ -124,17 +121,15 @@ public class EquipoController implements Initializable {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-
-
             for (int i = 0; i < imgPok.length; i++) {
 
 
                 while (resultSet.next()) {
 
                     int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
-                    NOM_POKEMON[i] = resultSet.getString("NOM_POKEMON");
-                    TIPO1[i] = resultSet.getString("TIPO1");
-                    TIPO2[i] = resultSet.getString("TIPO2");
+                    nomPokemon[i] = resultSet.getString("NOM_POKEMON");
+                    tipo1[i] = resultSet.getString("TIPO1");
+                    tipo2[i] = resultSet.getString("TIPO2");
                     ImagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
                     String SONIDO = resultSet.getString("SONIDO");
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
@@ -145,12 +140,11 @@ public class EquipoController implements Initializable {
 
 
 
-                    System.out.println(NUM_POKEDEX + " " + NOM_POKEMON + " " + TIPO1 + " " + TIPO2 + " " +
+                    System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
                             ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + SEXO);
 
                     //Cambio de imagen
                     break;
-
 
                 }
 
@@ -167,8 +161,6 @@ public class EquipoController implements Initializable {
             File fileImageFondo4 = new File(imgPok[3]);
             File fileImageFondo5 = new File(imgPok[4]);
             File fileImageFondo6 = new File(imgPok[5]);
-
-
 
 
             System.out.println("Posicion 1 = " + imgPok[0]);
@@ -191,23 +183,14 @@ public class EquipoController implements Initializable {
         } catch(SQLException e){
             throw new RuntimeException(e);
         }
-
-
-
-
     }
-
-
 
     @FXML
     void clickPok1(MouseEvent event) {
 
         File fileImgPok1 = new File(img1.getImage().getUrl());
-            System.out.println("ruta: " + fileImgPok1);
         imgFinal.setImage(new Image(fileImgPok1.getAbsolutePath()));
-
-        lblNomPok.setText(NOM_POKEMON[0]);
-
+        lblNomPok.setText(nomPokemon[0]);
     }
 
     @FXML
@@ -215,27 +198,43 @@ public class EquipoController implements Initializable {
 
         File fileImgPok2 = new File(img2.getImage().getUrl());
         imgFinal.setImage(new Image(fileImgPok2.getAbsolutePath()));
-        lblNomPok.setText(NOM_POKEMON[1]);
+        lblNomPok.setText(nomPokemon[1]);
 
     }
 
     @FXML
     void clickPok3(ActionEvent event) {
 
+        File fileImgPok3 = new File(img2.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok3.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[2]);
+
     }
 
     @FXML
     void clickPok4(ActionEvent event) {
+
+        File fileImgPok4 = new File(img2.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok4.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[3]);
 
     }
 
     @FXML
     void clickPok5(ActionEvent event) {
 
+        File fileImgPok5 = new File(img2.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok5.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[4]);
+
     }
 
     @FXML
     void clickPok6(ActionEvent event) {
+
+        File fileImgPok6 = new File(img2.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok6.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[5]);
 
     }
 

@@ -40,6 +40,28 @@ public class Pokemon {
 
     }
 
+    public Pokemon() {
+
+        this.motePok = "";
+        this.vitalidadPok = 0;
+        this.ptsAtaque = 0;
+        this.ptsDefensa = 0;
+        this.ptsAtaqueEsp = 0;
+        this.ptsDefensaEsp = 0;
+        this.velocidadPok = 0;
+        this.nivelPok = 1;
+        this.fertilidad = 5;
+        this.sexoPok = true;
+        this.objeto = objeto;
+        this.experiencia = 0;
+
+    }
+
+
+
+
+
+
     public String getMotePok() {
         return motePok;
     }
