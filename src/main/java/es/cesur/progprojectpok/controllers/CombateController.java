@@ -125,6 +125,11 @@ public class CombateController implements Initializable {
         stageAnterior.close();
     }
 
+    @FXML
+    void btnPokemon(ActionEvent event) throws  IOException {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }

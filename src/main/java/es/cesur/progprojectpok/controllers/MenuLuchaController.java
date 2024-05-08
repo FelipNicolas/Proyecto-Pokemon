@@ -1,6 +1,7 @@
 package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.HelloApplication;
+import es.cesur.progprojectpok.clases.Entrenador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,15 @@ public class MenuLuchaController implements Initializable {
     Stage stage = new Stage();
     FXMLLoader fxmlLoader = null;
 
+    private Entrenador entrenadorMenuLucha;
+
+    public Entrenador getEntrenadorMenuLucha() {
+        return entrenadorMenuLucha;
+    }
+
+    public void setEntrenadorMenuLucha(Entrenador entrenadorMenuLucha) {
+        this.entrenadorMenuLucha = entrenadorMenuLucha;
+    }
 
     @FXML
     private AnchorPane cerrarLucha;

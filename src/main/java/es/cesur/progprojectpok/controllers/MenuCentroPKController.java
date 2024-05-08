@@ -39,6 +39,8 @@ public class MenuCentroPKController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load(), 715, 700);
         stage.setTitle("boton-vuelta-view");
         stage.setScene(scene);
+        MenuMainController menuMainController = fxmlLoader.getController();
+        menuMainController.setEntrenadorMenuPrincipal(entrenadorMenu);
         stage.show();
 
         Stage stageAnterior = (Stage) cerrarCentroPK.getScene().getWindow();

@@ -81,6 +81,8 @@ public class MenuMainController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load(), 715, 700);
         stage.setTitle("Menu-inventario-view");
         stage.setScene(scene);
+        MenuInventarioController menuInventarioController = fxmlLoader.getController();
+        menuInventarioController.setEntrenadorInventario(entrenadorMenuPrincipal);
         stage.show();
 
         Stage stageAnterior = (Stage) cerrarMenuMain.getScene().getWindow();
