@@ -94,6 +94,7 @@ public class EquipoController implements Initializable {
     String[] tipo1 = new String[6];
     String[] tipo2 = new String[6];
 
+    ResultSet resultSet;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,7 +104,6 @@ public class EquipoController implements Initializable {
     @FXML
     void cargarEquipo(ActionEvent a) {
 
-        System.out.println("id equipo" + entrenadorEquipo);
 
         Connection connection = DBConnection.getConnection();
 
@@ -111,15 +111,13 @@ public class EquipoController implements Initializable {
 
         String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0 AND ID_USER = ?;";
 
-        String[] imgPok = new String[6];
-        String ImagenUrlPokemonGenerado = "";
 
 
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, entrenadorEquipo.getIdEntrenador());
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
             for (int i = 0; i < imgPok.length; i++) {
 
@@ -175,13 +173,22 @@ public class EquipoController implements Initializable {
             img6.setImage(new Image(fileImageFondo6.getAbsolutePath()));
 
 
-            resultSet.close();
-            preparedStatement.close();
-            connection.close();
+
 
 
         } catch(SQLException e){
             throw new RuntimeException(e);
+        }finally {
+
+            try {
+
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

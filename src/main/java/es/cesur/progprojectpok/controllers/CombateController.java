@@ -68,4 +68,10 @@ public class CombateController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+
+
+
+
+
 }

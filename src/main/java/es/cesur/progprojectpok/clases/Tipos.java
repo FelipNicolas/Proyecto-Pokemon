@@ -1,0 +1,6 @@
+package es.cesur.progprojectpok.clases;
+
+public enum Tipos {
+    FUEGO, AGUA, TIERRA, ROCA, ACERO, FANTASMA, PLANTA, BICHO, NORMAL, LUCHA, VOLADOR, ELECTRICO,
+    HIELO, PSIQUICO, VENENO, SINIESTRO, DRAGON
+}
