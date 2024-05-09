@@ -195,9 +195,20 @@ public class Pokemon {
 
 
 
-    public void combate(Pokemon pokObjetivo) {
+    public void combate(Pokemon pokObjetivo, Movimiento ataque) {
 
+        if (ataque instanceof mejoraMov) {
 
+            ataque.accionMov(this);
+
+        } else if (ataque instanceof estadoMov) {
+
+            ataque.accionMov(pokObjetivo);
+
+        } else if (ataque instanceof ataqueMov){
+
+            ataque.accionMov(pokObjetivo);
+        }
 
 
     }

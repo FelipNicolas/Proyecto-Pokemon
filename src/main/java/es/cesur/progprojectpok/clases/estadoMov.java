@@ -48,13 +48,8 @@ public class estadoMov extends Movimiento {
     @Override
     public void accionMov(Pokemon pokemonObjetivo) {
 
-        switch (estadoMov) {
-            case QUEMADO:
-                pokemonObjetivo.setEstadoPok(estadoMov);
-                break;
-
-
+        pokemonObjetivo.setEstadoPok(estadoMov);
 
         }
     }
-}
+
