@@ -108,7 +108,7 @@ public class CapturaController implements Initializable {
 
             resultSet.next();
 
-            String nomPokemon = resultSet.getString("NOM_POKEMON");
+            //String nomPokemon = resultSet.getString("NOM_POKEMON");
             String imgPokemon = resultSet.getString("IMAGEN");
 
             String rutaImgPokemon = ConfigDB.URL_POK + imgPokemon;
