@@ -1,17 +1,33 @@
 package es.cesur.progprojectpok.controllers;
 
+import es.cesur.progprojectpok.clases.Entrenador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CombateEquipoController implements Initializable {
+
+    Stage stage = new Stage();
+    FXMLLoader fxmlLoader = null;
+
+    private Entrenador entrenadorCombEquipo;
+
+    public Entrenador getEntrenadorCombEquipo() {
+        return entrenadorCombEquipo;
+    }
+
+    public void setEntrenadorCombEquipo(Entrenador entrenadorCombEquipo) {
+        this.entrenadorCombEquipo = entrenadorCombEquipo;
+    }
 
     @FXML
     private ImageView Gender1;

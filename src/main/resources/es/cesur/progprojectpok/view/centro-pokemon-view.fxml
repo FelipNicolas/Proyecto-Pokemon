@@ -24,92 +24,68 @@
          <children>
             <AnchorPane layoutX="14.0" layoutY="27.0" prefHeight="80.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: D62E2E; -fx-background-radius: 5;">
                <children>
-                  <ImageView fx:id="imgPok1" fitHeight="80.0" fitWidth="84.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/criatura-planta.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="imgPok1" fitHeight="80.0" fitWidth="84.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="14.0" layoutY="122.0" prefHeight="82.0" prefWidth="63.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: D62E2E; -fx-background-radius: 5;">
                <children>
-                  <ImageView fx:id="imgPok3" fitHeight="80.0" fitWidth="82.0" layoutX="1.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/criatura-planta.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="imgPok3" fitHeight="80.0" fitWidth="82.0" layoutX="1.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="14.0" layoutY="217.0" prefHeight="81.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: D62E2E; -fx-background-radius: 5;">
                <children>
-                  <ImageView fx:id="imgPok5" fitHeight="80.0" fitWidth="82.0" layoutX="2.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/criatura-planta.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="imgPok5" fitHeight="80.0" fitWidth="82.0" layoutX="2.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="243.0" layoutY="27.0" prefHeight="80.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: D62E2E; -fx-background-radius: 5;">
                <children>
-                  <ImageView fx:id="imgPok2" fitHeight="80.0" fitWidth="84.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/criatura-planta.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="imgPok2" fitHeight="80.0" fitWidth="84.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="100.0" layoutY="27.0" prefHeight="80.0" prefWidth="132.0" style="-fx-background-color: #21C190; -fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: black;">
                <children>
-                  <Label fx:id="lblPok1" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" text="Label" />
-                  <ProgressBar fx:id="pgrsbar1" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="1.0" style=" -fx-accent: green" />
+                  <Label fx:id="lblPok1" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" />
+                  <ProgressBar fx:id="pgrsbar1" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.0" style=" -fx-accent: green" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="243.0" layoutY="122.0" prefHeight="80.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: D62E2E; -fx-background-radius: 5;">
                <children>
-                  <ImageView fx:id="imgPok4" fitHeight="80.0" fitWidth="82.0" layoutX="1.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/criatura-planta.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="imgPok4" fitHeight="80.0" fitWidth="82.0" layoutX="1.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="243.0" layoutY="217.0" prefHeight="80.0" prefWidth="82.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: D62E2E; -fx-background-radius: 5;">
                <children>
-                  <ImageView fx:id="imgPok6" fitHeight="80.0" fitWidth="82.0" layoutX="2.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/criatura-planta.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="imgPok6" fitHeight="80.0" fitWidth="82.0" layoutX="2.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="100.0" layoutY="123.0" prefHeight="80.0" prefWidth="132.0" style="-fx-background-color: #21C190; -fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: black;">
                <children>
-                  <Label fx:id="lblPok2" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" text="Label" />
-                  <ProgressBar fx:id="pgrsbar3" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.76" style=" -fx-accent: green" />
+                  <Label fx:id="lblPok3" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" />
+                  <ProgressBar fx:id="pgrsbar3" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.0" style=" -fx-accent: green" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="100.0" layoutY="217.0" prefHeight="80.0" prefWidth="132.0" style="-fx-background-color: #21C190; -fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: black;">
                <children>
-                  <Label fx:id="lblPok3" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" text="Label" />
-                  <ProgressBar fx:id="pgrsbar5" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.58" style=" -fx-accent: green" />
+                  <Label fx:id="lblPok5" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" />
+                  <ProgressBar fx:id="pgrsbar5" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.0" style=" -fx-accent: green" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="329.0" layoutY="27.0" prefHeight="80.0" prefWidth="132.0" style="-fx-background-color: #21C190; -fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: black;">
                <children>
-                  <Label fx:id="lblPok4" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" text="Label" />
-                  <ProgressBar fx:id="pgrsbar2" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.81" style=" -fx-accent: green" />
+                  <Label fx:id="lblPok2" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" />
+                  <ProgressBar fx:id="pgrsbar2" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.0" style=" -fx-accent: green" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="329.0" layoutY="122.0" prefHeight="80.0" prefWidth="132.0" style="-fx-background-color: #21C190; -fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: black;">
                <children>
-                  <Label fx:id="lblPok5" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" text="Label" />
-                  <ProgressBar fx:id="pgrsbar4" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.31" style=" -fx-accent: green" />
+                  <Label fx:id="lblPok4" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" />
+                  <ProgressBar fx:id="pgrsbar4" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.0" style=" -fx-accent: green" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="329.0" layoutY="218.0" prefHeight="80.0" prefWidth="132.0" style="-fx-background-color: #21C190; -fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: black;">
                <children>
-                  <Label fx:id="lblPok6" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" text="Label" />
-                  <ProgressBar fx:id="pgrsbar6" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.09" style=" -fx-accent: green" />
+                  <Label fx:id="lblPok6" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="106.0" />
+                  <ProgressBar fx:id="pgrsbar6" layoutX="13.0" layoutY="48.0" prefHeight="18.0" prefWidth="106.0" progress="0.0" style=" -fx-accent: green" />
                </children>
             </AnchorPane>
          </children>

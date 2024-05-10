@@ -142,6 +142,8 @@ public class CentroPokController implements Initializable {
 
     int[] vidaPivote = new int[6];
 
+    String[] nomPok = new String[6];
+
     String ImagenUrlPokemonGenerado = "";
 
     String[] NOM_POKEMON = new String[6];
@@ -218,6 +220,19 @@ public class CentroPokController implements Initializable {
                 pgrsbar5.setProgress(((double) vidaPivote[4] / 100));
                 pgrsbar6.setProgress(((double) vidaPivote[5] / 100));
 
+
+                for (int j = 0; j < NOM_POKEMON.length; j++) {
+
+                    nomPok[i] = NOM_POKEMON[i] ;
+
+                }
+
+                lblPok1.setText(nomPok[0]);
+                lblPok2.setText(nomPok[1]);
+                lblPok3.setText(nomPok[2]);
+                lblPok4.setText(nomPok[3]);
+                lblPok5.setText(nomPok[4]);
+                lblPok6.setText(nomPok[5]);
 
 
                 System.out.println("La chupa a:" + vidaPivote[0]);
