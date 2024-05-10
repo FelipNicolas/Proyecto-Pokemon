@@ -4,6 +4,7 @@ public class Pokemon {
 
 
     private String motePok;
+
     private int vitalidadPok;
     private int ptsAtaque;
     private int ptsDefensa;
@@ -15,14 +16,14 @@ public class Pokemon {
     private int fertilidad = 5;
     private boolean sexoPok;
     private Objeto objeto;
-    //private Estado estadoPok;
+    private Estado estadoPok;
     private int experiencia;
-    //private Tipos tipoPok1;
-   // private Tipos tipoPok2;
+    private Tipos tipoPok1;
+    private Tipos tipoPok2;
 
 
     public Pokemon(String motePok, int vitalidadPok, int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp, int ptsDefensaEsp, int velocidadPok,
-                    int nivelPok, Movimiento[] setMoviminetos, int fertilidad, boolean sexoPok, Objeto objeto, int experiencia) {
+                   int nivelPok, Movimiento[] setMoviminetos, int fertilidad, boolean sexoPok, Objeto objeto, int experiencia, Tipos tipoPok1, Tipos tipoPok2, Estado estadoPok) {
 
         this.motePok = motePok;
         this.vitalidadPok = vitalidadPok;
@@ -37,7 +38,10 @@ public class Pokemon {
         this.sexoPok = sexoPok;
         this.objeto = objeto;
         this.experiencia = experiencia;
+        this.estadoPok = estadoPok;
 
+        this.tipoPok1 = tipoPok1;
+        this.tipoPok2 = tipoPok2;
     }
 
     public Pokemon() {
@@ -50,12 +54,39 @@ public class Pokemon {
         this.ptsDefensaEsp = 0;
         this.velocidadPok = 0;
         this.nivelPok = 1;
-        this.setMoviminetos = null;
-        this.fertilidad = 0;
+        this.fertilidad = 5;
         this.sexoPok = true;
-        this.objeto = null;
+        this.objeto = objeto;
         this.experiencia = 0;
+        this.tipoPok1 = null;
+        this.tipoPok2 = null;
+        this.estadoPok = null;
 
+    }
+
+
+    public Estado getEstadoPok() {
+        return estadoPok;
+    }
+
+    public void setEstadoPok(Estado estadoPok) {
+        this.estadoPok = estadoPok;
+    }
+
+    public Tipos getTipoPok1() {
+        return tipoPok1;
+    }
+
+    public void setTipoPok1(Tipos tipoPok1) {
+        this.tipoPok1 = tipoPok1;
+    }
+
+    public Tipos getTipoPok2() {
+        return tipoPok2;
+    }
+
+    public void setTipoPok2(Tipos tipoPok2) {
+        this.tipoPok2 = tipoPok2;
     }
 
     public String getMotePok() {
@@ -164,13 +195,34 @@ public class Pokemon {
 
 
 
-    public void combate(Pokemon pokObjetivo)
-    {
+    public void combate(Pokemon pokObjetivo, Movimiento ataque) {
+
+        if (ataque instanceof mejoraMov) {
+
+            ataque.accionMov(this);
+
+        } else if (ataque instanceof estadoMov) {
+
+            ataque.accionMov(pokObjetivo);
+
+        } else if (ataque instanceof ataqueMov){
+
+            ataque.accionMov(pokObjetivo);
+        }
+
+
     }
 
 
-    public void subirNivel(int expPok)
-    {
+    public void subirNivel(int expPok) {
+
+         int subirNivel = 10 * nivelPok;
+
+        while (expPok >= (subirNivel)) {
+                nivelPok++;
+                expPok -= subirNivel;
+        }
+
     }
 
 
