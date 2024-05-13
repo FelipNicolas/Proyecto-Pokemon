@@ -79,10 +79,13 @@ public class MenuMainController implements Initializable {
     @FXML
     void btnInventario(ActionEvent event) throws IOException {
 
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/menu-view-inventario.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 715, 700);
         stage.setTitle("Menu-inventario-view");
         stage.setScene(scene);
+        MenuInventarioController menuInventarioController = fxmlLoader.getController();
+        menuInventarioController.setEntrenadorMenuInventario(entrenadorMenuPrincipal);
         stage.show();
 
         Stage stageAnterior = (Stage) cerrarMenuMain.getScene().getWindow();

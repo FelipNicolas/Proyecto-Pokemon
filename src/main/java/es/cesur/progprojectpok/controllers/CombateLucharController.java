@@ -1,7 +1,9 @@
 package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.ImageData;
+import es.cesur.progprojectpok.clases.Entrenador;
 import es.cesur.progprojectpok.utils.Utils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -22,13 +24,46 @@ public class CombateLucharController implements Initializable {
     private ImageView Gender2;
 
     @FXML
-    private ImageView Perso1;
+    private Label lblATK1;
 
     @FXML
-    private ImageView Perso2;
+    private ImageView imgATK1;
 
     @FXML
-    private ImageView Pok1;
+    private ImageView imgATK2;
+
+    @FXML
+    private ImageView imgATK3;
+
+    @FXML
+    private ImageView imgATK4;
+
+    @FXML
+    private Label lblNvl1;
+
+    @FXML
+    private ProgressBar prgrsBar1;
+
+    @FXML
+    private ProgressBar prgrsBar2;
+
+    @FXML
+    private Label lblNvl2;
+
+    @FXML
+    private Label lblNombre2;
+
+    @FXML
+    private Label lblNombre1;
+
+    @FXML
+    private Label lblATK2;
+
+    @FXML
+    private Label lblATK3;
+
+    @FXML
+    private Label lblATK4;
 
     @FXML
     private ImageView Pok2;
@@ -37,46 +72,78 @@ public class CombateLucharController implements Initializable {
     private ImageView Pok3;
 
     @FXML
+    private ImageView Pok1;
+
+    @FXML
+    private Label lblComb1;
+
+    @FXML
+    private ImageView Pok6;
+
+    @FXML
     private ImageView Pok4;
 
     @FXML
     private ImageView Pok5;
 
     @FXML
-    private ImageView Pok6;
+    private ImageView Perso1;
 
     @FXML
-    private Button btn1;
+    private ImageView Perso2;
+
+    Entrenador entrenadorCombateLucha;
+
+    public Entrenador getEntrenadorCombateLucha() {
+        return entrenadorCombateLucha;
+    }
+
+    public void setEntrenadorCombateLucha(Entrenador entrenadorCombateLucha) {
+        this.entrenadorCombateLucha = entrenadorCombateLucha;
+    }
 
     @FXML
-    private Button btn2;
+    void btn1(ActionEvent event) {
+
+
+
+    }
+
+
 
     @FXML
-    private Button btn3;
+    void btn3(ActionEvent event) {
+
+    }
+
+
 
     @FXML
-    private Button btn4;
+    void btn2(ActionEvent event) {
+
+    }
+
+
 
     @FXML
-    private Label lblComb1;
+    void btn4(ActionEvent event) {
+
+    }
+
+
 
     @FXML
-    private Label lblNombre1;
+    void btnBACK(ActionEvent event) {
+
+    }
+
+
 
     @FXML
-    private Label lblNombre2;
+    void btnCargarEquipo(ActionEvent event) {
 
-    @FXML
-    private Label lblNvl1;
+    }
 
-    @FXML
-    private Label lblNvl2;
-
-    @FXML
-    private ProgressBar prgrsBar1;
-
-    @FXML
-    private ProgressBar prgrsBar2;
 
 
     @Override

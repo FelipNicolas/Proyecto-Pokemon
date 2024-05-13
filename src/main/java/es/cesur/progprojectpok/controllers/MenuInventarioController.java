@@ -1,6 +1,7 @@
 package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.HelloApplication;
+import es.cesur.progprojectpok.clases.Entrenador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,16 @@ public class MenuInventarioController implements Initializable {
 
     Stage stage = new Stage();
     FXMLLoader fxmlLoader = null;
+
+    Entrenador entrenadorMenuInventario;
+
+    public Entrenador getEntrenadorMenuInventario() {
+        return entrenadorMenuInventario;
+    }
+
+    public void setEntrenadorMenuInventario(Entrenador entrenadorMenuInventario) {
+        this.entrenadorMenuInventario = entrenadorMenuInventario;
+    }
 
     @FXML
     private AnchorPane carrarInventario;
@@ -47,6 +58,8 @@ public class MenuInventarioController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load(), 1065, 600);
         stage.setTitle("Tienda-view");
         stage.setScene(scene);
+        TiendaController tiendaController = fxmlLoader.getController();
+        tiendaController.setEntrenadorTienda(entrenadorMenuInventario);
         stage.show();
 
         Stage stageAnterior = (Stage) carrarInventario.getScene().getWindow();
