@@ -64,6 +64,23 @@ public class Pokemon {
 
     }
 
+    public Pokemon(int vitalidadPok, int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp, int ptsDefensaEsp, int velocidadPok,
+                   int nivelPok, Movimiento[] setMoviminetos, Tipos tipoPok1, Tipos tipoPok2, Estado estadoPok) {
+
+        this.vitalidadPok = vitalidadPok;
+        this.ptsAtaque = ptsAtaque;
+        this.ptsDefensa = ptsDefensa;
+        this.ptsAtaqueEsp = ptsAtaqueEsp;
+        this.ptsDefensaEsp = ptsDefensaEsp;
+        this.velocidadPok = velocidadPok;
+        this.nivelPok = nivelPok;
+        this.setMoviminetos = setMoviminetos;
+        this.estadoPok = estadoPok;
+
+        this.tipoPok1 = tipoPok1;
+        this.tipoPok2 = tipoPok2;
+    }
+
 
     public Estado getEstadoPok() {
         return estadoPok;

@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class CombateController implements Initializable {
@@ -150,19 +151,68 @@ public class CombateController implements Initializable {
         stageAnterior.close();
     }
 
-    String[] imgPok = new String[6];
+    private String[] imgPok = new String[6];
 
-    int[] vidaPivote = new int[6];
+    private int[] vidaPivote = new int[6];
 
-    String[] nomPok = new String[6];
+    private String[] nomPok = new String[6];
 
-    String ImagenUrlPokemonGenerado = "";
+    private String ImagenUrlPokemonGenerado = "";
 
-    String[] NOM_POKEMON = new String[6];
+    private String[] NOM_POKEMON = new String[6];
 
-    String[] TIPO1 = new String[6];
-    String[] TIPO2 = new String[6];
-    int[] VIDA = new int[6];
+    private String[] TIPO1 = new String[6];
+    private String[] TIPO2 = new String[6];
+    private int[] VIDA = new int[6];
+    private Random random = new Random();
+    private int pokemonRandom;
+    private Connection connection;
+
+    private String nomPokRandom;
+    private int vidaPokRandom;
+    private String imgPokRandom;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        pokemonRandom = random.nextInt(25);
+
+        connection = DBConnection.getConnection();
+
+        PreparedStatement preparedStatement = null;
+
+        String sql = "SELECT * FROM POKEDEX WHERE NUM_POKEDEX = ?;";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, pokemonRandom);
+
+            System.out.println("sentencia" + sql);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+
+            String nomPokemon = resultSet.getString("NOM_POKEMON");
+            String imgPokemon = resultSet.getString("IMAGEN");
+
+            String rutaImgPokemon = ConfigDB.URL_POK + imgPokemon;
+
+            File rutaAbsolutaImgPok = new File(rutaImgPokemon);
+            System.out.println("ruta absoluta" + rutaAbsolutaImgPok);
+
+            imgPok2.setImage(new Image(rutaAbsolutaImgPok.getAbsolutePath()));
+
+            prgrsBar1.setProgress(1);
+
+            lblNombre1.setText(nomPokemon);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     @FXML
     void btnPokemon(ActionEvent event) throws  IOException {
@@ -226,7 +276,7 @@ public class CombateController implements Initializable {
                 }
 
 
-                prgrsBar1.setProgress(((double) vidaPivote[0] / 100));
+                prgrsBar2.setProgress(((double) vidaPivote[0] / 100));
 
 
 
@@ -237,7 +287,7 @@ public class CombateController implements Initializable {
 
                 }
 
-                lblNombre1.setText(nomPok[0]);
+                lblNombre2.setText(nomPok[0]);
 
 
 
@@ -279,7 +329,5 @@ public class CombateController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
+
 }

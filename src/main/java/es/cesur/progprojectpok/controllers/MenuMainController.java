@@ -48,6 +48,8 @@ public class MenuMainController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load(), 715, 700);
         stage.setTitle("Menu-lucha-view");
         stage.setScene(scene);
+        MenuLuchaController menuLuchaController = fxmlLoader.getController();
+        menuLuchaController.setEntrenadorMenuLucha(entrenadorMenuPrincipal);
         stage.show();
 
         Stage stageAnterior = (Stage) cerrarMenuMain.getScene().getWindow();
