@@ -1,7 +1,7 @@
 package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.HelloApplication;
-import es.cesur.progprojectpok.clases.Entrenador;
+import es.cesur.progprojectpok.clases.*;
 import es.cesur.progprojectpok.database.ConfigDB;
 import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
@@ -43,19 +43,13 @@ public class CombateController implements Initializable {
 
       @FXML
     void btnLuchar(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/combate-luchar-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1015, 685);
-        stage.setTitle("movimientos-view");
-        stage.setScene(scene);
-        stage.show();
-
-        Stage stageAnterior = (Stage) cerrarCombatePK.getScene().getWindow();
-        stageAnterior.close();
 
         idPaneMain.setDisable(true);
         idPaneMain.setVisible(false);
         idPaneEquipo.setDisable(false);
         idPaneEquipo.setVisible(true);
+
+
 
     }
 
@@ -111,16 +105,29 @@ public class CombateController implements Initializable {
 
     private String[] nomPok = new String[6];
 
-    private String ImagenUrlPokemonGenerado = "";
+    private String imagenUrlPokemonGenerado = "";
 
-    private String[] NOM_POKEMON = new String[6];
-
-    private String[] TIPO1 = new String[6];
-    private String[] TIPO2 = new String[6];
+    private String[] nomPokemon = new String[6];
+    private Tipos[] tipo1 = new Tipos[6];
+    private Tipos[] tipo2 = new Tipos[6];
     private int[] VIDA = new int[6];
     private Random random = new Random();
     private int pokemonRandom;
     private Connection connection;
+
+    private Pokemon[] equipoEntrenador = new Pokemon[6];
+
+    private int[] ataqueNormal = new int[6];
+    private int[] ataqueEspecial = new int[6];
+    private int[] defensaNormal = new int[6];
+    private int[] defensaEspecial = new int[6];
+    private int[] velocidad = new int[6];
+    private int[] experiencia = new int[6];
+    private int[] nivel = new int[6];
+    private  boolean[] sexo = new boolean[6];
+    private Objeto[] objeto = new Objeto[6];
+    private Estado[] estadoPok = new Estado[6];
+
 
     private String nomPokRandom;
     private int vidaPokRandom;
@@ -169,7 +176,7 @@ public class CombateController implements Initializable {
     }
 
     @FXML
-    void btnPokemon(ActionEvent event) throws  IOException {
+    void btnPokemon(ActionEvent event) {
 
         System.out.println("id equipo" + entrenadorCombate);
 
@@ -180,7 +187,6 @@ public class CombateController implements Initializable {
         String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0 AND ID_USER = ?;";
 
         String[] imgPok = new String[6];
-        String ImagenUrlPokemonGenerado = "";
 
 
         try {
@@ -197,21 +203,26 @@ public class CombateController implements Initializable {
                 while (resultSet.next()) {
 
                     int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
-                    NOM_POKEMON[i] = resultSet.getString("NOM_POKEMON");
-                    TIPO1[i] = resultSet.getString("TIPO1");
-                    TIPO2[i] = resultSet.getString("TIPO2");
-                    ImagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
+                    nomPokemon[i] = resultSet.getString("NOM_POKEMON");
+                    tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1"));
+                    tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2"));
+                    imagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
                     String SONIDO = resultSet.getString("SONIDO");
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
                     int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
-                    String SEXO = resultSet.getString("SEXO");
+                    sexo[i] = Boolean.parseBoolean(resultSet.getString("SEXO"));
                     VIDA[i] = resultSet.getInt("VITALIDAD");
-                    int NIVEL = resultSet.getInt("NIVEL");
-
-
-
-                    System.out.println(NUM_POKEDEX + " " + NOM_POKEMON + " " + TIPO1 + " " + TIPO2 + " " +
-                            ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + SEXO + " " + VIDA);
+                    nivel[i] = resultSet.getInt("NIVEL");
+                    ataqueNormal[i] = resultSet.getInt("ATAQUE");
+                    ataqueEspecial[i] = resultSet.getInt("AT_ESPECIAL");
+                    defensaNormal[i] = resultSet.getInt("DEFENSA");
+                    defensaEspecial[i] = resultSet.getInt("DEF_ESPECIAL");
+                    velocidad[i] = resultSet.getInt("VELOCIDAD");
+                    experiencia[i] = resultSet.getInt("EXPERIENCIA");
+                    //objeto[i] = resultSet.getInt("ID_OBJETO");
+                    estadoPok[i] = Estado.valueOf(resultSet.getString("ESTADO"));
+                    System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
+                            imagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + sexo + " " + VIDA);
 
                     //Cambio de imagen
                     break;
@@ -219,7 +230,7 @@ public class CombateController implements Initializable {
 
                 }
 
-                imgPok[i] = ConfigDB.URL_POK + ImagenUrlPokemonGenerado;
+                imgPok[i] = ConfigDB.URL_POK + imagenUrlPokemonGenerado;
 
                 System.out.println(imgPok[i]);
 
@@ -235,9 +246,9 @@ public class CombateController implements Initializable {
 
 
 
-                for (int j = 0; j < NOM_POKEMON.length; j++) {
+                for (int j = 0; j < nomPokRandom.length(); j++) {
 
-                    nomPok[i] = NOM_POKEMON[i] ;
+                    nomPok[i] = nomPokemon[i] ;
 
                 }
 
@@ -258,8 +269,8 @@ public class CombateController implements Initializable {
                 System.out.println("La chupa a:" + vidaPivote[0]);
                 System.out.println("La chupa a:" + vidaPivote[1]);
 
-
-
+                equipoEntrenador[i] = new Pokemon(nomPokemon[i], ataqueNormal[i], defensaNormal[i], ataqueEspecial[i], defensaEspecial[i],
+                        velocidad[i], nivel[i], sexo[i], objeto[i], estadoPok[i], experiencia[i], tipo1[i], tipo2[i]);
             }
 
 
@@ -289,12 +300,14 @@ public class CombateController implements Initializable {
 
 
 
-        } catch(SQLException e){
-            throw new RuntimeException(e);
+        } catch (SQLException s){
+            System.out.println("Error SQL");
         }
 
 
     }
+
+
 
     @FXML
     private AnchorPane cerrarCombatePK;
