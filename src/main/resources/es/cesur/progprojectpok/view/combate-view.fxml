@@ -19,7 +19,7 @@
             <Image url="@../images/escenario-combate.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutY="521.0" prefHeight="160.0" prefWidth="1013.0" style="-fx-background-color: #742005; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;">
+      <AnchorPane fx:id="idPaneMain" layoutY="521.0" prefHeight="160.0" prefWidth="1013.0" style="-fx-background-color: #742005; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;">
          <children>
             <Button layoutX="636.0" layoutY="11.0" mnemonicParsing="false" onAction="#btnLuchar" prefHeight="63.0" prefWidth="164.0" style="-fx-background-color: pink; -fx-background-radius: 20;" text="LUCHAR">
                <font>
@@ -124,7 +124,7 @@
             </Button>
             <AnchorPane layoutX="30.0" layoutY="15.0" opacity="0.6" prefHeight="133.0" prefWidth="344.0" style="-fx-background-color: linear-gradient(to bottom, white, #CDD7D6); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: linear-gradient(to bottom, yellow, orange); -fx-border-width: 5; -fx-opacity: 1;">
                <children>
-                  <Label fx:id="lblComb1" alignment="TOP_LEFT" layoutX="16.0" layoutY="13.0" prefHeight="107.0" prefWidth="312.0" text="Label" />
+                  <Label fx:id="logCombateMain" alignment="TOP_LEFT" layoutX="16.0" layoutY="13.0" prefHeight="107.0" prefWidth="312.0" text="Label" />
                </children>
             </AnchorPane>
             <Button alignment="CENTER" layoutX="384.0" layoutY="62.0" mnemonicParsing="false" onAction="#btnPokemon" prefHeight="35.0" prefWidth="245.0" style="-fx-background-color: 0;" text="↻ CARGAR POKEMON" textFill="WHITE">
@@ -153,7 +153,7 @@
                   <Image url="@../images/male-icon.png" />
                </image>
             </ImageView>
-            <ProgressBar fx:id="prgrsBar1" layoutX="140.0" layoutY="56.0" prefWidth="200.0" progress="0.09" style=" -fx-accent: green"/>
+            <ProgressBar fx:id="prgrsBar1" layoutX="140.0" layoutY="56.0" prefWidth="200.0" progress="1.0" style=" -fx-accent: green" />
             <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="48.0" prefHeight="35.0" prefWidth="40.0" text="PS">
                <font>
                   <Font size="14.0" />
@@ -215,6 +215,161 @@
          <effect>
             <InnerShadow />
          </effect>
+      </AnchorPane>
+      <AnchorPane fx:id="idPaneAtaques" disable="true" layoutX="-1.0" layoutY="522.0" prefHeight="160.0" prefWidth="1013.0" style="-fx-background-color: #742005; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;" visible="false">
+         <children>
+            <AnchorPane layoutX="30.0" layoutY="15.0" opacity="0.6" prefHeight="133.0" prefWidth="344.0" style="-fx-background-color: linear-gradient(to bottom, white, #CDD7D6); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: linear-gradient(to bottom, yellow, orange); -fx-border-width: 5; -fx-opacity: 1;">
+               <children>
+                  <Label fx:id="logAtaques" alignment="TOP_LEFT" layoutX="16.0" layoutY="13.0" prefHeight="107.0" prefWidth="312.0" text="Label" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="idBtnAtaque1" alignment="TOP_LEFT" layoutX="419.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnAtaque1" prefHeight="63.0" prefWidth="175.0" text="ATAQUE 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgTipoMov1" fitHeight="39.0" fitWidth="40.0" layoutX="545.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblPPAtaque1" layoutX="434.0" layoutY="62.0" text="Label" />
+            <Button fx:id="idBtnAtaque3" alignment="TOP_LEFT" layoutX="612.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnAtaque3" prefHeight="63.0" prefWidth="175.0" text="ATAQUE 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <Label fx:id="lblPPAtaque3" layoutX="626.0" layoutY="62.0" text="Label" />
+            <ImageView fx:id="imgTipoMov3" fitHeight="39.0" fitWidth="40.0" layoutX="740.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="idBtnAtaque2" alignment="TOP_LEFT" layoutX="419.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnAtaque2" prefHeight="63.0" prefWidth="175.0" text="ATAQUE 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="idBtnAtaque4" alignment="TOP_LEFT" layoutX="612.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnAtaque4" prefHeight="63.0" prefWidth="175.0" text="ATAQUE 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgTipoMov2" fitHeight="39.0" fitWidth="40.0" layoutX="545.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgTipoMov4" fitHeight="39.0" fitWidth="40.0" layoutX="740.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblPPAtaque4" layoutX="626.0" layoutY="128.0" text="Label" />
+            <Label fx:id="lblPPAtaque2" layoutX="434.0" layoutY="128.0" text="Label" />
+            <Button alignment="CENTER" layoutX="840.0" layoutY="62.0" mnemonicParsing="false" onAction="#disableAtaques" prefHeight="46.0" prefWidth="111.0" text="VOLVER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="idPaneObjetos" disable="true" layoutX="-1.0" layoutY="522.0" prefHeight="160.0" prefWidth="1013.0" style="-fx-background-color: #742005; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;" visible="false">
+         <children>
+            <AnchorPane layoutX="30.0" layoutY="15.0" opacity="0.6" prefHeight="133.0" prefWidth="164.0" style="-fx-background-color: linear-gradient(to bottom, white, #CDD7D6); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: linear-gradient(to bottom, yellow, orange); -fx-border-width: 5; -fx-opacity: 1;">
+               <children>
+                  <Label fx:id="logObjetos" alignment="TOP_LEFT" layoutX="16.0" layoutY="13.0" prefHeight="107.0" prefWidth="164.0" text="Label" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="idBtnObjeto1" alignment="TOP_RIGHT" layoutX="236.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnObjeto1" prefHeight="63.0" prefWidth="175.0" text="OBJETO 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgObj1" fitHeight="39.0" fitWidth="40.0" layoutX="247.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="idBtnObjeto3" alignment="TOP_RIGHT" layoutX="419.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnObjeto3" prefHeight="63.0" prefWidth="175.0" text="OBJETO 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgObj3" fitHeight="39.0" fitWidth="40.0" layoutX="429.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="idBtnObjeto2" alignment="TOP_RIGHT" layoutX="236.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnObjeto2" prefHeight="63.0" prefWidth="175.0" text="OBJETO 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="idBtnObjeto4" alignment="TOP_RIGHT" layoutX="419.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnObjeto4" prefHeight="63.0" prefWidth="175.0" text="OBJETO 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgObj2" fitHeight="39.0" fitWidth="40.0" layoutX="247.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgObj4" fitHeight="39.0" fitWidth="40.0" layoutX="429.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+            <Button alignment="CENTER" layoutX="816.0" layoutY="28.0" mnemonicParsing="false" onAction="#disableObjetos" prefHeight="46.0" prefWidth="111.0" text="VOLVER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="idBtnObjeto5" alignment="TOP_RIGHT" layoutX="602.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnObjeto5" prefHeight="63.0" prefWidth="175.0" text="OBJETO 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="idBtnObjeto6" alignment="TOP_RIGHT" layoutX="602.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnObjeto6" prefHeight="63.0" prefWidth="175.0" text="OBJETO 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="idBtnObjeto7" alignment="TOP_RIGHT" layoutX="784.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnObjeto7" prefHeight="63.0" prefWidth="175.0" text="OBJETO 1">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgObj5" fitHeight="39.0" fitWidth="40.0" layoutX="611.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgObj6" fitHeight="39.0" fitWidth="40.0" layoutX="611.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgObj7" fitHeight="39.0" fitWidth="40.0" layoutX="796.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="idPaneEquipo" disable="true" layoutY="522.0" prefHeight="160.0" prefWidth="1013.0" style="-fx-background-color: #742005; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;" visible="false">
+         <children>
+            <AnchorPane layoutX="4.0" layoutY="15.0" opacity="0.6" prefHeight="133.0" prefWidth="159.0" style="-fx-background-color: linear-gradient(to bottom, white, #CDD7D6); -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: linear-gradient(to bottom, yellow, orange); -fx-border-width: 5; -fx-opacity: 1;">
+               <children>
+                  <Label fx:id="logEquipo" alignment="TOP_LEFT" layoutX="8.0" layoutY="13.0" prefHeight="107.0" prefWidth="139.0" text="Label" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="idBtnEquipo1" alignment="TOP_LEFT" layoutX="167.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnEquipoPok1" prefHeight="86.0" prefWidth="133.0" text="Pok 1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="39.0" fitWidth="40.0" layoutX="236.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+            <Button alignment="CENTER" layoutX="533.0" layoutY="107.0" mnemonicParsing="false" onAction="#disableEquipo" prefHeight="46.0" prefWidth="111.0" text="VOLVER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgEquipoPok1Tipo2" fitHeight="39.0" fitWidth="40.0" layoutX="216.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok1Tipo1" fitHeight="39.0" fitWidth="40.0" layoutX="175.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="idBtnEquipo2" alignment="TOP_LEFT" layoutX="309.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnEquipoPok2" prefHeight="86.0" prefWidth="133.0" text="Pok 1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgEquipoPok2Tipo1" fitHeight="39.0" fitWidth="40.0" layoutX="317.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok2Tipo2" fitHeight="39.0" fitWidth="40.0" layoutX="359.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="idBtnEquipo3" alignment="TOP_LEFT" layoutX="449.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnEquipoPok3" prefHeight="86.0" prefWidth="133.0" text="Pok 1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="idBtnEquipo4" alignment="TOP_LEFT" layoutX="588.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnEquipoPok4" prefHeight="86.0" prefWidth="133.0" text="Pok 1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="idBtnEquipo5" alignment="TOP_LEFT" layoutX="727.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnEquipoPok5" prefHeight="86.0" prefWidth="133.0" text="Pok 1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="idBtnEquipo6" alignment="TOP_LEFT" layoutX="866.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnEquipoPok6" prefHeight="86.0" prefWidth="133.0" text="Pok 1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="imgEquipoPok3Tipo1" fitHeight="39.0" fitWidth="40.0" layoutX="456.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok3Tipo2" fitHeight="39.0" fitWidth="40.0" layoutX="509.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok4Tipo1" fitHeight="39.0" fitWidth="40.0" layoutX="596.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok3Tipo2" fitHeight="39.0" fitWidth="40.0" layoutX="644.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok5Tipo1" fitHeight="39.0" fitWidth="40.0" layoutX="733.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok5Tipo1" fitHeight="39.0" fitWidth="40.0" layoutX="796.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok6Tipo1" fitHeight="39.0" fitWidth="40.0" layoutX="873.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipoPok6Tipo2" fitHeight="39.0" fitWidth="40.0" layoutX="935.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
       </AnchorPane>
    </children>
 </AnchorPane>

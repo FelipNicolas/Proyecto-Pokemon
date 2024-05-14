@@ -63,7 +63,7 @@
             <ImageView fx:id="imgATK2" fitHeight="35.0" fitWidth="34.0" layoutX="761.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="imgATK3" fitHeight="35.0" fitWidth="34.0" layoutX="565.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="imgATK4" fitHeight="35.0" fitWidth="34.0" layoutX="761.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true" />
-            <Button alignment="CENTER" layoutX="837.0" layoutY="53.0" mnemonicParsing="false" onAction="#btnBACK" prefHeight="63.0" prefWidth="141.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="CANCELAR" textFill="#614848">
+            <Button alignment="CENTER" layoutX="838.0" layoutY="77.0" mnemonicParsing="false" onAction="#btnBACK" prefHeight="63.0" prefWidth="141.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="CANCELAR" textFill="#614848">
                <font>
                   <Font size="22.0" />
                </font>

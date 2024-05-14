@@ -41,63 +41,7 @@ public class CombateController implements Initializable {
         this.entrenadorCombate = entrenadorCombate;
     }
 
-    @FXML
-    private AnchorPane cerrarCombatePK;
-
-    @FXML
-    private ImageView Gender1;
-
-    @FXML
-    private ImageView Pok2;
-
-    @FXML
-    private ImageView Pok3;
-
-    @FXML
-    private ImageView Gender2;
-
-    @FXML
-    private ImageView Pok1;
-
-    @FXML
-    private Label lblComb1;
-
-    @FXML
-    private ImageView Pok6;
-
-    @FXML
-    private ImageView Pok4;
-
-    @FXML
-    private ImageView Pok5;
-
-    @FXML
-    private ImageView imgPok1;
-
-    @FXML
-    private ImageView imgPok2;
-
-
-    @FXML
-    private Label lblNvl1;
-
-    @FXML
-    private ProgressBar prgrsBar1;
-
-
-    @FXML
-    private ProgressBar prgrsBar2;
-
-    @FXML
-    private Label lblNvl2;
-
-    @FXML
-    private Label lblNombre2;
-
-    @FXML
-    private Label lblNombre1;
-
-    @FXML
+      @FXML
     void btnLuchar(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/combate-luchar-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1015, 685);
@@ -107,6 +51,11 @@ public class CombateController implements Initializable {
 
         Stage stageAnterior = (Stage) cerrarCombatePK.getScene().getWindow();
         stageAnterior.close();
+
+        idPaneMain.setDisable(true);
+        idPaneMain.setVisible(false);
+        idPaneEquipo.setDisable(false);
+        idPaneEquipo.setVisible(true);
 
     }
 
@@ -134,6 +83,11 @@ public class CombateController implements Initializable {
 
         Stage stageAnterior = (Stage) cerrarCombatePK.getScene().getWindow();
         stageAnterior.close();
+
+        idPaneMain.setDisable(true);
+        idPaneMain.setVisible(false);
+        idPaneObjetos.setDisable(false);
+        idPaneObjetos.setVisible(true);
 
     }
 
@@ -289,6 +243,15 @@ public class CombateController implements Initializable {
 
                 lblNombre2.setText(nomPok[0]);
 
+                 idBtnAtaque1.setText(nomPok[0]);
+                 idBtnAtaque1.setText(nomPok[1]);
+                 idBtnAtaque1.setText(nomPok[2]);
+                 idBtnAtaque1.setText(nomPok[3]);
+                 idBtnAtaque1.setText(nomPok[4]);
+                 idBtnAtaque1.setText(nomPok[5]);
+
+
+
 
 
 
@@ -298,6 +261,8 @@ public class CombateController implements Initializable {
 
 
             }
+
+
 
             File fileImageFondo1 = new File(imgPok[0]);
 
@@ -322,10 +287,316 @@ public class CombateController implements Initializable {
 
 
 
+
+
         } catch(SQLException e){
             throw new RuntimeException(e);
         }
 
+
+    }
+
+    @FXML
+    private AnchorPane cerrarCombatePK;
+
+    @FXML
+    private ImageView Gender1;
+
+    @FXML
+    private ImageView Pok2;
+
+    @FXML
+    private ImageView Pok3;
+
+    @FXML
+    private ImageView Gender2;
+
+    @FXML
+    private ImageView Pok1;
+
+    @FXML
+    private Label lblComb1;
+
+    @FXML
+    private ImageView Pok6;
+
+    @FXML
+    private ImageView Pok4;
+
+    @FXML
+    private ImageView Pok5;
+
+    @FXML
+    private ImageView imgPok1;
+
+    @FXML
+    private ImageView imgPok2;
+
+    @FXML
+    private Label lblNvl1;
+
+    @FXML
+    private ProgressBar prgrsBar1;
+
+    @FXML
+    private ProgressBar prgrsBar2;
+
+    @FXML
+    private Label lblNvl2;
+
+    @FXML
+    private Label lblNombre2;
+
+    @FXML
+    private Label lblNombre1;
+
+    @FXML
+    private Button idBtnAtaque1;
+
+    @FXML
+    private Button idBtnAtaque2;
+
+    @FXML
+    private Button idBtnAtaque3;
+
+    @FXML
+    private Button idBtnAtaque4;
+
+    @FXML
+    private Button idBtnEquipo1;
+
+    @FXML
+    private Button idBtnEquipo2;
+
+    @FXML
+    private Button idBtnEquipo3;
+
+    @FXML
+    private Button idBtnEquipo4;
+
+    @FXML
+    private Button idBtnEquipo5;
+
+    @FXML
+    private Button idBtnEquipo6;
+
+    @FXML
+    private Button idBtnObjeto1;
+
+    @FXML
+    private Button idBtnObjeto2;
+
+    @FXML
+    private Button idBtnObjeto3;
+
+    @FXML
+    private Button idBtnObjeto4;
+
+    @FXML
+    private Button idBtnObjeto5;
+
+    @FXML
+    private Button idBtnObjeto6;
+
+    @FXML
+    private Button idBtnObjeto7;
+
+    @FXML
+    private AnchorPane idPaneAtaques;
+
+    @FXML
+    private AnchorPane idPaneEquipo;
+
+    @FXML
+    private AnchorPane idPaneObjetos;
+
+    @FXML
+    private AnchorPane idPaneMain;
+
+    @FXML
+    private ImageView imgEquipoPok1Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok1Tipo2;
+
+    @FXML
+    private ImageView imgEquipoPok2Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok2Tipo2;
+
+    @FXML
+    private ImageView imgEquipoPok3Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok3Tipo2;
+
+    @FXML
+    private ImageView imgEquipoPok4Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok5Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok6Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok6Tipo2;
+
+    @FXML
+    private ImageView imgObj1;
+
+    @FXML
+    private ImageView imgObj2;
+
+    @FXML
+    private ImageView imgObj3;
+
+    @FXML
+    private ImageView imgObj4;
+
+    @FXML
+    private ImageView imgObj5;
+
+    @FXML
+    private ImageView imgObj6;
+
+    @FXML
+    private ImageView imgObj7;
+
+    @FXML
+    private ImageView imgTipoMov1;
+
+    @FXML
+    private ImageView imgTipoMov2;
+
+    @FXML
+    private ImageView imgTipoMov3;
+
+    @FXML
+    private ImageView imgTipoMov4;
+
+    @FXML
+    private Label lblPPAtaque1;
+
+    @FXML
+    private Label lblPPAtaque2;
+
+    @FXML
+    private Label lblPPAtaque3;
+
+    @FXML
+    private Label lblPPAtaque4;
+
+    @FXML
+    private Label logAtaques;
+
+    @FXML
+    private Label logCombateMain;
+
+    @FXML
+    private Label logEquipo;
+
+    @FXML
+    private Label logObjetos;
+
+    @FXML
+    void btnAtaque1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAtaque2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAtaque3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAtaque4(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok4(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok5(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok6(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto4(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto5(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto6(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto7(ActionEvent event) {
+
+    }
+
+    @FXML
+    void disableAtaques(ActionEvent event) {
+
+    }
+
+    @FXML
+    void disableEquipo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void disableObjetos(ActionEvent event) {
 
     }
 
