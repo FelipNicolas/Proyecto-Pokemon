@@ -48,6 +48,8 @@ public class LoginController implements Initializable {
 
     protected Entrenador entrenadorLogin;
 
+    ResultSet resultSet;
+
 
 
 
@@ -61,14 +63,18 @@ public class LoginController implements Initializable {
 
 
     @FXML
-     void loginUser() throws SQLException, IOException {
+     void loginUser()  {
 
         Connection connection = DBConnection.getConnection();
 
         String sql = "SELECT NOMBRE_USER, PASS_USER, ID_USER FROM ENTRENADOR";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+
 
 
 
@@ -115,12 +121,30 @@ public class LoginController implements Initializable {
                 Stage stageAnterior = (Stage) usuarioCorrecto.getScene().getWindow();
                 stageAnterior.close();
 
+
+
+
+
+            }else usuarioCorrecto.setText("Incorrecto");
+        }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+            try {
                 resultSet.close();
                 preparedStatement.close();
                 connection.close();
 
-            }else usuarioCorrecto.setText("Incorrecto");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         }
+
 
     }
 

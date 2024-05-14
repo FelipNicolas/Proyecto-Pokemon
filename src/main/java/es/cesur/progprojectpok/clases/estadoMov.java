@@ -46,10 +46,11 @@ public class estadoMov extends Movimiento {
     }
 
     @Override
-    public void accionMov(Pokemon pokemonObjetivo) {
+    public int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento) {
 
         pokemonObjetivo.setEstadoPok(estadoMov);
 
+        return 0;
         }
     }
 

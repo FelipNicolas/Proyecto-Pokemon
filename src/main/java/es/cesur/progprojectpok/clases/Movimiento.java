@@ -56,6 +56,6 @@ public abstract class Movimiento {
         this.prioridad = prioridad;
     }
 
-    public abstract void accionMov(Pokemon pokemonObjetivo);
+    public abstract int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento);
 
 }

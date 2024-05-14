@@ -21,7 +21,7 @@ public class mejoraMov extends Movimiento{
     }
 
     @Override
-    public void accionMov(Pokemon pokemonObjetivo) {
+    public int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento) {
 
 
         switch (nombreStat) {
@@ -42,7 +42,7 @@ public class mejoraMov extends Movimiento{
                 pokemonObjetivo.setVelocidadPok(mejoraStat);
                 break;
         }
-
+        return mejoraStat;
     }
 
 

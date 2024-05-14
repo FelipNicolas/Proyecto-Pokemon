@@ -90,35 +90,23 @@ public class CombateController implements Initializable {
 
     Stage stage;
 
-    private String[] imgPok = new String[6];
 
-    private int[] vidaPivote = new int[6];
-
-    private String[] nomPok = new String[6];
-
-    private int[] numPokedexRival = new int[6];
 
 
     private String imagenUrlPokemonGenerado = "";
-    private String[] imagenUrlPokemonGeneradoRival = new String[6];
 
     private String[] nomPokemon = new String[6];
-    private String[] nomPokemonRival = new String[6];
 
     private String[] tipo1 = new String[6];
-    private Tipos[] tipo1Rival = new Tipos[6];
     private String[] tipo2 = new String[6];
-    private Tipos[] tipo2Rival = new Tipos[6];
+
     private int[] VIDA = new int[6];
     private Random random = new Random();
     private int pokemonRandom;
     private Connection connection;
 
-    private String nomPokRandom;
-    private int vidaPokRandom;
-    private String imgPokRandom;
 
-    private int idPokRival;
+
 
 
     public Entrenador getEntrenadorCombate() {
@@ -203,7 +191,7 @@ public class CombateController implements Initializable {
     }
 
     @FXML
-    void btnPokemon(ActionEvent event) throws IOException, SQLException {
+    void btnPokemon(ActionEvent event)  {
 
         System.out.println("id equipo" + entrenadorCombate);
 
@@ -214,7 +202,6 @@ public class CombateController implements Initializable {
         String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0 AND ID_USER = ?;";
 
         String[] imgPok = new String[6];
-        String ImagenUrlPokemonGenerado = "";
 
 
         try {
@@ -242,15 +229,15 @@ public class CombateController implements Initializable {
                     int NIVEL = resultSet.getInt("NIVEL");
 
 
-                    //System.out.println(NUM_POKEDEX + " " + NOM_POKEMON + " " + TIPO1 + " " + TIPO2 + " " +
-                     //       ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + SEXO + " " + VIDA);
 
-                    //Cambio de imagen
+
+                    //System.out.println(NUM_POKEDEX + " " + NOM_POKEMON + " " + TIPO1 + " " + TIPO2 + " " +
+                    //       ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + SEXO + " " + VIDA);
+
+
                     break;
 
-
                 }
-
 
             }
         } catch (SQLException s){
@@ -259,78 +246,16 @@ public class CombateController implements Initializable {
 
     }
 
-    public Pokemon[] cargarEquipoContrario() throws SQLException {
-
-        equipoRivalBD();
-
-        Pokemon[] equipoPivote = equipoRivalBD();
-
-        for (int i = 0; i < equipoPivote.length; i++) {
-            System.out.println(equipoPivote[i].toString());
-
-        }
 
 
-        return null;
-    }
 
-    private Pokemon[] equipoRivalBD() throws SQLException {
-        Random random2 = new Random();
-        Pokemon[] equipoRival = new Pokemon[6];
-        Connection connection = DBConnection.getConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet;
-        String sql = "SELECT * FROM POKEDEX WHERE NUM_POKEDEX = ?";
-
-
-        for (int i = 0; i < equipoRival.length; i++) {
-            idPokRival = random2.nextInt(1, 10);
-
-            System.out.println("id pok: " + idPokRival);
-
-
-            try {
-                preparedStatement = connection.prepareStatement(sql);
-
-                preparedStatement.setInt(1, idPokRival);
-
-                 resultSet = preparedStatement.executeQuery();
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            while (resultSet.next()) {
-
-                numPokedexRival[i] = resultSet.getInt("NUM_POKEDEX");
-                nomPokemonRival[i] = resultSet.getString("NOM_POKEMON");
-                tipo1Rival[i] = Tipos.valueOf(resultSet.getString("TIPO1").toUpperCase());
-                tipo2Rival[i] = Tipos.valueOf(resultSet.getString("TIPO2").toUpperCase());
-                imagenUrlPokemonGeneradoRival[i] = resultSet.getString("IMAGEN");
-
-
-            }
-
-
-            equipoRival[i] = new Pokemon(nomPokemonRival[i],
-                    tipo1Rival[i], tipo2Rival[i], numPokedexRival[i], imagenUrlPokemonGeneradoRival[i]) {
-
-
-            };
-
-        }
-        return equipoRival;
-    }
 
     public static void main(String[] args) {
 
         CombateController prueba = new CombateController();
 
-        try {
-            prueba.cargarEquipoContrario();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            //prueba.cargarEquipoContrario();
+
 
     }
 
