@@ -5,6 +5,12 @@ public class Pokemon {
 
     private String motePok;
 
+    private String nombrePok;
+
+    private String urlImgPok;
+
+    private int numPokedex;
+
     private int vitalidadPok;
     private int ptsAtaque;
     private int ptsDefensa;
@@ -61,6 +67,25 @@ public class Pokemon {
         this.tipoPok1 = null;
         this.tipoPok2 = null;
         this.estadoPok = null;
+
+    }
+
+    public Pokemon(String nombrePok, Tipos tipoPok1, Tipos tipoPok2, int numPokedex, String urlImgPok) {
+
+        this.nombrePok = nombrePok;
+        this.numPokedex = numPokedex;
+        this.urlImgPok = urlImgPok;
+        this.vitalidadPok = 100;
+        this.ptsAtaque = 0;
+        this.ptsDefensa = 0;
+        this.ptsAtaqueEsp = 0;
+        this.ptsDefensaEsp = 0;
+        this.velocidadPok = 0;
+        this.nivelPok = 1;
+        this.tipoPok1 = tipoPok1;
+        this.tipoPok2 = tipoPok2;
+        this.estadoPok = null;
+
 
     }
 
@@ -208,6 +233,8 @@ public class Pokemon {
         } else if (ataque instanceof ataqueMov){
 
             ataque.accionMov(pokObjetivo);
+
+
         }
 
 
@@ -237,4 +264,14 @@ public class Pokemon {
     {
     }
 
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "nombrePok='" + nombrePok + '\'' +
+                ", urlImgPok='" + urlImgPok + '\'' +
+                ", numPokedex=" + numPokedex +
+                ", tipoPok1=" + tipoPok1 +
+                ", tipoPok2=" + tipoPok2 +
+                '}';
+    }
 }
