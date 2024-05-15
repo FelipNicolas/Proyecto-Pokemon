@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Period;
 import java.util.Random;
 
 public class Pokemon {
@@ -386,6 +387,7 @@ public class Pokemon {
 
 
     }
+
 
     @Override
     public String toString() {
