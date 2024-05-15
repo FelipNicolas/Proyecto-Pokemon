@@ -55,6 +55,7 @@ public class Pokemon {
 
     private Tipos[] tipo2Rival = new Tipos[6];
 
+    private int idPokRival;
 
     public Pokemon(String motePok, int vitalidadPok, int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp, int ptsDefensaEsp, int velocidadPok,
                    int nivelPok, Movimiento[] setMoviminetos, int fertilidad, boolean sexoPok, Objeto objeto, int experiencia, Tipos tipoPok1, Tipos tipoPok2, Estado estadoPok) {
@@ -116,6 +117,37 @@ public class Pokemon {
 
 
     }
+
+    public Pokemon(int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp, int ptsDefensaEsp, int velocidadPok,
+                   Objeto objeto, Estado estadoPok) {
+
+        this.ptsAtaque = ptsAtaque;
+        this.ptsDefensa = ptsDefensa;
+        this.ptsAtaqueEsp = ptsAtaqueEsp;
+        this.ptsDefensaEsp = ptsDefensaEsp;
+        this.velocidadPok = velocidadPok;
+        this.objeto = objeto;
+        this.estadoPok = estadoPok;
+    }
+
+    public Pokemon(String nombrePok, int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp,
+                   int ptsDefensaEsp, int velocidadPok, int nivelPok, boolean sexoPok, Objeto objeto, Estado estadoPok,
+                   int experiencia, Tipos tipoPok1, Tipos tipoPok2) {
+        this.nombrePok = nombrePok;
+        this.tipoPok1 = tipoPok1;
+        this.tipoPok2 = tipoPok2;
+        this.ptsAtaque = ptsAtaque;
+        this.ptsAtaqueEsp = ptsAtaqueEsp;
+        this.ptsDefensa = ptsDefensa;
+        this.ptsDefensaEsp = ptsDefensaEsp;
+        this.velocidadPok = velocidadPok;
+        this.nivelPok = nivelPok;
+        this.sexoPok = sexoPok;
+        this.objeto = objeto;
+        this.estadoPok = estadoPok;
+        this.experiencia = experiencia;
+    }
+
 
 
     public Estado getEstadoPok() {
@@ -248,7 +280,7 @@ public class Pokemon {
 
 
 
-    public void combate(Pokemon pokObjetivo, Movimiento ataque) {
+    public void atacar(Pokemon pokObjetivo, Movimiento ataque) {
 
         if (ataque instanceof mejoraMov) {
 

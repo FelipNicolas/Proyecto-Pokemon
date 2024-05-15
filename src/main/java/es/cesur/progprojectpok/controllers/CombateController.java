@@ -1,9 +1,7 @@
 package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.HelloApplication;
-import es.cesur.progprojectpok.clases.Entrenador;
-import es.cesur.progprojectpok.clases.Pokemon;
-import es.cesur.progprojectpok.clases.Tipos;
+import es.cesur.progprojectpok.clases.*;
 import es.cesur.progprojectpok.database.ConfigDB;
 import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
@@ -97,8 +95,8 @@ public class CombateController implements Initializable {
 
     private String[] nomPokemon = new String[6];
 
-    private String[] tipo1 = new String[6];
-    private String[] tipo2 = new String[6];
+    private Tipos[] tipo1 = new Tipos[6];
+    private Tipos[] tipo2 = new Tipos[6];
 
     private int[] VIDA = new int[6];
     private Random random = new Random();
@@ -120,6 +118,15 @@ public class CombateController implements Initializable {
 
     @FXML
     void btnLuchar(ActionEvent event) {
+
+
+
+
+        idPaneMain.setDisable(true);
+        idPaneMain.setVisible(false);
+        idPaneAtaques.setDisable(false);
+        idPaneAtaques.setVisible(true);
+
 
 
     }
@@ -147,6 +154,31 @@ public class CombateController implements Initializable {
         Stage stageAnterior = (Stage) cerrarCombatePK.getScene().getWindow();
         stageAnterior.close();
     }
+
+    private String[] imgPok = new String[6];
+
+    private int[] vidaPivote = new int[6];
+
+    private String[] nomPok = new String[6];
+
+
+
+
+    private Pokemon[] equipoEntrenador = new Pokemon[6];
+
+    private int[] ataqueNormal = new int[6];
+    private int[] ataqueEspecial = new int[6];
+    private int[] defensaNormal = new int[6];
+    private int[] defensaEspecial = new int[6];
+    private int[] velocidad = new int[6];
+    private int[] experiencia = new int[6];
+    private int[] nivel = new int[6];
+    private  boolean[] sexo = new boolean[6];
+    private int[] idObjeto = new int[6];
+    private Estado[] estadoPok = new Estado[6];
+    private String[] nomPokRandom = new String[6];
+    private int vidaPokRandom;
+    private String imgPokRandom;
 
 
     @Override
@@ -199,7 +231,7 @@ public class CombateController implements Initializable {
 
         PreparedStatement preparedStatement = null;
 
-        String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0 AND ID_USER = ?;";
+        String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX INNER JOIN OBJETO O ON P.ID_OBJETO = O.ID_OBJETO WHERE P.CAJA = 0 AND P.ID_USER = ?;";
 
         String[] imgPok = new String[6];
 
@@ -217,17 +249,26 @@ public class CombateController implements Initializable {
                 while (resultSet.next()) {
 
                     int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
-                    nomPokemon[i] = resultSet.getString("NOM_POKEMON");
-                    tipo1[i] = resultSet.getString("TIPO1");
-                    tipo2[i] = resultSet.getString("TIPO2");
+                    nomPok[i] = resultSet.getString("NOM_POKEMON");
+                    tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1").toUpperCase());
+                    tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2").toUpperCase());
                     imagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
                     String SONIDO = resultSet.getString("SONIDO");
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
                     int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
-                    String SEXO = resultSet.getString("SEXO");
+                    sexo[i] = Boolean.parseBoolean(resultSet.getString("SEXO"));
                     VIDA[i] = resultSet.getInt("VITALIDAD");
-                    int NIVEL = resultSet.getInt("NIVEL");
-
+                    nivel[i] = resultSet.getInt("NIVEL");
+                    ataqueNormal[i] = resultSet.getInt("ATAQUE");
+                    ataqueEspecial[i] = resultSet.getInt("AT_ESPECIAL");
+                    defensaNormal[i] = resultSet.getInt("DEFENSA");
+                    defensaEspecial[i] = resultSet.getInt("DEF_ESPECIAL");
+                    velocidad[i] = resultSet.getInt("VELOCIDAD");
+                    experiencia[i] = resultSet.getInt("EXPERIENCIA");
+                    idObjeto[i] = resultSet.getInt("ID_OBJETO");
+                    estadoPok[i] = Estado.valueOf(resultSet.getString("ESTADO").toUpperCase());
+                    System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
+                            imagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + sexo + " " + VIDA);
 
 
 
@@ -239,10 +280,289 @@ public class CombateController implements Initializable {
 
                 }
 
+
+                prgrsBar2.setProgress(((double) vidaPivote[0] / 100));
+
+
+
+
+               /* for (int j = 0; j < nomPokRandom.length(); j++) {
+
+                    nomPok[i] = nomPokemon[i] ;
+
+                }*/
+
+                lblNombre2.setText(nomPok[0]);
+
+                System.out.println(nomPok[0]);
+
+                 idBtnEquipo1.setText(nomPok[0]);
+                 idBtnEquipo2.setText(nomPok[1]);
+                 idBtnEquipo3.setText(nomPok[2]);
+                 idBtnEquipo4.setText(nomPok[3]);
+                 idBtnEquipo5.setText(nomPok[4]);
+                 idBtnEquipo6.setText(nomPok[5]);
+
+
+
+
+
+
+                System.out.println("La chupa a:" + vidaPivote[0]);
+                System.out.println("La chupa a:" + vidaPivote[1]);
+
+               // equipoEntrenador[i] = new Pokemon(nomPokemon[i], ataqueNormal[i], defensaNormal[i], ataqueEspecial[i], defensaEspecial[i],
+               //         velocidad[i], nivel[i], sexo[i], idObjeto[i], estadoPok[i], experiencia[i], tipo1[i], tipo2[i]);
             }
-        } catch (SQLException s){
-            System.out.println("Error SQL");
+
+
+
+            File fileImageFondo1 = new File(imgPok[0]);
+
+          /*  File fileImageFondo2 = new File(imgPok[1]);
+            File fileImageFondo3 = new File(imgPok[2]);
+            File fileImageFondo4 = new File(imgPok[3]);
+            File fileImageFondo5 = new File(imgPok[4]);
+            File fileImageFondo6 = new File(imgPok[5]); */
+
+
+            System.out.println("Posicion 1 = " + imgPok[0]);
+            //System.out.println("Posicion 2 = " + imgPok[1]);
+
+
+            imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+            /* imgPok2.setImage(new Image(fileImageFondo2.getAbsolutePath()));
+            imgPok3.setImage(new Image(fileImageFondo3.getAbsolutePath()));
+            imgPok4.setImage(new Image(fileImageFondo4.getAbsolutePath()));
+            imgPok5.setImage(new Image(fileImageFondo5.getAbsolutePath()));
+            imgPok6.setImage(new Image(fileImageFondo6.getAbsolutePath())); */
+
+
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
+
+
+
+
+    }
+
+
+
+
+
+    @FXML
+    private Button idBtnAtaque1;
+
+    @FXML
+    private Button idBtnAtaque2;
+
+    @FXML
+    private Button idBtnAtaque3;
+
+    @FXML
+    private Button idBtnAtaque4;
+
+    @FXML
+    private Button idBtnEquipo1;
+
+    @FXML
+    private Button idBtnEquipo2;
+
+    @FXML
+    private Button idBtnEquipo3;
+
+    @FXML
+    private Button idBtnEquipo4;
+
+    @FXML
+    private Button idBtnEquipo5;
+
+    @FXML
+    private Button idBtnEquipo6;
+
+    @FXML
+    private Button idBtnObjeto1;
+
+    @FXML
+    private Button idBtnObjeto2;
+
+    @FXML
+    private Button idBtnObjeto3;
+
+    @FXML
+    private Button idBtnObjeto4;
+
+    @FXML
+    private Button idBtnObjeto5;
+
+    @FXML
+    private Button idBtnObjeto6;
+
+    @FXML
+    private Button idBtnObjeto7;
+
+    @FXML
+    private AnchorPane idPaneAtaques;
+
+    @FXML
+    private AnchorPane idPaneEquipo;
+
+    @FXML
+    private AnchorPane idPaneObjetos;
+
+    @FXML
+    private AnchorPane idPaneMain;
+
+    @FXML
+    private ImageView imgEquipoPok1Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok1Tipo2;
+
+    @FXML
+    private ImageView imgEquipoPok2Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok2Tipo2;
+
+    @FXML
+    private ImageView imgEquipoPok3Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok3Tipo2;
+
+    @FXML
+    private ImageView imgEquipoPok4Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok5Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok6Tipo1;
+
+    @FXML
+    private ImageView imgEquipoPok6Tipo2;
+
+    @FXML
+    private ImageView imgObj1;
+
+    @FXML
+    private ImageView imgObj2;
+
+    @FXML
+    private ImageView imgObj3;
+
+    @FXML
+    private ImageView imgObj4;
+
+    @FXML
+    private ImageView imgObj5;
+
+    @FXML
+    private ImageView imgObj6;
+
+    @FXML
+    private ImageView imgObj7;
+
+    @FXML
+    private ImageView imgTipoMov1;
+
+    @FXML
+    private ImageView imgTipoMov2;
+
+    @FXML
+    private ImageView imgTipoMov3;
+
+    @FXML
+    private ImageView imgTipoMov4;
+
+    @FXML
+    private Label lblPPAtaque1;
+
+    @FXML
+    private Label lblPPAtaque2;
+
+    @FXML
+    private Label lblPPAtaque3;
+
+    @FXML
+    private Label lblPPAtaque4;
+
+    @FXML
+    private Label logAtaques;
+
+    @FXML
+    private Label logCombateMain;
+
+    @FXML
+    private Label logEquipo;
+
+    @FXML
+    private Label logObjetos;
+
+    @FXML
+    void btnAtaque1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAtaque2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAtaque3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAtaque4(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok2(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok3(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok4(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok5(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEquipoPok6(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto1(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnObjeto2(ActionEvent event) {
 
     }
 

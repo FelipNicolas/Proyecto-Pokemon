@@ -18,8 +18,11 @@ public class UtilsFicheros {
 
 
     public void guardarArchivoTexto(String rutaArchivo, String contenido) {
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivo))) {
             bw.write(contenido);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }

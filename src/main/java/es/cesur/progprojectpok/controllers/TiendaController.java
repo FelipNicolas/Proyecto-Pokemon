@@ -2,12 +2,14 @@ package es.cesur.progprojectpok.controllers;
 
 import es.cesur.progprojectpok.HelloApplication;
 import es.cesur.progprojectpok.clases.Entrenador;
+import es.cesur.progprojectpok.clases.Objeto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,10 +19,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static es.cesur.progprojectpok.clases.Objeto.*;
+
 public class TiendaController implements Initializable {
 
 
-    Stage stage = new Stage();
+    Stage stage;
     FXMLLoader fxmlLoader = null;
 
 
@@ -64,55 +68,109 @@ public class TiendaController implements Initializable {
     @FXML
     private ImageView imgObj4;
 
+    int contador = 1;
+
+    Objeto pivoteObj;
+
+    
+
+
+
     @FXML
     void btnSumarCant(ActionEvent event) {
+
+        contador++;
+        lblCantidadObj.setText(String.valueOf(contador));
+
 
     }
 
     @FXML
     void btnRestarCant(ActionEvent event) {
 
+        if (contador > 1) {
+            contador--;
+            lblCantidadObj.setText(String.valueOf(contador));
+        }
+
     }
+
+    public void infoTienda(Objeto objeto, ImageView img) {
+
+
+        imgObjetoComprar.setImage(img.getImage());
+        lblNombrePrecio.setText("Nombre: " + objeto.getNombre() + "\n"
+                + "Precio: " + objeto.getPrecio());
+        lblCantidadObj.setText(String.valueOf(1));
+        lblDescripcion.setText(objeto.getDescripcion());
+
+
+    }
+
 
     @FXML
     void mostrarObj1(MouseEvent event) {
 
-        imgObjetoComprar.setImage(imgObj1.getImage());
+        contador = 0;
+        pivoteObj = POKEBALL;
+
+        this.infoTienda(pivoteObj, imgObj1);
+
+    }
+    @FXML
+    void mostrarObj2(MouseEvent event) {
+        contador = 0;
+        pivoteObj = CHALECO;
+        this.infoTienda(pivoteObj, imgObj2);
 
     }
 
     @FXML
-    void mostrarObj2(ActionEvent event) {
+    void mostrarObj3(MouseEvent event) {
+        contador = 0;
+        pivoteObj = ANILLO;
+        this.infoTienda(pivoteObj, imgObj3);
 
     }
 
     @FXML
-    void mostrarObj3(ActionEvent event) {
+    void mostrarObj4(MouseEvent event) {
+        contador = 0;
+        pivoteObj = ETER;
+        this.infoTienda(pivoteObj, imgObj4);
 
     }
 
     @FXML
-    void mostrarObj4(ActionEvent event) {
+    void mostrarObj5(MouseEvent event) {
+        contador = 0;
+        pivoteObj = BASTON;
+        this.infoTienda(pivoteObj, imgObj5);
+
 
     }
 
     @FXML
-    void mostrarObj5(ActionEvent event) {
+    void mostrarObj6(MouseEvent event) {
+        contador = 0;
+        pivoteObj = PILA;
+        this.infoTienda(pivoteObj, imgObj6);
 
     }
 
     @FXML
-    void mostrarObj6(ActionEvent event) {
+    void mostrarObj7(MouseEvent event) {
+        contador = 0;
+        pivoteObj = PLUMA;
+        this.infoTienda(pivoteObj, imgObj7);
 
     }
 
     @FXML
-    void mostrarObj7(ActionEvent event) {
-
-    }
-
-    @FXML
-    void mostrarObj8(ActionEvent event) {
+    void mostrarObj8(MouseEvent event) {
+        contador = 0;
+        pivoteObj = PESA;
+        this.infoTienda(pivoteObj, imgObj8);
 
     }
 
