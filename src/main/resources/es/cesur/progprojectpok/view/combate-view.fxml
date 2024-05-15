@@ -139,7 +139,7 @@
             <Image url="@../images/blastoise-frente.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgPok1" fitHeight="288.0" fitWidth="312.0" layoutX="154.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgPok1" fitHeight="212.0" fitWidth="245.0" layoutX="175.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/charizar-espalda.gif" />
          </image>

@@ -46,8 +46,8 @@ public class CombateController implements Initializable {
 
         idPaneMain.setDisable(true);
         idPaneMain.setVisible(false);
-        idPaneEquipo.setDisable(false);
-        idPaneEquipo.setVisible(true);
+        idPaneAtaques.setDisable(false);
+        idPaneAtaques.setVisible(true);
 
 
 
@@ -55,16 +55,10 @@ public class CombateController implements Initializable {
 
     @FXML
     void btnPK(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/combate-equipo-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1015, 685);
-        stage.setTitle("pokemons-view");
-        stage.setScene(scene);
-        CombateEquipoController combateEquipoController = fxmlLoader.getController();
-        combateEquipoController.setEntrenadorCombEquipo(entrenadorCombate);
-        stage.show();
-
-        Stage stageAnterior = (Stage) cerrarCombatePK.getScene().getWindow();
-        stageAnterior.close();
+        idPaneMain.setDisable(true);
+        idPaneMain.setVisible(false);
+        idPaneEquipo.setDisable(false);
+        idPaneEquipo.setVisible(true);
     }
 
     @FXML
@@ -127,9 +121,7 @@ public class CombateController implements Initializable {
     private  boolean[] sexo = new boolean[6];
     private Objeto[] objeto = new Objeto[6];
     private Estado[] estadoPok = new Estado[6];
-
-
-    private String nomPokRandom;
+    private String[] nomPokRandom = new String[6];
     private int vidaPokRandom;
     private String imgPokRandom;
 
@@ -203,9 +195,9 @@ public class CombateController implements Initializable {
                 while (resultSet.next()) {
 
                     int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
-                    nomPokemon[i] = resultSet.getString("NOM_POKEMON");
-                    tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1"));
-                    tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2"));
+                    nomPok[i] = resultSet.getString("NOM_POKEMON");
+                    tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1").toUpperCase());
+                    tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2").toUpperCase());
                     imagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
                     String SONIDO = resultSet.getString("SONIDO");
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
@@ -220,7 +212,7 @@ public class CombateController implements Initializable {
                     velocidad[i] = resultSet.getInt("VELOCIDAD");
                     experiencia[i] = resultSet.getInt("EXPERIENCIA");
                     //objeto[i] = resultSet.getInt("ID_OBJETO");
-                    estadoPok[i] = Estado.valueOf(resultSet.getString("ESTADO"));
+                    estadoPok[i] = Estado.valueOf(resultSet.getString("ESTADO").toUpperCase());
                     System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
                             imagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + sexo + " " + VIDA);
 
@@ -246,20 +238,22 @@ public class CombateController implements Initializable {
 
 
 
-                for (int j = 0; j < nomPokRandom.length(); j++) {
+               /* for (int j = 0; j < nomPokRandom.length(); j++) {
 
                     nomPok[i] = nomPokemon[i] ;
 
-                }
+                }*/
 
                 lblNombre2.setText(nomPok[0]);
 
-                 idBtnAtaque1.setText(nomPok[0]);
-                 idBtnAtaque1.setText(nomPok[1]);
-                 idBtnAtaque1.setText(nomPok[2]);
-                 idBtnAtaque1.setText(nomPok[3]);
-                 idBtnAtaque1.setText(nomPok[4]);
-                 idBtnAtaque1.setText(nomPok[5]);
+                System.out.println(nomPok[0]);
+
+                 idBtnEquipo1.setText(nomPok[0]);
+                 idBtnEquipo2.setText(nomPok[1]);
+                 idBtnEquipo3.setText(nomPok[2]);
+                 idBtnEquipo4.setText(nomPok[3]);
+                 idBtnEquipo5.setText(nomPok[4]);
+                 idBtnEquipo6.setText(nomPok[5]);
 
 
 
