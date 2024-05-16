@@ -33,22 +33,22 @@ CREATE TABLE POKEMON (
 
 CREATE TABLE MOVIMIENTOS (
     ID_MOVIMIENTO INT NOT NULL PRIMARY KEY,
+    NOM_MOVIMIENTO VARCHAR(20) NOT NULL;
     POTENCIA INT,
     TIPO VARCHAR(20) NOT NULL,
     ESTADO VARCHAR(20),
     QUITA INT,
-    TURNOS INT,
+    PP INT NOT NULL,
     MEJORA VARCHAR(20),
     CANT_MEJORA INT,
-    NIVEL_APRENDIZAJE INT NOT NULL
+    NIVEL_APRENDIZAJE INT NOT NULL,
+    CATEGORIA VARCHAR(20);
 );
 
 CREATE TABLE MOVIMIENTOS_POKEMON (
     ID_MOVIMIENTO INT,
     ID_POKEMON INT
-    
-
-);
+    );
 
 CREATE TABLE OBJETO (
     ID_OBJETO INT AUTO_INCREMENT PRIMARY KEY,
@@ -137,7 +137,7 @@ INSERT INTO POKEMON (ID_USER, NUM_POKEDEX, MOTE, CAJA, ATAQUE, AT_ESPECIAL, DEFE
 (1, 7, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 100, NULL),
 (1, 10, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 100, NULL),
 (1, 16, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 100, NULL);
-
+(1, 110, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 80, NULL);
 
 
 
@@ -298,9 +298,67 @@ INSERT INTO POKEDEX (NUM_POKEDEX, NOM_POKEMON, TIPO1, TIPO2, IMAGEN, NIVEL_EVOLU
 (151, 'Mew', 'Psíquico', NULL, 'ani_bw_151.gif', NULL);
 
 
+-- Movimientos de Ataque (Inflije daño al Pokémon rival)
+INSERT INTO MOVIMIENTOS (ID_MOVIMIENTO, NOM_MOVIMIENTO, POTENCIA, TIPO, ESTADO, QUITA, PP, MEJORA, CANT_MEJORA, NIVEL_APRENDIZAJE, CATEGORIA) VALUES
+(1, 'Pound', 40, 'Normal', 'Físico', NULL, 35, NULL, NULL, 1, 'Ataque'),
+(2, 'Karate Chop', 50, 'Fighting', 'Físico', NULL, 25, NULL, NULL, 1, 'Ataque'),
+(4, 'Comet Punch', 18, 'Normal', 'Físico', NULL, 15, NULL, NULL, 1, 'Ataque'),
+(5, 'Mega Punch', 80, 'Normal', 'Físico', NULL, 20, NULL, NULL, 1, 'Ataque'),
+(6, 'Pay Day', 40, 'Normal', 'Físico', NULL, 20, NULL, NULL, 1, 'Ataque'),
+(7, 'Fire Punch', 75, 'Fire', 'Físico', NULL, 15, NULL, NULL, 1, 'Ataque'),
+(8, 'Ice Punch', 75, 'Ice', 'Físico', NULL, 15, NULL, NULL, 1, 'Ataque'),
+(9, 'Thunder Punch', 75, 'Electric', 'Físico', NULL, 15, NULL, NULL, 1, 'Ataque'),
+(10, 'Scratch', 40, 'Normal', 'Físico', NULL, 35, NULL, NULL, 1, 'Ataque');
+
+-- Movimientos de Estado (Alteran el estado del Pokémon enemigo)
+INSERT INTO MOVIMIENTOS (ID_MOVIMIENTO, NOM_MOVIMIENTO, POTENCIA, TIPO, ESTADO, QUITA, PP, MEJORA, CANT_MEJORA, NIVEL_APRENDIZAJE, CATEGORIA) VALUES
+(3, 'Growl', NULL, 'Normal', 'Estado', NULL, 40, NULL, NULL, 1, 'Estado'),
+(12, 'Leer', NULL, 'Normal', 'Estado', NULL, 30, NULL, NULL, 1, 'Estado'),
+(14, 'Whirlwind', NULL, 'Normal', 'Estado', NULL, 20, NULL, NULL, 1, 'Estado'),
+(15, 'Supersonic', NULL, 'Normal', 'Estado', NULL, 20, NULL, NULL, 1, 'Estado'),
+(18, 'Disable', NULL, 'Normal', 'Estado', NULL, 20, NULL, NULL, 1, 'Estado'),
+(28, 'Growl', NULL, 'Normal', 'Estado', NULL, 40, NULL, NULL, 1, 'Estado'),
+(32, 'Supersonic', NULL, 'Normal', 'Estado', NULL, 20, NULL, NULL, 1, 'Estado'),
+(33, 'Confusion', 50, 'Psychic', 'Special', NULL, 25, NULL, NULL, 1, 'Estado'),
+(35, 'Water Gun', 40, 'Water', 'Special', NULL, 25, NULL, NULL, 1, 'Estado');
+
+-- Movimientos de Mejora (Alteran una estadística de nuestro Pokémon)
+INSERT INTO MOVIMIENTOS (ID_MOVIMIENTO, NOM_MOVIMIENTO, POTENCIA, TIPO, ESTADO, QUITA, PP, MEJORA, CANT_MEJORA, NIVEL_APRENDIZAJE, CATEGORIA) VALUES
+(74, 'Swords Dance', NULL, 'Normal', 'Estado', NULL, 30, 'Atk', 2, 1, 'Mejora'),
+(75, 'Agility', NULL, 'Psychic', 'Estado', NULL, 30, 'Speed', 2, 1, 'Mejora'),
+(86, 'Minimize', NULL, 'Normal', 'Estado', NULL, 20, 'Evasion', 2, 1, 'Mejora'),
+(88, 'Withdraw', NULL, 'Water', 'Estado', NULL, 40, 'Defense', 1, 1, 'Mejora'),
+(89, 'Defense Curl', NULL, 'Normal', 'Estado', NULL, 40, 'Defense', 1, 1, 'Mejora'),
+(90, 'Barrier', NULL, 'Psychic', 'Estado', NULL, 20, 'Defense', 2, 1, 'Mejora'),
+(91, 'Light Screen', NULL, 'Psychic', 'Estado', NULL, 30, 'Special Defense', 2, 1, 'Mejora'),
+(93, 'Reflect', NULL, 'Psychic', 'Estado', NULL, 20, 'Defense', 2, 1, 'Mejora');
 
 
-
+INSERT INTO MOVIMIENTOS_POKEMON (ID_MOVIMIENTO, ID_POKEMON) VALUES
+(35, 1),
+(88, 1),
+(5, 1),
+(8, 1),
+(35, 2),
+(88, 2),
+(3, 2),
+(4, 2),
+(1, 3),
+(9, 3),
+(10, 3),
+(33, 3),
+(6, 4),
+(7, 4),
+(12, 4),
+(18, 4),
+(88, 5),
+(10, 5),
+(35, 5),
+(6, 5),
+(28, 7),
+(75, 7),
+(90, 7),
+(91, 7);
 
 
 
