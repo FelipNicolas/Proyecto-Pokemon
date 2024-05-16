@@ -6,11 +6,10 @@ public class mejoraMov extends Movimiento{
     private String nombreStat;
     private int numTurnos;
 
-    public mejoraMov(String nomMovimiento, int pp, int precision, int prioridad, int mejoraStat, String nombreStat, int numTurnos) {
-        super(nomMovimiento, pp, precision, prioridad);
+    public mejoraMov(String nomMovimiento, int pp, int mejoraStat, String nombreStat) {
+        super(nomMovimiento, pp);
         this.mejoraStat = mejoraStat;
         this.nombreStat = nombreStat;
-        this.numTurnos = numTurnos;
     }
 
     public mejoraMov() {

@@ -7,11 +7,9 @@ public class estadoMov extends Movimiento {
     private int numTurnos;
 
 
-    public estadoMov(String nomMovimiento, int pp, int precision, int prioridad, Estado estadoMov, boolean persistente, int numTurnos) {
-        super(nomMovimiento, pp, precision, prioridad);
+    public estadoMov(String nomMovimiento, int pp, Estado estadoMov) {
+        super(nomMovimiento, pp);
         this.estadoMov = estadoMov;
-        this.persistente = persistente;
-        this.numTurnos = numTurnos;
     }
 
     public estadoMov() {

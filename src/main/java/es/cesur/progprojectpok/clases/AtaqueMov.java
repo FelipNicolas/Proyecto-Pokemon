@@ -13,8 +13,8 @@ public class AtaqueMov extends Movimiento{
     public static final double NORMAL = 1.0;
 
 
-    public AtaqueMov(String nomMovimiento, int pp, int precision, int prioridad, int potenciaMov, Tipos tipoMov, String categoriaMov) {
-        super(nomMovimiento, pp, precision, prioridad);
+    public AtaqueMov(String nomMovimiento, int pp,int potenciaMov, Tipos tipoMov, String categoriaMov) {
+        super(nomMovimiento, pp);
         this.potenciaMov = potenciaMov;
         this.tipoMov = tipoMov;
         this.categoriaMov = categoriaMov;

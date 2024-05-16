@@ -26,7 +26,7 @@ public class Pokemon {
     private int ptsDefensaEsp;
     private int velocidadPok;
     private int nivelPok = 1;
-    private Movimiento[] setMoviminetos;
+    private Movimiento[] setMovimientos;
     private int fertilidad = 5;
     private boolean sexoPok;
     private Objeto objeto;
@@ -57,8 +57,24 @@ public class Pokemon {
 
     private int idPokRival;
 
+    private int[] potenciaMov = new int[4];
+    private int[] pp = new int[4];
+
+    private String[] categoriaMov = new String[4];
+    private Tipos[] tipoMov = new Tipos[4];
+
+    private String[] estadoMov = new String[4];
+
+    private int[] cantMejora = new int[4];
+    private String[] statMejora = new String[4];
+    private Movimiento[] movimientos;
+
+    private String[] nombreMov = new String[4];
+
+    private Estado[] estadoMovSaludable = new Estado[4];
+
     public Pokemon(String motePok, int vitalidadPok, int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp, int ptsDefensaEsp, int velocidadPok,
-                   int nivelPok, Movimiento[] setMoviminetos, int fertilidad, boolean sexoPok, Objeto objeto, int experiencia, Tipos tipoPok1, Tipos tipoPok2, Estado estadoPok) {
+                   int nivelPok, Movimiento[] setMovimientos, int fertilidad, boolean sexoPok, Objeto objeto, int experiencia, Tipos tipoPok1, Tipos tipoPok2, Estado estadoPok) {
 
         this.motePok = motePok;
         this.vitalidadPok = vitalidadPok;
@@ -68,7 +84,7 @@ public class Pokemon {
         this.ptsDefensaEsp = ptsDefensaEsp;
         this.velocidadPok = velocidadPok;
         this.nivelPok = nivelPok;
-        this.setMoviminetos = setMoviminetos;
+        this.setMovimientos = setMovimientos;
         this.fertilidad = fertilidad;
         this.sexoPok = sexoPok;
         this.objeto = objeto;
@@ -87,6 +103,7 @@ public class Pokemon {
         this.ptsDefensa = 0;
         this.ptsAtaqueEsp = 0;
         this.ptsDefensaEsp = 0;
+        this.setMovimientos = null;
         this.velocidadPok = 0;
         this.nivelPok = 1;
         this.fertilidad = 5;
@@ -99,7 +116,7 @@ public class Pokemon {
 
     }
 
-    public Pokemon(String nombrePok, Tipos tipoPok1, Tipos tipoPok2, int numPokedex, String urlImgPok) {
+    public Pokemon(String nombrePok, Tipos tipoPok1, Tipos tipoPok2, int numPokedex, String urlImgPok, Movimiento[] setMovimientos) {
 
         this.nombrePok = nombrePok;
         this.numPokedex = numPokedex;
@@ -114,6 +131,7 @@ public class Pokemon {
         this.tipoPok1 = tipoPok1;
         this.tipoPok2 = tipoPok2;
         this.estadoPok = null;
+        this.setMovimientos = setMovimientos;
 
 
     }
@@ -239,11 +257,11 @@ public class Pokemon {
     }
 
     public Movimiento[] getSetMoviminetos() {
-        return setMoviminetos;
+        return setMovimientos;
     }
 
     public void setSetMoviminetos(Movimiento[] setMoviminetos) {
-        this.setMoviminetos = setMoviminetos;
+        this.setMovimientos = setMoviminetos;
     }
 
     public int getFertilidad() {
@@ -387,11 +405,57 @@ public class Pokemon {
             }
 
 
-            equipoRival[i] = new Pokemon(nomPokemonRival[i],
-                    tipo1Rival[i], tipo2Rival[i], numPokedexRival[i], imagenUrlPokemonGeneradoRival[i]);
+            //equipoRival[i] = new Pokemon(nomPokemonRival[i],
+             //       tipo1Rival[i], tipo2Rival[i], numPokedexRival[i], imagenUrlPokemonGeneradoRival[i]);
 
         }
         return equipoRival;
+
+    }
+
+    public void cargarMovimientos(Pokemon pokemon, int idEntrenador, int idPokemon) {
+
+
+        Connection connection = DBConnection.getConnection();
+        String sql = "SELECT * FROM MOVIMIENTOS_POKEMON M INNER JOIN POKEMON P ON P.ID_POKEMON = M.ID_POKEMON INNER JOIN MOVIMIENTOS MO ON M.ID_MOVIMIENTO = MO.ID_MOVIMIENTO WHERE P.ID_ENTRENADOR = ? AND P.ID_POKEMON = ?;";
+         movimientos = new Movimiento[4];
+
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, idEntrenador);
+            preparedStatement.setInt(2, idPokemon);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+
+            for (int i = 0; i < movimientos.length; i++) {
+
+            while (resultSet.next()) {
+
+                nombreMov[i] = resultSet.getString("NOM_POKEMON");
+                potenciaMov[i] = resultSet.getInt("potencia");
+                categoriaMov[i] = resultSet.getString("categoria");
+                estadoMov[i] = resultSet.getString("mo.estado");
+                tipoMov[i] = Tipos.valueOf(resultSet.getString("tipo"));
+                pp[i] = resultSet.getInt("pp");
+                statMejora[i] = resultSet.getString("MEJORA");
+                cantMejora[i] = resultSet.getInt("CANT_MEJORA");
+                estadoMovSaludable[i] = Estado.valueOf(resultSet.getString("MEJORA"));
+
+            }
+
+            switch (categoriaMov[i]) {
+                case "ataque":
+                    pokemon.setMovimientos[i] = new AtaqueMov(nombreMov[i], pp[i], potenciaMov[i],tipoMov[i],categoriaMov[i]);
+                case "mejora":
+                    pokemon.setMovimientos[i] = new mejoraMov(nombreMov[i], pp[i], cantMejora[i], statMejora[i]);
+                case "estado":
+                    pokemon.setMovimientos[i] = new estadoMov(nombreMov[i], pp[i], estadoMovSaludable[i]);
+            }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
