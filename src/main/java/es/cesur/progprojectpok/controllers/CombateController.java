@@ -120,6 +120,15 @@ public class CombateController implements Initializable {
     private int vidaPokRandom;
     private String imgPokRandom;
 
+    int pokElejido = 0;
+
+    int movElejido;
+    int movElejidoRival;
+
+    int pokElejidoRival;
+
+    Random randomMovRival = new Random();
+
 
     Pokemon pokMovimientos = new Pokemon();
 
@@ -129,42 +138,9 @@ public class CombateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        pokemonRandom = random.nextInt(25);
-
-        connection = DBConnection.getConnection();
-
-        PreparedStatement preparedStatement = null;
-
-        String sql = "SELECT * FROM POKEDEX WHERE NUM_POKEDEX = ?;";
-
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, pokemonRandom);
-
-            System.out.println("sentencia" + sql);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            resultSet.next();
-
-            String nomPokemon = resultSet.getString("NOM_POKEMON");
-            String imgPokemon = resultSet.getString("IMAGEN");
-
-            String rutaImgPokemon = ConfigDB.URL_POK + imgPokemon;
-
-            File rutaAbsolutaImgPok = new File(rutaImgPokemon);
-            System.out.println("ruta absoluta" + rutaAbsolutaImgPok);
-
-            imgPok2.setImage(new Image(rutaAbsolutaImgPok.getAbsolutePath()));
-
-            prgrsBar1.setProgress(1);
-
-            lblNombre1.setText(nomPokemon);
 
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
 
     }
 
@@ -195,8 +171,8 @@ public class CombateController implements Initializable {
 
                     int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
                     nomPok[i] = resultSet.getString("NOM_POKEMON");
-                    tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1").toUpperCase());
-                    tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2").toUpperCase());
+                    tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1"));
+                    tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2"));
                     imagenUrlPokemonGenerado[i] = resultSet.getString("IMAGEN");
                     String SONIDO = resultSet.getString("SONIDO");
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
@@ -248,17 +224,8 @@ public class CombateController implements Initializable {
                  idBtnEquipo6.setText(nomPok[5]);
 
 
-
-                System.out.println("La chupa a:" + vidaPivote[0]);
-                System.out.println("La chupa a:" + vidaPivote[1]);
-
-
-
-
                 equipoEntrenador[i] = new Pokemon(nomPok[i], ataqueNormal[i], defensaNormal[i], ataqueEspecial[i], defensaEspecial[i],
                         velocidad[i], nivel[i], sexo[i], objeto[i], estadoPok[i], experiencia[i], tipo1[i], tipo2[i]);
-
-
 
 
                 pokMovimientos.cargarMovimientos(equipoEntrenador[i], entrenadorCombate.getIdEntrenador(), idPokemon[i]);
@@ -272,20 +239,321 @@ public class CombateController implements Initializable {
             idBtnAtaque4.setText(equipoEntrenador[0].getNombreMov(3));
 
             File fileImageFondo1 = new File(imgPok[0]);
-
-
-
             System.out.println("Posicion 1 = " + imgPok[0]);
-           //System.out.pr
-
             imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
 
+            combateFinal();
 
         } catch (SQLException s){
             throw new RuntimeException(s);
         }
+    }
+
+    public void combateFinal() {
+
+        Pokemon pokPivote = new Pokemon();
+        pokElejidoRival = 0;
+        movElejidoRival = randomMovRival.nextInt(0,4);
+        Pokemon[] tuEquipo = equipoEntrenador;
+        Pokemon[] equipoRival = pokPivote.cargarEquipoContrarioConStats(tuEquipo[0]);
+
+        while (comprobarEstadoEquipo(tuEquipo, equipoRival)) {
+
+            if (tuEquipo[pokElejido].getVelocidadPok() > equipoRival[pokElejidoRival].getVelocidadPok()) {
+
+                tuEquipo[pokElejido].funcionalidadCombate(equipoRival[pokElejidoRival], movElejido);
+                prgrsBar1.setProgress(((double) equipoRival[pokElejidoRival].getVitalidadPok() / 100));
+                comprobarVivo(equipoRival[pokElejidoRival], tuEquipo[pokElejido]);
+                comprobarEstadoEquipo(tuEquipo, equipoRival);
+
+                equipoRival[pokElejidoRival].funcionalidadCombate(tuEquipo[pokElejido], movElejidoRival);
+                prgrsBar2.setProgress((double) tuEquipo[pokElejido].getVitalidadPok() / 100);
+                comprobarVivo(equipoRival[pokElejidoRival], tuEquipo[pokElejido]);
+                comprobarEstadoEquipo(tuEquipo, equipoRival);
+                break;
+
+            }else {
+
+                equipoRival[pokElejidoRival].funcionalidadCombate(tuEquipo[pokElejido], movElejidoRival);
+                comprobarEstadoEquipo(tuEquipo, equipoRival);
+                tuEquipo[pokElejido].funcionalidadCombate(equipoRival[pokElejidoRival], movElejido);
+                comprobarEstadoEquipo(tuEquipo, equipoRival);
+                break;
+            }
+
+        }
+
+    }
+
+    public boolean comprobarVivo(Pokemon pokemonRival, Pokemon tuPokemon) {
+
+        if (tuPokemon.getVitalidadPok() <= 0) {
+
+            tuPokemon.setEstadoPok(Estado.valueOf("DEBILITADO"));
+
+            switch (pokElejido) {
+
+                case 0:
+                    idBtnEquipo1.setDisable(true);
+                    break;
+                case 1:
+                    idBtnEquipo2.setDisable(true);
+                    break;
+                case 2:
+                    idBtnEquipo3.setDisable(true);
+                    break;
+                case 3:
+                    idBtnEquipo4.setDisable(true);
+                    break;
+                case 4:
+                    idBtnEquipo5.setDisable(true);
+                    break;
+                case 5:
+                    idBtnEquipo6.setDisable(true);
+                    break;
+            }
+
+            idPaneAtaques.setDisable(true);
+            idPaneAtaques.setVisible(false);
+
+            idPaneEquipo.setDisable(false);
+            idPaneEquipo.setVisible(true);
 
 
+        } else if (pokemonRival.getVitalidadPok() <= 0) {
+
+            pokemonRival.setEstadoPok(Estado.valueOf("DEBILITADO"));
+
+            switch (pokElejidoRival) {
+
+                case 0:
+                    Pok1.setDisable(true);
+                    break;
+                case 1:
+                    Pok2.setDisable(true);
+                    break;
+                case 2:
+                    Pok3.setDisable(true);
+                    break;
+                case 3:
+                    Pok4.setDisable(true);
+                    break;
+                case 4:
+                    Pok5.setDisable(true);
+                    break;
+                case 5:
+                    Pok6.setDisable(true);
+                    break;
+
+            }
+            pokElejidoRival++;
+
+        }
+
+        return false;
+        }
+
+
+    public boolean comprobarEstadoEquipo(Pokemon[] tuEquipo, Pokemon[] equipoRival){
+
+        boolean seguir = true;
+        int contador = 0;
+        int contadorRival = 0;
+
+        for (int i = 0; i < equipoRival.length; i++) {
+
+            if (tuEquipo[i].getEstadoPok().equals("DEBILITADO")) {
+                contador++;
+            }
+
+            if (equipoRival[i].getEstadoPok().equals("DEBILITADO")) {
+                contadorRival++;
+            }
+
+        }
+
+        if (contador == 6) {
+            System.out.println("Rival gana el combate");
+            seguir = false;
+        }else if (contadorRival == 6){
+            System.out.println("Has ganado el combate");
+            seguir = false;
+        }
+        return seguir;
+    }
+
+
+    @FXML
+    void btnAtaque1(ActionEvent event) {
+
+        movElejido = 0;
+        combateFinal();
+
+    }
+
+    @FXML
+    void btnAtaque2(ActionEvent event) {
+
+        movElejido = 1;
+        combateFinal();
+
+    }
+
+
+
+    @FXML
+    void btnAtaque3(ActionEvent event) {
+
+        movElejido = 2;
+        combateFinal();
+    }
+
+    @FXML
+    void btnAtaque4(ActionEvent event) {
+
+        movElejido = 3;
+        combateFinal();
+    }
+
+
+    @FXML
+    void btnEquipoPok1(ActionEvent event) {
+
+        lblNvl2.setText("Nv" + nivel[0]);
+        lblNombre2.setText(nomPok[0]);
+        prgrsBar2.setProgress(((double) VIDA[0] / 100));
+
+        File fileImageFondo1 = new File(imgPok[0]);
+        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+        idBtnAtaque1.setText(equipoEntrenador[0].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[0].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[0].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[0].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
+        pokElejido = 0;
+    }
+
+    @FXML
+    void btnEquipoPok2(ActionEvent event) {
+
+        lblNvl2.setText("Nv" + nivel[1]);
+        lblNombre2.setText(nomPok[1]);
+        prgrsBar2.setProgress(((double) VIDA[1] / 100));
+
+        System.out.println(imgPok[1]);
+
+        File fileImageFondo1 = new File(imgPok[1]);
+        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+        idBtnAtaque1.setText(equipoEntrenador[1].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[1].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[1].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[1].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
+        pokElejido = 1;
+    }
+
+    @FXML
+    void btnEquipoPok3(ActionEvent event) {
+
+        lblNvl2.setText("Nv" + nivel[2]);
+        lblNombre2.setText(nomPok[2]);
+        prgrsBar2.setProgress(((double) VIDA[2] / 100));
+
+        File fileImageFondo1 = new File(imgPok[2]);
+        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+        idBtnAtaque1.setText(equipoEntrenador[2].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[2].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[2].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[2].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
+        pokElejido = 2;
+    }
+
+    @FXML
+    void btnEquipoPok4(ActionEvent event) {
+
+        lblNvl2.setText("Nv" + nivel[3]);
+        lblNombre2.setText(nomPok[3]);
+        prgrsBar2.setProgress(((double) VIDA[3] / 100));
+
+        File fileImageFondo1 = new File(imgPok[3]);
+        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+        idBtnAtaque1.setText(equipoEntrenador[3].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[3].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[3].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[3].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
+        pokElejido = 3;
+    }
+
+    @FXML
+    void btnEquipoPok5(ActionEvent event) {
+
+        lblNvl2.setText("Nv" + nivel[4]);
+        lblNombre2.setText(nomPok[4]);
+        prgrsBar2.setProgress(((double) VIDA[4] / 100));
+
+        File fileImageFondo1 = new File(imgPok[4]);
+        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+        idBtnAtaque1.setText(equipoEntrenador[4].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[4].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[4].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[4].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
+        pokElejido = 4;
+    }
+
+    @FXML
+    void btnEquipoPok6(ActionEvent event) {
+
+        lblNvl2.setText("Nv" + nivel[5]);
+        lblNombre2.setText(nomPok[5]);
+        prgrsBar2.setProgress(((double) VIDA[5] / 100));
+
+        File fileImageFondo1 = new File(imgPok[5]);
+        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+        idBtnAtaque1.setText(equipoEntrenador[5].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[5].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[5].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[5].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
+        pokElejido = 5;
     }
 
 
@@ -494,160 +762,9 @@ public class CombateController implements Initializable {
     @FXML
     private Label logObjetos;
 
-    @FXML
-    void btnAtaque1(ActionEvent event) {
 
 
-    }
 
-    @FXML
-    void btnAtaque2(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnAtaque3(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnAtaque4(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnEquipoPok1(ActionEvent event) {
-
-        lblNvl2.setText("Nv" + nivel[0]);
-        lblNombre2.setText(nomPok[0]);
-        prgrsBar2.setProgress(((double) VIDA[0] / 100));
-
-        File fileImageFondo1 = new File(imgPok[0]);
-        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
-
-        idBtnAtaque1.setText(equipoEntrenador[0].getNombreMov(0));
-        idBtnAtaque2.setText(equipoEntrenador[0].getNombreMov(1));
-        idBtnAtaque3.setText(equipoEntrenador[0].getNombreMov(2));
-        idBtnAtaque4.setText(equipoEntrenador[0].getNombreMov(3));
-
-        idPaneEquipo.setDisable(true);
-        idPaneEquipo.setVisible(false);
-        idPaneMain.setDisable(false);
-        idPaneMain.setVisible(true);
-
-    }
-
-    @FXML
-    void btnEquipoPok2(ActionEvent event) {
-
-        lblNvl2.setText("Nv" + nivel[1]);
-        lblNombre2.setText(nomPok[1]);
-        prgrsBar2.setProgress(((double) VIDA[1] / 100));
-
-        System.out.println(imgPok[1]);
-
-        File fileImageFondo1 = new File(imgPok[1]);
-        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
-
-        idBtnAtaque1.setText(equipoEntrenador[1].getNombreMov(0));
-        idBtnAtaque2.setText(equipoEntrenador[1].getNombreMov(1));
-        idBtnAtaque3.setText(equipoEntrenador[1].getNombreMov(2));
-        idBtnAtaque4.setText(equipoEntrenador[1].getNombreMov(3));
-
-        idPaneEquipo.setDisable(true);
-        idPaneEquipo.setVisible(false);
-        idPaneMain.setDisable(false);
-        idPaneMain.setVisible(true);
-
-    }
-
-    @FXML
-    void btnEquipoPok3(ActionEvent event) {
-
-        lblNvl2.setText("Nv" + nivel[2]);
-        lblNombre2.setText(nomPok[2]);
-        prgrsBar2.setProgress(((double) VIDA[2] / 100));
-
-        File fileImageFondo1 = new File(imgPok[2]);
-        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
-
-        idBtnAtaque1.setText(equipoEntrenador[2].getNombreMov(0));
-        idBtnAtaque2.setText(equipoEntrenador[2].getNombreMov(1));
-        idBtnAtaque3.setText(equipoEntrenador[2].getNombreMov(2));
-        idBtnAtaque4.setText(equipoEntrenador[2].getNombreMov(3));
-
-        idPaneEquipo.setDisable(true);
-        idPaneEquipo.setVisible(false);
-        idPaneMain.setDisable(false);
-        idPaneMain.setVisible(true);
-
-    }
-
-    @FXML
-    void btnEquipoPok4(ActionEvent event) {
-
-        lblNvl2.setText("Nv" + nivel[3]);
-        lblNombre2.setText(nomPok[3]);
-        prgrsBar2.setProgress(((double) VIDA[3] / 100));
-
-        File fileImageFondo1 = new File(imgPok[3]);
-        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
-
-        idBtnAtaque1.setText(equipoEntrenador[3].getNombreMov(0));
-        idBtnAtaque2.setText(equipoEntrenador[3].getNombreMov(1));
-        idBtnAtaque3.setText(equipoEntrenador[3].getNombreMov(2));
-        idBtnAtaque4.setText(equipoEntrenador[3].getNombreMov(3));
-
-        idPaneEquipo.setDisable(true);
-        idPaneEquipo.setVisible(false);
-        idPaneMain.setDisable(false);
-        idPaneMain.setVisible(true);
-
-    }
-
-    @FXML
-    void btnEquipoPok5(ActionEvent event) {
-
-        lblNvl2.setText("Nv" + nivel[4]);
-        lblNombre2.setText(nomPok[4]);
-        prgrsBar2.setProgress(((double) VIDA[4] / 100));
-
-        File fileImageFondo1 = new File(imgPok[4]);
-        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
-
-        idBtnAtaque1.setText(equipoEntrenador[4].getNombreMov(0));
-        idBtnAtaque2.setText(equipoEntrenador[4].getNombreMov(1));
-        idBtnAtaque3.setText(equipoEntrenador[4].getNombreMov(2));
-        idBtnAtaque4.setText(equipoEntrenador[4].getNombreMov(3));
-
-        idPaneEquipo.setDisable(true);
-        idPaneEquipo.setVisible(false);
-        idPaneMain.setDisable(false);
-        idPaneMain.setVisible(true);
-
-    }
-
-    @FXML
-    void btnEquipoPok6(ActionEvent event) {
-
-        lblNvl2.setText("Nv" + nivel[5]);
-        lblNombre2.setText(nomPok[5]);
-        prgrsBar2.setProgress(((double) VIDA[5] / 100));
-
-        File fileImageFondo1 = new File(imgPok[5]);
-        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
-
-        idBtnAtaque1.setText(equipoEntrenador[5].getNombreMov(0));
-        idBtnAtaque2.setText(equipoEntrenador[5].getNombreMov(1));
-        idBtnAtaque3.setText(equipoEntrenador[5].getNombreMov(2));
-        idBtnAtaque4.setText(equipoEntrenador[5].getNombreMov(3));
-
-        idPaneEquipo.setDisable(true);
-        idPaneEquipo.setVisible(false);
-        idPaneMain.setDisable(false);
-        idPaneMain.setVisible(true);
-
-    }
 
     @FXML
     void btnObjeto1(ActionEvent event) {

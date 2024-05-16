@@ -87,6 +87,11 @@ public class Pokemon {
 
     private Estado[] estadoMovSaludable = new Estado[4];
 
+    private boolean vivo = true;
+
+
+
+
     public Pokemon(String motePok, int vitalidadPok, int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp, int ptsDefensaEsp, int velocidadPok,
                    int nivelPok, Movimiento[] setMovimientos, int fertilidad, String sexoPok, Objeto objeto, int experiencia, Tipos tipoPok1, Tipos tipoPok2, Estado estadoPok) {
 
@@ -126,6 +131,26 @@ public class Pokemon {
         this.tipoPok1 = null;
         this.tipoPok2 = null;
         this.estadoPok = null;
+
+    }
+
+
+
+    public Pokemon(String nombrePok, Tipos tipoPok1, Tipos tipoPok2, int numPokedex, String urlImgPok) {
+
+        this.nombrePok = nombrePok;
+        this.numPokedex = numPokedex;
+        this.urlImgPok = urlImgPok;
+        this.vitalidadPok = 100;
+        this.ptsAtaque = 0;
+        this.ptsDefensa = 0;
+        this.ptsAtaqueEsp = 0;
+        this.ptsDefensaEsp = 0;
+        this.velocidadPok = 0;
+        this.nivelPok = 1;
+        this.tipoPok1 = tipoPok1;
+        this.tipoPok2 = tipoPok2;
+        this.estadoPok = Estado.SALUDABLE;
 
     }
 
@@ -180,6 +205,13 @@ public class Pokemon {
     }
 
 
+    public String getNombrePok() {
+        return nombrePok;
+    }
+
+    public void setNombrePok(String nombrePok) {
+        this.nombrePok = nombrePok;
+    }
 
     public Estado getEstadoPok() {
         return estadoPok;
@@ -303,7 +335,8 @@ public class Pokemon {
 
 
 
-    public void atacar(Pokemon pokObjetivo, Movimiento ataque) {
+    public float atacar(Pokemon pokObjetivo, Movimiento ataque) {
+
 
         if (ataque instanceof mejoraMov) {
 
@@ -315,11 +348,45 @@ public class Pokemon {
 
         } else if (ataque instanceof AtaqueMov){
 
-            ataque.accionMov(pokObjetivo, ataque);
+            if (((AtaqueMov) ataque).getCategoriaMov().equals("Físico")){
+
+                int danioTotal = ((ataque.accionMov(pokObjetivo, ataque) + this.getPtsAtaque()) - pokObjetivo.getPtsDefensa() );
+
+                pokObjetivo.setVitalidadPok(pokObjetivo.getVitalidadPok() - danioTotal);
+
+            } else if (((AtaqueMov) ataque).getCategoriaMov().equals("Especial")) {
+
+                int danioTotal = ((ataque.accionMov(pokObjetivo, ataque) + this.getPtsAtaqueEsp()) - pokObjetivo.getPtsDefensaEsp() );
+                pokObjetivo.setVitalidadPok(pokObjetivo.getVitalidadPok() - danioTotal);
+                System.out.println(this.getNombrePok() + " ataco a " + pokObjetivo.getNombrePok() + " con el movimiento: " + ataque.getNomMovimiento());
+
+            }
 
         }
+        return pokObjetivo.getVitalidadPok();
+    }
+
+
+    public void funcionalidadCombate(Pokemon pokRival, int contador) {
+
+
+        if (this.getVelocidadPok() > pokRival.getVelocidadPok()) {
+
+            this.atacar(pokRival, this.setMovimientos[contador]);
+            pokRival.atacar(this, pokRival.setMovimientos[contador]);
+
+        } else {
+
+            pokRival.atacar(this, pokRival.setMovimientos[contador]);
+            this.atacar(pokRival, this.setMovimientos[contador]);
+        }
+
 
     }
+
+
+
+
 
 
     public void subirNivel(int expPok) {
@@ -339,33 +406,96 @@ public class Pokemon {
     {
     }
 
-
-
     public void capturar(Pokemon pokeCaptura)
     {
     }
 
-    public Pokemon[] cargarEquipoContrarioSinStats()  {
+    public void crearMovEquipoRival(Pokemon pokemon) {
 
-        Pokemon pok = new Pokemon();
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet;
+        String sql = "SELECT * FROM movimientos WHERE tipo = ? ORDER BY RAND() LIMIT 1";
+        Movimiento[] movPivote = new Movimiento[4];
 
-        Pokemon[] equipoPivote = new Pokemon[0];
+        for (int i = 0; i < movPivote.length; i++) {
+
+            try {
+                preparedStatement = connection.prepareStatement(sql);
+
+                preparedStatement.setString(1, String.valueOf(pokemon.getTipoPok1()));
+
+                resultSet = preparedStatement.executeQuery();
+
+
+                    while (resultSet.next()) {
+
+                        nombreMov[i] = resultSet.getString("NOM_MOVIMIENTO");
+                        potenciaMov[i] = resultSet.getInt("potencia");
+                        categoriaMov[i] = resultSet.getString("categoria");
+                        estadoMov[i] = resultSet.getString("estado");
+                        tipoMov[i] = Tipos.valueOf(resultSet.getString("tipo"));
+                        pp[i] = resultSet.getInt("pp");
+                        statMejora[i] = resultSet.getString("MEJORA");
+                        cantMejora[i] = resultSet.getInt("CANT_MEJORA");
+
+                        break;
+
+                    }
+
+                    switch (categoriaMov[i]) {
+                        case "Ataque":
+                            pokemon.setMovimientos[i] = new AtaqueMov(nombreMov[i], pp[i], potenciaMov[i],tipoMov[i],categoriaMov[i]);
+                            break;
+                        case "Mejora":
+                            pokemon.setMovimientos[i] = new mejoraMov(nombreMov[i], pp[i], cantMejora[i], statMejora[i]);
+                            break;
+                        case "Estado":
+                            pokemon.setMovimientos[i] = new estadoMov(nombreMov[i], pp[i], Estado.SALUDABLE);
+                            break;
+                    }
+
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+
+
+
+
+
+    public Pokemon[] cargarEquipoContrarioConStats(Pokemon pokReferencia) {
+
+        Pokemon[] equipoRivalCompleto = new Pokemon[6];
+        Random random = new Random();
+        int indice;
+
         try {
 
-            equipoPivote = pok.equipoRivalBD();
+            equipoRivalCompleto = pokReferencia.equipoRivalBD();
 
+
+            for (int i = 0; i < equipoRivalCompleto.length; i++) {
+
+                indice = random.nextInt(-10, 10);
+
+                equipoRivalCompleto[i].setVitalidadPok(100);
+                equipoRivalCompleto[i].setPtsAtaque(pokReferencia.getPtsAtaque() + indice);
+                equipoRivalCompleto[i].setPtsAtaqueEsp(pokReferencia.getPtsAtaqueEsp() + indice);
+                equipoRivalCompleto[i].setPtsDefensa(pokReferencia.getPtsDefensa() + indice);
+                equipoRivalCompleto[i].setPtsDefensaEsp(pokReferencia.getPtsDefensaEsp() + indice);
+                equipoRivalCompleto[i].setVelocidadPok(pokReferencia.getVelocidadPok() + indice);
+
+                crearMovEquipoRival(equipoRivalCompleto[i]);
+
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-        for (int i = 0; i < equipoPivote.length; i++) {
-            System.out.println(equipoPivote[i].toString());
-
-        }
-
-
-        return equipoPivote;
+        return equipoRivalCompleto;
     }
 
 
@@ -394,25 +524,26 @@ public class Pokemon {
 
                 resultSet = preparedStatement.executeQuery();
 
+                while (resultSet.next()) {
+
+                    numPokedexRival[i] = resultSet.getInt("NUM_POKEDEX");
+                    nomPokemonRival[i] = resultSet.getString("NOM_POKEMON");
+                    tipo1Rival[i] = Tipos.valueOf(resultSet.getString("TIPO1"));
+                    tipo2Rival[i] = Tipos.valueOf(resultSet.getString("TIPO2"));
+                    imagenUrlPokemonGeneradoRival[i] = resultSet.getString("IMAGEN");
+
+                    break;
+                }
+
+
+                equipoRival[i] = new Pokemon(nomPokemonRival[i],
+                       tipo1Rival[i], tipo2Rival[i], numPokedexRival[i], imagenUrlPokemonGeneradoRival[i]);
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
+            }finally {
+
             }
-
-            while (resultSet.next()) {
-
-                numPokedexRival[i] = resultSet.getInt("NUM_POKEDEX");
-                nomPokemonRival[i] = resultSet.getString("NOM_POKEMON");
-                tipo1Rival[i] = Tipos.valueOf(resultSet.getString("TIPO1").toUpperCase());
-                tipo2Rival[i] = Tipos.valueOf(resultSet.getString("TIPO2").toUpperCase());
-                imagenUrlPokemonGeneradoRival[i] = resultSet.getString("IMAGEN");
-
-                break;
-            }
-
-
-            //equipoRival[i] = new Pokemon(nomPokemonRival[i],
-             //       tipo1Rival[i], tipo2Rival[i], numPokedexRival[i], imagenUrlPokemonGeneradoRival[i]);
-
         }
         return equipoRival;
 
@@ -441,7 +572,7 @@ public class Pokemon {
                 potenciaMov[i] = resultSet.getInt("potencia");
                 categoriaMov[i] = resultSet.getString("categoria");
                 estadoMov[i] = resultSet.getString("mo.estado");
-                tipoMov[i] = Tipos.valueOf(resultSet.getString("tipo").toUpperCase());
+                tipoMov[i] = Tipos.valueOf(resultSet.getString("tipo"));
                 pp[i] = resultSet.getInt("pp");
                 statMejora[i] = resultSet.getString("MEJORA");
                 cantMejora[i] = resultSet.getInt("CANT_MEJORA");

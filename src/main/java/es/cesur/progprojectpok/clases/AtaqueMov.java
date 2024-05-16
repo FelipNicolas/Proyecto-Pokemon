@@ -40,7 +40,7 @@ public class AtaqueMov extends Movimiento{
 
         double potenciador = calcularMultiplicador(movimiento.getTipoMov(), pokemonObjetivo.getTipoPok1(), pokemonObjetivo.getTipoPok2());
 
-        int valorAtaque = (int) (movimiento.getPotenciaMov() * potenciador);;
+        int valorAtaque = (int) ((movimiento.getPotenciaMov()) * potenciador);
 
      return valorAtaque;
     }
