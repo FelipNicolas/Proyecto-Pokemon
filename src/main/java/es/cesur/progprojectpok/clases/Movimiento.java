@@ -8,12 +8,11 @@ public abstract class Movimiento {
     protected int prioridad;
 
 
-    public Movimiento(String nomMovimiento, int pp, int precision, int prioridad) {
+    public Movimiento(String nomMovimiento, int pp) {
         super();
         this.nomMovimiento = nomMovimiento;
         this.pp = pp;
-        this.precision = precision;
-        this.prioridad = prioridad;
+
     }
 
     public Movimiento() {
@@ -56,6 +55,6 @@ public abstract class Movimiento {
         this.prioridad = prioridad;
     }
 
-    public abstract void accionMov(Pokemon pokemonObjetivo);
+    public abstract int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento);
 
 }

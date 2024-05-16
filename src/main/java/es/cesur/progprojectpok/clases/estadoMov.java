@@ -7,11 +7,9 @@ public class estadoMov extends Movimiento {
     private int numTurnos;
 
 
-    public estadoMov(String nomMovimiento, int pp, int precision, int prioridad, Estado estadoMov, boolean persistente, int numTurnos) {
-        super(nomMovimiento, pp, precision, prioridad);
+    public estadoMov(String nomMovimiento, int pp, Estado estadoMov) {
+        super(nomMovimiento, pp);
         this.estadoMov = estadoMov;
-        this.persistente = persistente;
-        this.numTurnos = numTurnos;
     }
 
     public estadoMov() {
@@ -46,10 +44,23 @@ public class estadoMov extends Movimiento {
     }
 
     @Override
-    public void accionMov(Pokemon pokemonObjetivo) {
+    public int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento) {
 
         pokemonObjetivo.setEstadoPok(estadoMov);
 
+        return 0;
         }
+
+
+    @Override
+    public String toString() {
+        return "estadoMov{" +
+                "estadoMov=" + estadoMov +
+                ", persistente=" + persistente +
+                ", numTurnos=" + numTurnos +
+                ", nomMovimiento='" + nomMovimiento + '\'' +
+                ", pp=" + pp +
+                '}';
     }
+}
 

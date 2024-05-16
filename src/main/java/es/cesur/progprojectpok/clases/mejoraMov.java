@@ -6,11 +6,10 @@ public class mejoraMov extends Movimiento{
     private String nombreStat;
     private int numTurnos;
 
-    public mejoraMov(String nomMovimiento, int pp, int precision, int prioridad, int mejoraStat, String nombreStat, int numTurnos) {
-        super(nomMovimiento, pp, precision, prioridad);
+    public mejoraMov(String nomMovimiento, int pp, int mejoraStat, String nombreStat) {
+        super(nomMovimiento, pp);
         this.mejoraStat = mejoraStat;
         this.nombreStat = nombreStat;
-        this.numTurnos = numTurnos;
     }
 
     public mejoraMov() {
@@ -21,7 +20,7 @@ public class mejoraMov extends Movimiento{
     }
 
     @Override
-    public void accionMov(Pokemon pokemonObjetivo) {
+    public int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento) {
 
 
         switch (nombreStat) {
@@ -42,7 +41,7 @@ public class mejoraMov extends Movimiento{
                 pokemonObjetivo.setVelocidadPok(mejoraStat);
                 break;
         }
-
+        return mejoraStat;
     }
 
 
@@ -71,6 +70,14 @@ public class mejoraMov extends Movimiento{
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "mejoraMov{" +
+                "mejoraStat=" + mejoraStat +
+                ", nombreStat='" + nombreStat + '\'' +
+                ", numTurnos=" + numTurnos +
+                ", nomMovimiento='" + nomMovimiento + '\'' +
+                ", pp=" + pp +
+                '}';
+    }
 }

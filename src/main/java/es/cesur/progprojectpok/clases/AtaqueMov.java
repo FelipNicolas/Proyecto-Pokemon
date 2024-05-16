@@ -1,6 +1,6 @@
 package es.cesur.progprojectpok.clases;
 
-public class ataqueMov extends Movimiento{
+public class AtaqueMov extends Movimiento{
 
     private int potenciaMov;
     private Tipos tipoMov;
@@ -13,14 +13,14 @@ public class ataqueMov extends Movimiento{
     public static final double NORMAL = 1.0;
 
 
-    public ataqueMov(String nomMovimiento, int pp, int precision, int prioridad, int potenciaMov, Tipos tipoMov, String categoriaMov) {
-        super(nomMovimiento, pp, precision, prioridad);
+    public AtaqueMov(String nomMovimiento, int pp,int potenciaMov, Tipos tipoMov, String categoriaMov) {
+        super(nomMovimiento, pp);
         this.potenciaMov = potenciaMov;
         this.tipoMov = tipoMov;
         this.categoriaMov = categoriaMov;
     }
 
-    public ataqueMov() {
+    public AtaqueMov() {
         super();
         this.potenciaMov = 0;
         this.tipoMov = null;
@@ -28,14 +28,15 @@ public class ataqueMov extends Movimiento{
     }
 
     @Override
-    public void accionMov(Pokemon pokemonObjetivo) {
+    public int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento) {
 
+        int danoMov = danoAtaque(pokemonObjetivo, (AtaqueMov) movimiento);
 
-
+        return danoMov;
     }
 
 
-    public int dañoAtaque(Pokemon pokemonObjetivo, ataqueMov movimiento) {
+    public int danoAtaque(Pokemon pokemonObjetivo, AtaqueMov movimiento) {
 
         double potenciador = calcularMultiplicador(movimiento.getTipoMov(), pokemonObjetivo.getTipoPok1(), pokemonObjetivo.getTipoPok2());
 
@@ -127,9 +128,17 @@ public class ataqueMov extends Movimiento{
         this.categoriaMov = categoriaMov;
     }
 
-    public static void main(String[] args) {
 
-        System.out.println(calcularMultiplicador(Tipos.AGUA, Tipos.FUEGO, Tipos.FUEGO));
-
+    @Override
+    public String toString() {
+        return "AtaqueMov{" +
+                "potenciaMov=" + potenciaMov +
+                ", tipoMov=" + tipoMov +
+                ", categoriaMov='" + categoriaMov + '\'' +
+                ", nomMovimiento='" + nomMovimiento + '\'' +
+                ", pp=" + pp +
+                '}';
     }
 }
+
+

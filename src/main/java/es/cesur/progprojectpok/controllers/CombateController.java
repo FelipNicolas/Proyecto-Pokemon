@@ -99,6 +99,7 @@ public class CombateController implements Initializable {
     private Tipos[] tipo1 = new Tipos[6];
     private Tipos[] tipo2 = new Tipos[6];
     private int[] VIDA = new int[6];
+    private int[] idPokemon = new int[6];
     private Random random = new Random();
     private int pokemonRandom;
     private Connection connection;
@@ -112,12 +113,18 @@ public class CombateController implements Initializable {
     private int[] velocidad = new int[6];
     private int[] experiencia = new int[6];
     private int[] nivel = new int[6];
-    private  boolean[] sexo = new boolean[6];
+    private  String[] sexo = new String[6];
     private Objeto[] objeto = new Objeto[6];
     private Estado[] estadoPok = new Estado[6];
     private String[] nomPokRandom = new String[6];
     private int vidaPokRandom;
     private String imgPokRandom;
+    private String generoM = ConfigDB.GENERO_M;
+    private String generoF = ConfigDB.GENERO_F;
+
+    Pokemon pokMovimientos = new Pokemon();
+
+
 
 
     @Override
@@ -195,7 +202,7 @@ public class CombateController implements Initializable {
                     String SONIDO = resultSet.getString("SONIDO");
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
                     int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
-                    sexo[i] = Boolean.parseBoolean(resultSet.getString("SEXO"));
+                    sexo[i] = resultSet.getString("SEXO");
                     VIDA[i] = resultSet.getInt("VITALIDAD");
                     nivel[i] = resultSet.getInt("NIVEL");
                     ataqueNormal[i] = resultSet.getInt("ATAQUE");
@@ -206,6 +213,7 @@ public class CombateController implements Initializable {
                     experiencia[i] = resultSet.getInt("EXPERIENCIA");
                     //objeto[i] = resultSet.getInt("ID_OBJETO");
                     estadoPok[i] = Estado.valueOf(resultSet.getString("ESTADO").toUpperCase());
+                    idPokemon[i] = resultSet.getInt("ID_POKEMON");
                     System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
                             imagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + sexo + " " + VIDA);
 
@@ -225,19 +233,10 @@ public class CombateController implements Initializable {
 
                 }
 
-
                  prgrsBar2.setProgress(((double) vidaPivote[0] / 100));
 
                  lblNvl2.setText("Nv" + nivel[0]);
 
-
-
-
-               /* for (int j = 0; j < nomPokRandom.length(); j++) {
-
-                    nomPok[i] = nomPokemon[i] ;
-
-                }*/
 
                  lblNombre2.setText(nomPok[0]);
 
@@ -254,35 +253,33 @@ public class CombateController implements Initializable {
                 System.out.println("La chupa a:" + vidaPivote[0]);
                 System.out.println("La chupa a:" + vidaPivote[1]);
 
-                equipoEntrenador[i] = new Pokemon(nomPokemon[i], ataqueNormal[i], defensaNormal[i], ataqueEspecial[i], defensaEspecial[i],
+
+
+
+                equipoEntrenador[i] = new Pokemon(nomPok[i], ataqueNormal[i], defensaNormal[i], ataqueEspecial[i], defensaEspecial[i],
                         velocidad[i], nivel[i], sexo[i], objeto[i], estadoPok[i], experiencia[i], tipo1[i], tipo2[i]);
+
+
+
+
+                pokMovimientos.cargarMovimientos(equipoEntrenador[i], entrenadorCombate.getIdEntrenador(), idPokemon[i]);
+                System.out.println("Equipo entrenador: " + equipoEntrenador[i]);
+
             }
 
-
+            idBtnAtaque1.setText(equipoEntrenador[0].getNombreMov(0));
+            idBtnAtaque2.setText(equipoEntrenador[0].getNombreMov(1));
+            idBtnAtaque3.setText(equipoEntrenador[0].getNombreMov(2));
+            idBtnAtaque4.setText(equipoEntrenador[0].getNombreMov(3));
 
             File fileImageFondo1 = new File(imgPok[0]);
 
-          /*  File fileImageFondo2 = new File(imgPok[1]);
-            File fileImageFondo3 = new File(imgPok[2]);
-            File fileImageFondo4 = new File(imgPok[3]);
-            File fileImageFondo5 = new File(imgPok[4]);
-            File fileImageFondo6 = new File(imgPok[5]); */
 
 
             System.out.println("Posicion 1 = " + imgPok[0]);
-            //System.out.println("Posicion 2 = " + imgPok[1]);
-
+           //System.out.pr
 
             imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
-
-            /* imgPok2.setImage(new Image(fileImageFondo2.getAbsolutePath()));
-            imgPok3.setImage(new Image(fileImageFondo3.getAbsolutePath()));
-            imgPok4.setImage(new Image(fileImageFondo4.getAbsolutePath()));
-            imgPok5.setImage(new Image(fileImageFondo5.getAbsolutePath()));
-            imgPok6.setImage(new Image(fileImageFondo6.getAbsolutePath())); */
-
-
-
 
 
         } catch (SQLException s){
@@ -292,12 +289,6 @@ public class CombateController implements Initializable {
 
     }
 
-   /* public void iniciarCombate(Pokemon pokEntrenador, Pokemon pokRival){
-
-        if (pokEntrenador.getVelocidadPok() > pokRival.getVelocidadPok()) {
-            pokEntrenador.combate(pokRival, );
-        }
-   } */
 
 
     @FXML
@@ -507,6 +498,7 @@ public class CombateController implements Initializable {
     @FXML
     void btnAtaque1(ActionEvent event) {
 
+
     }
 
     @FXML
@@ -534,6 +526,16 @@ public class CombateController implements Initializable {
         File fileImageFondo1 = new File(imgPok[0]);
         imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
 
+        idBtnAtaque1.setText(equipoEntrenador[0].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[0].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[0].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[0].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
     }
 
     @FXML
@@ -548,6 +550,16 @@ public class CombateController implements Initializable {
         File fileImageFondo1 = new File(imgPok[1]);
         imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
 
+        idBtnAtaque1.setText(equipoEntrenador[1].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[1].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[1].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[1].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
     }
 
     @FXML
@@ -559,6 +571,16 @@ public class CombateController implements Initializable {
 
         File fileImageFondo1 = new File(imgPok[2]);
         imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+        idBtnAtaque1.setText(equipoEntrenador[2].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[2].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[2].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[2].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
 
     }
 
@@ -572,6 +594,16 @@ public class CombateController implements Initializable {
         File fileImageFondo1 = new File(imgPok[3]);
         imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
 
+        idBtnAtaque1.setText(equipoEntrenador[3].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[3].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[3].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[3].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
     }
 
     @FXML
@@ -584,6 +616,16 @@ public class CombateController implements Initializable {
         File fileImageFondo1 = new File(imgPok[4]);
         imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
 
+        idBtnAtaque1.setText(equipoEntrenador[4].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[4].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[4].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[4].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
+
     }
 
     @FXML
@@ -594,7 +636,17 @@ public class CombateController implements Initializable {
         prgrsBar2.setProgress(((double) VIDA[5] / 100));
 
         File fileImageFondo1 = new File(imgPok[5]);
-        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));¡
+        imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+
+        idBtnAtaque1.setText(equipoEntrenador[5].getNombreMov(0));
+        idBtnAtaque2.setText(equipoEntrenador[5].getNombreMov(1));
+        idBtnAtaque3.setText(equipoEntrenador[5].getNombreMov(2));
+        idBtnAtaque4.setText(equipoEntrenador[5].getNombreMov(3));
+
+        idPaneEquipo.setDisable(true);
+        idPaneEquipo.setVisible(false);
+        idPaneMain.setDisable(false);
+        idPaneMain.setVisible(true);
 
     }
 
