@@ -50,5 +50,17 @@ public class estadoMov extends Movimiento {
 
         return 0;
         }
+
+
+    @Override
+    public String toString() {
+        return "estadoMov{" +
+                "estadoMov=" + estadoMov +
+                ", persistente=" + persistente +
+                ", numTurnos=" + numTurnos +
+                ", nomMovimiento='" + nomMovimiento + '\'' +
+                ", pp=" + pp +
+                '}';
     }
+}
 

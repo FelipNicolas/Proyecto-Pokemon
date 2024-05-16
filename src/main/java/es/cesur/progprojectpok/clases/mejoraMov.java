@@ -70,6 +70,14 @@ public class mejoraMov extends Movimiento{
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "mejoraMov{" +
+                "mejoraStat=" + mejoraStat +
+                ", nombreStat='" + nombreStat + '\'' +
+                ", numTurnos=" + numTurnos +
+                ", nomMovimiento='" + nomMovimiento + '\'' +
+                ", pp=" + pp +
+                '}';
+    }
 }

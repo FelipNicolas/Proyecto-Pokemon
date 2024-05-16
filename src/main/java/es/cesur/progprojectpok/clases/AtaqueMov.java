@@ -128,9 +128,17 @@ public class AtaqueMov extends Movimiento{
         this.categoriaMov = categoriaMov;
     }
 
-    public static void main(String[] args) {
 
-        System.out.println(calcularMultiplicador(Tipos.AGUA, Tipos.FUEGO, Tipos.FUEGO));
-
+    @Override
+    public String toString() {
+        return "AtaqueMov{" +
+                "potenciaMov=" + potenciaMov +
+                ", tipoMov=" + tipoMov +
+                ", categoriaMov='" + categoriaMov + '\'' +
+                ", nomMovimiento='" + nomMovimiento + '\'' +
+                ", pp=" + pp +
+                '}';
     }
 }
+
+

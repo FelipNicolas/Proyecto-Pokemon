@@ -72,6 +72,9 @@ public class TiendaController implements Initializable {
 
     Objeto pivoteObj;
 
+    Entrenador entrenadorTienda;
+
+
     
 
 
@@ -155,7 +158,6 @@ public class TiendaController implements Initializable {
         contador = 0;
         pivoteObj = PILA;
         this.infoTienda(pivoteObj, imgObj6);
-
     }
 
     @FXML
@@ -174,9 +176,6 @@ public class TiendaController implements Initializable {
 
     }
 
-
-
-    Entrenador entrenadorTienda;
 
     public Entrenador getEntrenadorTienda() {
         return entrenadorTienda;
