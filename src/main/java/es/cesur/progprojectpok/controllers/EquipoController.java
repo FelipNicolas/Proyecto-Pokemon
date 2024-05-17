@@ -87,7 +87,7 @@ public class EquipoController implements Initializable {
 
     String[] imgPok = new String[6];
 
-    String ImagenUrlPokemonGenerado = "";
+    String[] ImagenUrlPokemonGenerado = new String[6];
 
     String[] nomPokemon = new String[6];
 
@@ -128,7 +128,7 @@ public class EquipoController implements Initializable {
                     nomPokemon[i] = resultSet.getString("NOM_POKEMON");
                     tipo1[i] = resultSet.getString("TIPO1");
                     tipo2[i] = resultSet.getString("TIPO2");
-                    ImagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
+                    ImagenUrlPokemonGenerado[i] = resultSet.getString("IMAGEN");
                     String SONIDO = resultSet.getString("SONIDO");
                     int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
                     int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
@@ -138,15 +138,15 @@ public class EquipoController implements Initializable {
 
 
 
-                    System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
-                            ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + SEXO);
+                    System.out.println("Pokemon equipo: " + NUM_POKEDEX + " " + nomPokemon[i] + " " + tipo1[i] + " " + tipo2[i] + " " +
+                            ImagenUrlPokemonGenerado[i]);
 
                     //Cambio de imagen
                     break;
 
                 }
 
-                imgPok[i] = ConfigDB.URL_POK + ImagenUrlPokemonGenerado;
+                imgPok[i] = ConfigDB.URL_POK + ImagenUrlPokemonGenerado[i];
 
                 System.out.println(imgPok[i]);
 

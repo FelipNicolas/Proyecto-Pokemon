@@ -1,18 +1,18 @@
 package es.cesur.progprojectpok.clases;
 
-public class mejoraMov extends Movimiento{
+public class MejoraMov extends Movimiento{
 
     private int mejoraStat;
     private String nombreStat;
     private int numTurnos;
 
-    public mejoraMov(String nomMovimiento, int pp, int mejoraStat, String nombreStat) {
+    public MejoraMov(String nomMovimiento, int pp, int mejoraStat, String nombreStat) {
         super(nomMovimiento, pp);
         this.mejoraStat = mejoraStat;
         this.nombreStat = nombreStat;
     }
 
-    public mejoraMov() {
+    public MejoraMov() {
         super();
         this.mejoraStat = 0;
         this.nombreStat = "";

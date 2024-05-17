@@ -6,18 +6,19 @@ public class AtaqueMov extends Movimiento{
     private Tipos tipoMov;
 
     private String categoriaMov;
+    private String tipoMovimientoEst;
 
     public static final double INMUNE = 0.0;
     public static final double SUPER_EFICAZ = 2.0;
     public static final double POCO_EFICAZ = 0.5;
     public static final double NORMAL = 1.0;
 
-
-    public AtaqueMov(String nomMovimiento, int pp,int potenciaMov, Tipos tipoMov, String categoriaMov) {
+    public AtaqueMov(String nomMovimiento, int pp,int potenciaMov, Tipos tipoMov, String categoriaMov, String tipoMovimientoEst) {
         super(nomMovimiento, pp);
         this.potenciaMov = potenciaMov;
         this.tipoMov = tipoMov;
         this.categoriaMov = categoriaMov;
+        this.tipoMovimientoEst = tipoMovimientoEst;
     }
 
     public AtaqueMov() {

@@ -136,8 +136,8 @@ INSERT INTO POKEMON (ID_USER, NUM_POKEDEX, MOTE, CAJA, ATAQUE, AT_ESPECIAL, DEFE
 (1, 2, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 100, NULL),
 (1, 7, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 100, NULL),
 (1, 10, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 100, NULL),
-(1, 16, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 100, NULL);
-(1, 110, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 80, NULL);
+(1, 5, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 100, NULL);
+(1, 9, NULL, 0, 62, 80, 63, 80, 60, 16, 70, 'M', 'Saludable', 0, 80, NULL);
 
 
 

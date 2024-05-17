@@ -27,19 +27,16 @@ public class Pokemon {
     private int ptsDefensaEsp;
     private int velocidadPok;
     private int nivelPok = 1;
-    private Movimiento[] setMovimientos = new Movimiento[4];
+    private Movimiento[] movimientoPok = new Movimiento[4];
+
     private int fertilidad = 5;
 
-    public Movimiento[] getSetMovimientos() {
-        return setMovimientos;
+    public Movimiento[] getMovimientoPok() {
+        return movimientoPok;
     }
 
-    public String getNombreMov(int num) {
-        return setMovimientos[num].getNomMovimiento();
-    }
-
-    public void setSetMovimientos(Movimiento[] setMovimientos) {
-        this.setMovimientos = setMovimientos;
+    public void setMovimientoPok(Movimiento[] movimientoPok) {
+        this.movimientoPok = movimientoPok;
     }
 
     private String sexoPok;
@@ -92,8 +89,10 @@ public class Pokemon {
 
 
 
+
+
     public Pokemon(String motePok, int vitalidadPok, int ptsAtaque, int ptsDefensa, int ptsAtaqueEsp, int ptsDefensaEsp, int velocidadPok,
-                   int nivelPok, Movimiento[] setMovimientos, int fertilidad, String sexoPok, Objeto objeto, int experiencia, Tipos tipoPok1, Tipos tipoPok2, Estado estadoPok) {
+                   int nivelPok, Movimiento[] movimientoPok, int fertilidad, String sexoPok, Objeto objeto, int experiencia, Tipos tipoPok1, Tipos tipoPok2, Estado estadoPok) {
 
         this.motePok = motePok;
         this.vitalidadPok = vitalidadPok;
@@ -103,13 +102,12 @@ public class Pokemon {
         this.ptsDefensaEsp = ptsDefensaEsp;
         this.velocidadPok = velocidadPok;
         this.nivelPok = nivelPok;
-        this.setMovimientos = setMovimientos;
+        this.movimientoPok = movimientoPok;
         this.fertilidad = fertilidad;
         this.sexoPok = sexoPok;
         this.objeto = objeto;
         this.experiencia = experiencia;
         this.estadoPok = estadoPok;
-
         this.tipoPok1 = tipoPok1;
         this.tipoPok2 = tipoPok2;
     }
@@ -136,7 +134,25 @@ public class Pokemon {
 
 
 
-    public Pokemon(String nombrePok, Tipos tipoPok1, Tipos tipoPok2, int numPokedex, String urlImgPok) {
+    public Pokemon(String nombrePok, Tipos tipoPok1, Tipos tipoPok2, int numPokedex, String urlImgPok, int vida) {
+
+        this.nombrePok = nombrePok;
+        this.numPokedex = numPokedex;
+        this.urlImgPok = urlImgPok;
+        this.vitalidadPok = vida;
+        this.ptsAtaque = 0;
+        this.ptsDefensa = 0;
+        this.ptsAtaqueEsp = 0;
+        this.ptsDefensaEsp = 0;
+        this.velocidadPok = 0;
+        this.nivelPok = 1;
+        this.tipoPok1 = tipoPok1;
+        this.tipoPok2 = tipoPok2;
+        this.estadoPok = Estado.SALUDABLE;
+
+    }
+
+    public Pokemon(String nombrePok, Tipos tipoPok1, Tipos tipoPok2, int numPokedex, String urlImgPok, Movimiento[] MovimientosPok) {
 
         this.nombrePok = nombrePok;
         this.numPokedex = numPokedex;
@@ -151,25 +167,7 @@ public class Pokemon {
         this.tipoPok1 = tipoPok1;
         this.tipoPok2 = tipoPok2;
         this.estadoPok = Estado.SALUDABLE;
-
-    }
-
-    public Pokemon(String nombrePok, Tipos tipoPok1, Tipos tipoPok2, int numPokedex, String urlImgPok, Movimiento[] setMovimientos) {
-
-        this.nombrePok = nombrePok;
-        this.numPokedex = numPokedex;
-        this.urlImgPok = urlImgPok;
-        this.vitalidadPok = 100;
-        this.ptsAtaque = 0;
-        this.ptsDefensa = 0;
-        this.ptsAtaqueEsp = 0;
-        this.ptsDefensaEsp = 0;
-        this.velocidadPok = 0;
-        this.nivelPok = 1;
-        this.tipoPok1 = tipoPok1;
-        this.tipoPok2 = tipoPok2;
-        this.estadoPok = null;
-        this.setMovimientos = setMovimientos;
+        this.movimientoPok = movimientoPok;
 
 
     }
@@ -202,6 +200,10 @@ public class Pokemon {
         this.objeto = objeto;
         this.estadoPok = estadoPok;
         this.experiencia = experiencia;
+    }
+
+    public String getNombreMov(int num) {
+        return movimientoPok[num].getNomMovimiento();
     }
 
 
@@ -337,32 +339,32 @@ public class Pokemon {
 
     public float atacar(Pokemon pokObjetivo, Movimiento ataque) {
 
-
-        if (ataque instanceof mejoraMov) {
-
-            ataque.accionMov(this, ataque);
-
-        } else if (ataque instanceof estadoMov) {
-
-            ataque.accionMov(pokObjetivo, ataque);
-
-        } else if (ataque instanceof AtaqueMov){
-
             if (((AtaqueMov) ataque).getCategoriaMov().equals("Físico")){
 
-                int danioTotal = ((ataque.accionMov(pokObjetivo, ataque) + this.getPtsAtaque()) - pokObjetivo.getPtsDefensa() );
+                //int danioTotal = ((ataque.accionMov(pokObjetivo, ataque) + this.getPtsAtaque()) - pokObjetivo.getPtsDefensa() );
+                int danioTotal = ((AtaqueMov) ataque).getPotenciaMov();
 
-                pokObjetivo.setVitalidadPok(pokObjetivo.getVitalidadPok() - danioTotal);
+                System.out.println("Vida pok Antes: " + pokObjetivo.getNombrePok() + " " + pokObjetivo.getVitalidadPok());
+
+                pokObjetivo.setVitalidadPok(pokObjetivo.getVitalidadPok() - danioTotal);System.out.println("Vida pok Despues: " + pokObjetivo.getNombrePok() + " " + pokObjetivo.getVitalidadPok());
+
+                System.out.println(this.getNombrePok() + " ataco a " + pokObjetivo.getNombrePok() + " con el movimiento: " + ataque.getNomMovimiento());
 
             } else if (((AtaqueMov) ataque).getCategoriaMov().equals("Especial")) {
 
-                int danioTotal = ((ataque.accionMov(pokObjetivo, ataque) + this.getPtsAtaqueEsp()) - pokObjetivo.getPtsDefensaEsp() );
+                int danioTotal = ((AtaqueMov) ataque).getPotenciaMov();
+                //int danioTotal = ((ataque.accionMov(pokObjetivo, ataque) + this.getPtsAtaqueEsp()) - pokObjetivo.getPtsDefensaEsp() );
+
                 pokObjetivo.setVitalidadPok(pokObjetivo.getVitalidadPok() - danioTotal);
+
+
                 System.out.println(this.getNombrePok() + " ataco a " + pokObjetivo.getNombrePok() + " con el movimiento: " + ataque.getNomMovimiento());
+                System.out.println("Vida pok: " + pokObjetivo.getNombrePok() + " " + pokObjetivo.getVitalidadPok());
 
             }
 
-        }
+        System.out.println("VIDA POKEMON DESPUES ATAQUE: " + pokObjetivo.getVitalidadPok());
+
         return pokObjetivo.getVitalidadPok();
     }
 
@@ -372,13 +374,20 @@ public class Pokemon {
 
         if (this.getVelocidadPok() > pokRival.getVelocidadPok()) {
 
-            this.atacar(pokRival, this.setMovimientos[contador]);
-            pokRival.atacar(this, pokRival.setMovimientos[contador]);
+            this.atacar(pokRival, this.movimientoPok[contador]);
+            System.out.println("Vida enemigoAntes: " + pokRival.getVitalidadPok());
+            System.out.println("Movimiento elejido: " + contador);
+            System.out.println("Vida enemigoDespues: " + pokRival.getVitalidadPok());
+            pokRival.atacar(this, pokRival.movimientoPok[contador]);
 
         } else {
 
-            pokRival.atacar(this, pokRival.setMovimientos[contador]);
-            this.atacar(pokRival, this.setMovimientos[contador]);
+            pokRival.atacar(this, pokRival.movimientoPok[contador]);
+            System.out.println("Vida enemigoAntes: " + pokRival.getVitalidadPok());
+            System.out.println("Movimiento elejido: " + contador);
+            this.atacar(pokRival, this.movimientoPok[contador]);
+            System.out.println("Vida enemigoDespues: " + pokRival.getVitalidadPok());
+
         }
 
 
@@ -410,49 +419,64 @@ public class Pokemon {
     {
     }
 
+    /*
     public void crearMovEquipoRival(Pokemon pokemon) {
 
+        Random random = new Random();
         Connection connection = DBConnection.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet;
-        String sql = "SELECT * FROM movimientos WHERE tipo = ? ORDER BY RAND() LIMIT 1";
-        Movimiento[] movPivote = new Movimiento[4];
+        String sql = "SELECT * FROM movimientos where ID_MOVIMIENTO = ?";
 
-        for (int i = 0; i < movPivote.length; i++) {
+
+
+        for (int i = 0; i < movimientoPok.length; i++) {
+
+            int idMov = random.nextInt(11);
 
             try {
+
                 preparedStatement = connection.prepareStatement(sql);
 
-                preparedStatement.setString(1, String.valueOf(pokemon.getTipoPok1()));
+                preparedStatement.setInt(1, idMov);
 
                 resultSet = preparedStatement.executeQuery();
 
 
                     while (resultSet.next()) {
 
+
                         nombreMov[i] = resultSet.getString("NOM_MOVIMIENTO");
                         potenciaMov[i] = resultSet.getInt("potencia");
                         categoriaMov[i] = resultSet.getString("categoria");
+                        System.out.println("CategoriaMov: " + categoriaMov[i]);
                         estadoMov[i] = resultSet.getString("estado");
                         tipoMov[i] = Tipos.valueOf(resultSet.getString("tipo"));
                         pp[i] = resultSet.getInt("pp");
-                        statMejora[i] = resultSet.getString("MEJORA");
-                        cantMejora[i] = resultSet.getInt("CANT_MEJORA");
 
                         break;
 
                     }
 
+                pokemon.movimientoPok[i] = new AtaqueMov(nombreMov[i], pp[i], potenciaMov[i],tipoMov[i],categoriaMov[i], estadoMov[i]);
+                System.out.println("Movimiento: " + pokemon.movimientoPok[i].getNomMovimiento() + ", Potencia: " + potenciaMov[i]);
+
+
+                /*
                     switch (categoriaMov[i]) {
                         case "Ataque":
-                            pokemon.setMovimientos[i] = new AtaqueMov(nombreMov[i], pp[i], potenciaMov[i],tipoMov[i],categoriaMov[i]);
+                            pokemon.movimientoPok[i] = new AtaqueMov(nombreMov[i], pp[i], potenciaMov[i],tipoMov[i],categoriaMov[i]);
+                            System.out.println("Movimiento: " + movimientoPok[i]);
                             break;
+
                         case "Mejora":
-                            pokemon.setMovimientos[i] = new mejoraMov(nombreMov[i], pp[i], cantMejora[i], statMejora[i]);
+                            pokemon.movimientoPok[i] = new mejoraMov(nombreMov[i], pp[i], cantMejora[i], statMejora[i]);
                             break;
                         case "Estado":
-                            pokemon.setMovimientos[i] = new estadoMov(nombreMov[i], pp[i], Estado.SALUDABLE);
+                            pokemon.movimientoPok[i] = new estadoMov(nombreMov[i], pp[i], Estado.SALUDABLE);
                             break;
+
+
                     }
 
 
@@ -462,7 +486,7 @@ public class Pokemon {
         }
 
     }
-
+*/
 
 
 
@@ -489,7 +513,11 @@ public class Pokemon {
                 equipoRivalCompleto[i].setPtsDefensaEsp(pokReferencia.getPtsDefensaEsp() + indice);
                 equipoRivalCompleto[i].setVelocidadPok(pokReferencia.getVelocidadPok() + indice);
 
-                crearMovEquipoRival(equipoRivalCompleto[i]);
+                equipoRivalCompleto[i].setMovimientoPok(pokReferencia.getMovimientoPok());
+
+                System.out.println("pokemon equipoRival numero: " + i + " " + equipoRivalCompleto[i].getNombrePok() + ", " +
+                        equipoRivalCompleto[i].getPtsAtaqueEsp() + equipoRivalCompleto[i].getPtsAtaque());
+                //crearMovEquipoRival(equipoRivalCompleto[i]);
 
             }
         } catch (SQLException e) {
@@ -537,7 +565,7 @@ public class Pokemon {
 
 
                 equipoRival[i] = new Pokemon(nomPokemonRival[i],
-                       tipo1Rival[i], tipo2Rival[i], numPokedexRival[i], imagenUrlPokemonGeneradoRival[i]);
+                       tipo1Rival[i], tipo2Rival[i], numPokedexRival[i], imagenUrlPokemonGeneradoRival[i], 100);
 
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -554,7 +582,8 @@ public class Pokemon {
 
         Connection connection = DBConnection.getConnection();
         String sql = "SELECT * FROM MOVIMIENTOS_POKEMON M INNER JOIN POKEMON P ON P.ID_POKEMON = M.ID_POKEMON INNER JOIN MOVIMIENTOS MO ON M.ID_MOVIMIENTO = MO.ID_MOVIMIENTO WHERE P.ID_USER = ? AND P.ID_POKEMON = ?;";
-         movimientos = new Movimiento[4];
+        //String sql2 = "SELECT * FROM movimientos_pokemon WHERE ID_POKEMON = ? ";
+        movimientos = new Movimiento[4];
 
         PreparedStatement preparedStatement = null;
         try {
@@ -571,7 +600,7 @@ public class Pokemon {
                 nombreMov[i] = resultSet.getString("NOM_MOVIMIENTO");
                 potenciaMov[i] = resultSet.getInt("potencia");
                 categoriaMov[i] = resultSet.getString("categoria");
-                estadoMov[i] = resultSet.getString("mo.estado");
+                estadoMov[i] = resultSet.getString("estados");
                 tipoMov[i] = Tipos.valueOf(resultSet.getString("tipo"));
                 pp[i] = resultSet.getInt("pp");
                 statMejora[i] = resultSet.getString("MEJORA");
@@ -580,18 +609,21 @@ public class Pokemon {
                 break;
 
             }
+                pokemon.movimientoPok[i] = new AtaqueMov(nombreMov[i], pp[i], potenciaMov[i],tipoMov[i],categoriaMov[i], estadoMov[i]);
 
+/*
             switch (categoriaMov[i]) {
                 case "Ataque":
-                    pokemon.setMovimientos[i] = new AtaqueMov(nombreMov[i], pp[i], potenciaMov[i],tipoMov[i],categoriaMov[i]);
                     break;
                 case "Mejora":
-                    pokemon.setMovimientos[i] = new mejoraMov(nombreMov[i], pp[i], cantMejora[i], statMejora[i]);
+                    pokemon.movimientoPok[i] = new MejoraMov(nombreMov[i], pp[i], cantMejora[i], statMejora[i]);
                     break;
                 case "Estado":
-                    pokemon.setMovimientos[i] = new estadoMov(nombreMov[i], pp[i], Estado.SALUDABLE);
+                    pokemon.movimientoPok[i] = new EstadoMov(nombreMov[i], pp[i], Estado.SALUDABLE);
                     break;
             }
+            */
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -609,7 +641,7 @@ public class Pokemon {
                 ", ptsAtaqueEsp=" + ptsAtaqueEsp +
                 ", ptsDefensaEsp=" + ptsDefensaEsp +
                 ", velocidadPok=" + velocidadPok +
-                ", setMovimientos=" + Arrays.toString(setMovimientos) +
+                ", movimientoPok=" + Arrays.toString(movimientoPok) +
                 ", sexoPok='" + sexoPok + '\'' +
                 ", objeto=" + objeto +
                 '}';

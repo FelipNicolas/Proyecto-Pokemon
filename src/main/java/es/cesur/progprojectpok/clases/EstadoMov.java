@@ -1,18 +1,18 @@
 package es.cesur.progprojectpok.clases;
 
-public class estadoMov extends Movimiento {
+public class EstadoMov extends Movimiento {
 
     private Estado estadoMov;
     private boolean persistente;
     private int numTurnos;
 
 
-    public estadoMov(String nomMovimiento, int pp, Estado estadoMov) {
+    public EstadoMov(String nomMovimiento, int pp, Estado estadoMov) {
         super(nomMovimiento, pp);
         this.estadoMov = estadoMov;
     }
 
-    public estadoMov() {
+    public EstadoMov() {
         super();
         this.estadoMov = null;
         this.persistente = true;

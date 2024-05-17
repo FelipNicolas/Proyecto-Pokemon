@@ -174,9 +174,6 @@ public class CombateController implements Initializable {
                     tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1"));
                     tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2"));
                     imagenUrlPokemonGenerado[i] = resultSet.getString("IMAGEN");
-                    String SONIDO = resultSet.getString("SONIDO");
-                    int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
-                    int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
                     sexo[i] = resultSet.getString("SEXO");
                     VIDA[i] = resultSet.getInt("VITALIDAD");
                     nivel[i] = resultSet.getInt("NIVEL");
@@ -189,8 +186,8 @@ public class CombateController implements Initializable {
                     //objeto[i] = resultSet.getInt("ID_OBJETO");
                     estadoPok[i] = Estado.valueOf(resultSet.getString("ESTADO").toUpperCase());
                     idPokemon[i] = resultSet.getInt("ID_POKEMON");
-                    System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
-                            imagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + sexo + " " + VIDA);
+                   // System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
+                   //         imagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + sexo + " " + VIDA);
 
                     //Cambio de imagen
                     break;
@@ -239,10 +236,9 @@ public class CombateController implements Initializable {
             idBtnAtaque4.setText(equipoEntrenador[0].getNombreMov(3));
 
             File fileImageFondo1 = new File(imgPok[0]);
-            System.out.println("Posicion 1 = " + imgPok[0]);
+            //System.out.println("Posicion 1 = " + imgPok[0]);
             imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
 
-            combateFinal();
 
         } catch (SQLException s){
             throw new RuntimeException(s);
@@ -262,12 +258,12 @@ public class CombateController implements Initializable {
             if (tuEquipo[pokElejido].getVelocidadPok() > equipoRival[pokElejidoRival].getVelocidadPok()) {
 
                 tuEquipo[pokElejido].funcionalidadCombate(equipoRival[pokElejidoRival], movElejido);
-                prgrsBar1.setProgress(((double) equipoRival[pokElejidoRival].getVitalidadPok() / 100));
+                prgrsBar1.setProgress( equipoRival[pokElejidoRival].getVitalidadPok() / 100);
                 comprobarVivo(equipoRival[pokElejidoRival], tuEquipo[pokElejido]);
                 comprobarEstadoEquipo(tuEquipo, equipoRival);
 
                 equipoRival[pokElejidoRival].funcionalidadCombate(tuEquipo[pokElejido], movElejidoRival);
-                prgrsBar2.setProgress((double) tuEquipo[pokElejido].getVitalidadPok() / 100);
+                prgrsBar2.setProgress(tuEquipo[pokElejido].getVitalidadPok() / 100);
                 comprobarVivo(equipoRival[pokElejidoRival], tuEquipo[pokElejido]);
                 comprobarEstadoEquipo(tuEquipo, equipoRival);
                 break;
