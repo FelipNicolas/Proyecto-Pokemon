@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="509.0" prefWidth="922.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.cesur.progprojectpok.controllers.HelloController">
+<AnchorPane prefHeight="509.0" prefWidth="922.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.cesur.progprojectpok.controllers.CombateLucharController">
    <children>
       <ImageView fitHeight="524.0" fitWidth="1013.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,7 +18,7 @@
       </ImageView>
       <AnchorPane layoutY="521.0" prefHeight="160.0" prefWidth="1013.0" style="-fx-background-color: #742005; -fx-border-color: #000000; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;">
          <children>
-            <Button fx:id="btn1" alignment="TOP_LEFT" layoutX="625.0" layoutY="11.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="ATAQUE 1" textFill="#614747">
+            <Button alignment="TOP_LEFT" layoutX="432.0" layoutY="14.0" mnemonicParsing="false" onAction="#btn1" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="ATAQUE 1" textFill="#614747">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -26,12 +26,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <ImageView fitHeight="139.0" fitWidth="143.0" layoutX="440.0" layoutY="19.0" opacity="0.13" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/pokeball.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btn3" alignment="TOP_LEFT" layoutX="625.0" layoutY="81.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="ATAQUE 3" textFill="#614848">
+            <Button alignment="TOP_LEFT" layoutX="432.0" layoutY="84.0" mnemonicParsing="false" onAction="#btn3" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="ATAQUE 3" textFill="#614848">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -39,7 +34,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Button fx:id="btn2" alignment="TOP_LEFT" layoutX="819.0" layoutY="11.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="ATAQUE 2" textFill="#614848">
+            <Button alignment="TOP_LEFT" layoutX="626.0" layoutY="14.0" mnemonicParsing="false" onAction="#btn2" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="ATAQUE 2" textFill="#614848">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -47,7 +42,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Button fx:id="btn4" alignment="TOP_LEFT" layoutX="819.0" layoutY="81.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="ATAQUE 4" textFill="#614848">
+            <Button alignment="TOP_LEFT" layoutX="626.0" layoutY="84.0" mnemonicParsing="false" onAction="#btn4" prefHeight="63.0" prefWidth="175.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="ATAQUE 4" textFill="#614848">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -60,14 +55,22 @@
                   <Label fx:id="lblComb1" alignment="TOP_LEFT" layoutX="16.0" layoutY="13.0" prefHeight="107.0" prefWidth="312.0" text="Label" />
                </children>
             </AnchorPane>
-            <Label layoutX="640.0" layoutY="49.0" prefWidth="40.0" text="Label" />
-            <Label layoutX="835.0" layoutY="49.0" prefWidth="40.0" text="Label" />
-            <Label layoutX="640.0" layoutY="119.0" prefWidth="40.0" text="Label" />
-            <Label layoutX="835.0" layoutY="119.0" prefWidth="40.0" text="Label" />
-            <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="758.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="954.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="758.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="954.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lblATK1" layoutX="447.0" layoutY="52.0" prefWidth="40.0" text="Label" />
+            <Label fx:id="lblATK2" layoutX="642.0" layoutY="52.0" prefWidth="40.0" text="Label" />
+            <Label fx:id="lblATK3" layoutX="447.0" layoutY="122.0" prefWidth="40.0" text="Label" />
+            <Label fx:id="lblATK4" layoutX="642.0" layoutY="122.0" prefWidth="40.0" text="Label" />
+            <ImageView fx:id="imgATK1" fitHeight="35.0" fitWidth="34.0" layoutX="565.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgATK2" fitHeight="35.0" fitWidth="34.0" layoutX="761.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgATK3" fitHeight="35.0" fitWidth="34.0" layoutX="565.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgATK4" fitHeight="35.0" fitWidth="34.0" layoutX="761.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true" />
+            <Button alignment="CENTER" layoutX="838.0" layoutY="77.0" mnemonicParsing="false" onAction="#btnBACK" prefHeight="63.0" prefWidth="141.0" style="-fx-background-color: pink; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: black;" text="CANCELAR" textFill="#614848">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Button>
          </children>
       </AnchorPane>
       <ImageView fx:id="Perso2" fitHeight="150.0" fitWidth="174.0" layoutX="538.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">

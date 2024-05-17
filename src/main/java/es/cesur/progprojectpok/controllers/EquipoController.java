@@ -1,127 +1,297 @@
 package es.cesur.progprojectpok.controllers;
 
+import es.cesur.progprojectpok.HelloApplication;
 import es.cesur.progprojectpok.ImageData;
+import es.cesur.progprojectpok.clases.Entrenador;
+import es.cesur.progprojectpok.database.ConfigDB;
+import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class EquipoController implements Initializable {
 
-    public static final String PATH_IMG_FONDO = Utils.PATH_BASE_SOURCES + "/images/fondoplaya.png";
-    public static final String PATH_IMG_CRIATURA = Utils.PATH_BASE_SOURCES + "/images/criatura-planta.png";
-    public static final String PATH_IMG_CRIATURA2 = Utils.PATH_BASE_SOURCES + "/images/criatura-rayo.png";
+    Stage stage = new Stage();
+    FXMLLoader fxmlLoader = null;
 
     @FXML
-    private Label welcomeText;
+    private ImageView img1;
 
     @FXML
-    private ImageView imgViewEjemplo;
+    private ImageView img2;
 
     @FXML
-    private ComboBox<String> comboBoxColores;
+    private ImageView img3;
 
     @FXML
-    private ListView<String> listView;
+    private ImageView img4;
 
     @FXML
-    private Button btnHello;
-
-
-    @FXML
-    private TableView<ImageData> tableView;
+    private ImageView img5;
 
     @FXML
-    private TableColumn<ImageData, String> imageColumn;
-    @FXML
-    private TableColumn<ImageData, String> nameColumn;
+    private ImageView img6;
 
+    @FXML
+    private ImageView imgFinal;
 
 
     @FXML
-    private ProgressBar progressBar;
+    private ImageView imgtipo2;
 
-    /**
-     * Called to initialize a controller after its root element has been
-     * completely processed.
-     *
-     * @param location  The location used to resolve relative paths for the root object, or
-     *                  {@code null} if the location is not known.
-     * @param resources The resources used to localize the root object, or {@code null} if
-     *                  the root object was not localized.
-     */
+    @FXML
+    private Label lblNivel;
+
+    @FXML
+    private ImageView imgObj;
+
+    @FXML
+    private ImageView imgTipo1;
+
+    @FXML
+    private Label lblNomPok;
+
+    @FXML
+    private TextArea txtDescrip;
+
+    @FXML
+    private ImageView imgGen;
+
+    @FXML
+    private ProgressBar barVida;
+
+    @FXML
+    private Label idEntrenador;
+
+    @FXML
+    private Label cerrarEquipo;
+    @FXML
+    private Label lblTipo1;
+    @FXML
+    private Label lblTipo2;
+
+
+
+
+    private Entrenador entrenadorEquipo;
+
+    public Entrenador getEntrenadorEquipo() {
+        return entrenadorEquipo;
+    }
+
+    public void setEntrenadorEquipo(Entrenador entrenadorEquipo) {
+        this.entrenadorEquipo = entrenadorEquipo;
+    }
+
+    private String[] imgPok = new String[6];
+
+    private String[] imagenUrlPokemonGenerado = new String[6];
+
+    private String[] nomPokemon = new String[6];
+
+    private String[] tipo1 = new String[6];
+
+    private String[] tipo2 = new String[6];
+    private  String[] sexo = new String[6];
+    private int[] vida = new int[6];
+    private int[] nivel = new int[6];
+    private int[] numPokedex = new int[6];
+    ResultSet resultSet;
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-// ComboBox: selecciona un valor por defecto
-        comboBoxColores.getItems().addAll("Opción 1", "Opción 2", "Opción 3");
-        comboBoxColores.getSelectionModel().select("Opción 2");
-
-        // ImageView: establece una imagen por defecto
-
-        File fileImageFondo = new File(PATH_IMG_FONDO);
-        imgViewEjemplo.setImage(new Image(fileImageFondo.getAbsolutePath()));
 
 
+        }
 
-        // Slider: establece un valor por defecto
-        progressBar.setProgress(0.5);
-
-        listView.getItems().addAll("Elemento 1", "Elemento 2", "Elemento 3");
-
+    @FXML
+    void cargarEquipo(ActionEvent a) {
 
 
-        // Configura la columna de nombre como normal
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        Connection connection = DBConnection.getConnection();
 
-        // Configura la columna de imagen para mostrar una ImageView
-        imageColumn.setCellValueFactory(new PropertyValueFactory<>("imagePath"));
-        imageColumn.setCellFactory(tc -> new TableCell<ImageData, String>() {
-            private final ImageView imageView = new ImageView();
-            {
-                imageView.setFitHeight(50); // Ajusta a tus necesidades
-                imageView.setFitWidth(50);
-            }
+        PreparedStatement preparedStatement = null;
 
-            @Override
-            protected void updateItem(String imagePath, boolean empty) {
-                super.updateItem(imagePath, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    File fileImageFondo = new File(imagePath);
-                    imageView.setImage(new Image(fileImageFondo.getAbsolutePath()));
-                    setGraphic(imageView);
+        String sql = "SELECT * FROM POKEDEX PO INNER JOIN POKEMON P ON PO.NUM_POKEDEX = P.NUM_POKEDEX WHERE CAJA = 0 AND ID_USER = ?;";
+
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, entrenadorEquipo.getIdEntrenador());
+
+            resultSet = preparedStatement.executeQuery();
+
+               for (int i = 0; i < imgPok.length; i++) {
+
+
+                while (resultSet.next()) {
+
+                    numPokedex[i] = resultSet.getInt("NUM_POKEDEX");
+                    nomPokemon[i] = resultSet.getString("NOM_POKEMON");
+                    tipo1[i] = resultSet.getString("TIPO1");
+                    tipo2[i] = resultSet.getString("TIPO2");
+                    imagenUrlPokemonGenerado[i] = resultSet.getString("IMAGEN");
+                    sexo[i] = resultSet.getString("SEXO");
+                    vida[i] = resultSet.getInt("VITALIDAD");
+                    nivel[i] = resultSet.getInt("NIVEL");
+
+                    //Cambio de imagen
+                    break;
+
+
                 }
-            }
-        });
 
-        // Ejemplo de cómo añadir datos
-        tableView.getItems().add(new ImageData(PATH_IMG_CRIATURA, "Criatura"));
-        // Añade más datos según sea necesario
+                imgPok[i] = ConfigDB.URL_POK + imagenUrlPokemonGenerado[i];
+
+                System.out.println(imgPok[i]);
+
+
+            }
+
+            File fileImageFondo1 = new File(imgPok[0]);
+            File fileImageFondo2 = new File(imgPok[1]);
+            File fileImageFondo3 = new File(imgPok[2]);
+            File fileImageFondo4 = new File(imgPok[3]);
+            File fileImageFondo5 = new File(imgPok[4]);
+            File fileImageFondo6 = new File(imgPok[5]);
+
+
+            System.out.println("Posicion 1 = " + imgPok[0]);
+            System.out.println("Posicion 2 = " + imgPok[1]);
+
+
+            img1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
+            img2.setImage(new Image(fileImageFondo2.getAbsolutePath()));
+            img3.setImage(new Image(fileImageFondo3.getAbsolutePath()));
+            img4.setImage(new Image(fileImageFondo4.getAbsolutePath()));
+            img5.setImage(new Image(fileImageFondo5.getAbsolutePath()));
+            img6.setImage(new Image(fileImageFondo6.getAbsolutePath()));
+
+
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
 
 
     }
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-        tableView.getItems().add(new ImageData(PATH_IMG_CRIATURA2, "Criatura 2"));
+    void btnBACK(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/menu-view-centropk.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 715, 700);
+        stage.setTitle("boton-vuelta-view");
+        stage.setScene(scene);
+        MenuCentroPKController menuCentroPKController = fxmlLoader.getController();
+        menuCentroPKController.setEntrenadorMenu(entrenadorEquipo);
+        stage.show();
 
-        listView.getItems().add("Elemento 4");
+        Stage stageAnterior = (Stage) cerrarEquipo.getScene().getWindow();
+        stageAnterior.close();
+    }
+    File fileImgPok1;
+    File fileImgPokGenero;
 
-        progressBar.setProgress(0.1);
-        progressBar.setStyle("-fx-accent: red;");
 
-        comboBoxColores.getItems().add("Opción 4");
-        comboBoxColores.getSelectionModel().select("Opción 4");
+
+
+    @FXML
+    void clickPok1(MouseEvent event) {
+
+        fileImgPok1 = new File(img1.getImage().getUrl());
+            System.out.println("ruta: " + fileImgPok1);
+        imgFinal.setImage(new Image(fileImgPok1.getAbsolutePath()));
+
+        lblNomPok.setText(nomPokemon[0]);
+        barVida.setProgress(vida[0]);
+        lblNivel.setText("Nv" + nivel[0]);
+        lblTipo1.setText(tipo1[0]);
+        lblTipo2.setText(tipo2[0]);
+
+
+
+    }
+
+    @FXML
+    void clickPok2(MouseEvent event) {
+
+        File fileImgPok2 = new File(img2.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok2.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[1]);
+        lblNivel.setText("Nv" + nivel[1]);
+        lblTipo1.setText(tipo1[1]);
+        lblTipo2.setText(tipo2[1]);
+
+    }
+
+    @FXML
+    void clickPok3(MouseEvent event) {
+
+        File fileImgPok3 = new File(img3.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok3.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[2]);
+        lblNivel.setText("Nv" + nivel[2]);
+        lblTipo1.setText(tipo1[2]);
+        lblTipo2.setText(tipo2[2]);
+
+    }
+
+    @FXML
+    void clickPok4(MouseEvent event) {
+
+        File fileImgPok4 = new File(img4.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok4.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[3]);
+        lblNivel.setText("Nv" + nivel[3]);
+        lblTipo1.setText(tipo1[3]);
+        lblTipo2.setText(tipo2[3]);
+
+    }
+
+    @FXML
+    void clickPok5(MouseEvent event) {
+
+        File fileImgPok4 = new File(img4.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok4.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[4]);
+        lblNivel.setText("Nv" + nivel[4]);
+        lblTipo1.setText(tipo1[4]);
+        lblTipo2.setText(tipo2[4]);
+    }
+
+    @FXML
+    void clickPok6(MouseEvent event) {
+
+        File fileImgPok5 = new File(img5.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok5.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[5]);
+        lblNivel.setText("Nv" + nivel[5]);
+        lblTipo1.setText(tipo1[5]);
+        lblTipo2.setText(tipo2[5]);
+
     }
 
 
-}
+
+
+    }

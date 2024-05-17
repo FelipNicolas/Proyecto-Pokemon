@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Utils {
 
-    public static final String PATH_BASE_SOURCES = "src/main/resources/es/cesur/progprojectpok";
+    public static final String PATH_BASE_SOURCES = "src/main/resources/es/cesur/progprojectpok/";
 
     /**
      * Genera un número aleatorio entero entre dos números dados, ambos inclusive.

@@ -3,6 +3,8 @@ package es.cesur.progprojectpok.controllers;
 import es.cesur.progprojectpok.HelloApplication;
 import es.cesur.progprojectpok.ImageData;
 import es.cesur.progprojectpok.SplashApplication;
+import es.cesur.progprojectpok.clases.Entrenador;
+import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +18,12 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -39,38 +46,126 @@ public class LoginController implements Initializable {
     @FXML
     private Label usuarioCorrecto;
 
-
-    @FXML
-    void loginUser(ActionEvent event) {
-        if(userId.getText().equals("felipe") && passUser.getText().equals("1234")) {
-            usuarioCorrecto.setText("Correcto");
-
-        }else usuarioCorrecto.setText("Incorrecto");
+    protected Entrenador entrenadorLogin;
 
 
 
-    }
-
-    @FXML
-    void registerUser(ActionEvent event) {
-
-    }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+
     }
+
+
+    @FXML
+     void loginUser() throws SQLException, IOException {
+
+        Connection connection = DBConnection.getConnection();
+
+        String sql = "SELECT NOMBRE_USER, PASS_USER, ID_USER FROM ENTRENADOR";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+
+
+        String nomEntrenador;
+        String passEntrenador;
+        int idEntrenador;
+
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = null;
+
+
+
+        while (resultSet.next()) {
+
+            nomEntrenador = resultSet.getString("NOMBRE_USER");
+            passEntrenador = resultSet.getString("PASS_USER");
+            idEntrenador = resultSet.getInt("ID_USER");
+
+
+            if (userId.getText().equals(nomEntrenador) && passUser.getText().equals(passEntrenador)) {
+
+
+                entrenadorLogin = new Entrenador(nomEntrenador, passEntrenador, idEntrenador);
+
+
+                System.out.println(" entrenador login" + entrenadorLogin.getIdEntrenador());
+
+
+                fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/menu-view-principal.fxml"));
+
+                Scene scene = new Scene(fxmlLoader.load(), 715, 700);
+
+                // Enviar el id de entrenador a la siguente pantalla (equipo controller)
+
+                stage.setTitle("Login");
+                stage.setScene(scene);
+                MenuMainController menuMainController = fxmlLoader.getController();
+                menuMainController.setEntrenadorMenuPrincipal(entrenadorLogin);
+                stage.show();
+
+
+                System.out.println(entrenadorLogin.getIdEntrenador());
+
+                Stage stageAnterior = (Stage) usuarioCorrecto.getScene().getWindow();
+                stageAnterior.close();
+
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+
+            }else usuarioCorrecto.setText("Incorrecto");
+        }
+
+    }
+
+
+
+
+
+    @FXML
+    void registerUser(ActionEvent event) {
+
+        Connection connection = DBConnection.getConnection();
+
+        String nomEntrenador;
+        String passEntrenador;
+
+        nomEntrenador = userId.getText();
+        passEntrenador = passUser.getText();
+
+
+        String sql = "INSERT INTO ENTRENADOR (NOMBRE_USER, PASS_USER, POKEDOLLAR) VALUES (" + "'" +
+                nomEntrenador + "' " + ", '" + passEntrenador + "', " + "500" + ")";
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+    }
+
+
+
 
     @FXML
     void btnExit(ActionEvent event) {
-
+        System.exit(0);
     }
 
-    @FXML
-    protected void onHelloButtonClick() {
 
-    }
 
 
 }

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="944.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.cesur.progprojectpok.controllers.PcController">
+    <children>
+        <ImageView fitHeight="558.0" fitWidth="968.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/fondo-pc.jpg" />
+            </image>
+        </ImageView>
+      <AnchorPane fx:id="fondoMain" layoutX="192.0" layoutY="10.0" prefHeight="533.0" prefWidth="744.0" style="-fx-border-color: black; -fx-background-color: #43CEB5; -fx-border-radius: 10; -fx-background-radius: 12; -fx-border-width: 3;">
+         <children>
+            <AnchorPane layoutX="495.0" layoutY="410.0" prefHeight="81.0" prefWidth="94.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="495.0" layoutY="294.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="604.0" layoutY="295.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="495.0" layoutY="179.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="604.0" layoutY="409.0" prefHeight="106.0" prefWidth="95.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="5.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="604.0" layoutY="63.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="495.0" layoutY="64.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="604.0" layoutY="177.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="385.0" layoutY="62.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="385.0" layoutY="180.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="385.0" layoutY="296.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="385.0" layoutY="412.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="278.0" layoutY="62.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="278.0" layoutY="180.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="278.0" layoutY="296.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="278.0" layoutY="411.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="171.0" layoutY="62.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/blastoise-frente.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="171.0" layoutY="179.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="171.0" layoutY="296.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="171.0" layoutY="412.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="98.0" fitWidth="72.0" layoutX="99.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/91873.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="cerrarPC" fitHeight="52.0" fitWidth="165.0" layoutX="319.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo-pixel.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="22.0" layoutY="467.0" prefHeight="52.0" prefWidth="129.0" style="-fx-border-color: black; -fx-border-radius: 5;">
+               <children>
+                  <Button alignment="CENTER" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="39.0" style="-fx-background-color: white;" text="&lt;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="90.0" layoutY="2.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="39.0" style="-fx-background-color: white;" text="&gt;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="2.0" prefHeight="52.0" prefWidth="51.0" style="-fx-background-color: white;" text="CAJA 1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+        <AnchorPane layoutX="14.0" layoutY="85.0" prefHeight="384.0" prefWidth="278.0" style="-fx-border-color: black; -fx-background-color: #43CEB5; -fx-border-radius: 10; -fx-background-radius: 12; -fx-border-width: 3;">
+            <children>
+                <AnchorPane layoutX="25.0" layoutY="23.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/blastoise-frente.gif" />
+                     </image></ImageView>
+               </children>
+                </AnchorPane>
+                <AnchorPane layoutX="162.0" layoutY="23.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+                </AnchorPane>
+                <AnchorPane layoutX="25.0" layoutY="143.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+                </AnchorPane>
+                <AnchorPane layoutX="162.0" layoutY="143.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+                </AnchorPane>
+                <AnchorPane layoutX="25.0" layoutY="261.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+                </AnchorPane>
+                <AnchorPane layoutX="162.0" layoutY="261.0" prefHeight="98.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 10; -fx-background-color: #21C190;">
+               <children>
+                  <ImageView fitHeight="98.0" fitWidth="86.0" layoutX="5.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+      <Button layoutX="45.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBACK" prefHeight="52.0" prefWidth="129.0" style="-fx-background-radius: 10; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: D62E2E;" text="VOLVER" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
