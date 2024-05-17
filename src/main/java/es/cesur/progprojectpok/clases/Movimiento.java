@@ -2,12 +2,14 @@ package es.cesur.progprojectpok.clases;
 
 public abstract class Movimiento {
 
+    //Atributos
     protected String nomMovimiento;
     protected int pp;
     protected int precision;
     protected int prioridad;
 
 
+    //Constructores
     public Movimiento(String nomMovimiento, int pp) {
         super();
         this.nomMovimiento = nomMovimiento;
@@ -23,6 +25,8 @@ public abstract class Movimiento {
         this.prioridad = 0;
     }
 
+
+    //Getters & Setters
     public String getNomMovimiento() {
         return nomMovimiento;
     }

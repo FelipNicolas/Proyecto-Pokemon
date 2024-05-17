@@ -84,9 +84,15 @@ public class EquipoController implements Initializable {
 
     @FXML
     private Label cerrarEquipo;
+    @FXML
+    private Label lblTipo1;
+    @FXML
+    private Label lblTipo2;
 
 
-   private Entrenador entrenadorEquipo;
+
+
+    private Entrenador entrenadorEquipo;
 
     public Entrenador getEntrenadorEquipo() {
         return entrenadorEquipo;
@@ -96,16 +102,19 @@ public class EquipoController implements Initializable {
         this.entrenadorEquipo = entrenadorEquipo;
     }
 
-    String[] imgPok = new String[6];
+    private String[] imgPok = new String[6];
 
-    String ImagenUrlPokemonGenerado = "";
+    private String[] imagenUrlPokemonGenerado = new String[6];
 
-    String[] NOM_POKEMON = new String[6];
+    private String[] nomPokemon = new String[6];
 
-    String[] TIPO1 = new String[6];
+    private String[] tipo1 = new String[6];
 
-    String[] TIPO2 = new String[6];
-
+    private String[] tipo2 = new String[6];
+    private  String[] sexo = new String[6];
+    private int[] vida = new int[6];
+    private int[] nivel = new int[6];
+    private int[] numPokedex = new int[6];
     ResultSet resultSet;
 
 
@@ -138,22 +147,14 @@ public class EquipoController implements Initializable {
 
                 while (resultSet.next()) {
 
-                    int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
-                    NOM_POKEMON[i] = resultSet.getString("NOM_POKEMON");
-                    TIPO1[i] = resultSet.getString("TIPO1");
-                    TIPO2[i] = resultSet.getString("TIPO2");
-                    ImagenUrlPokemonGenerado = resultSet.getString("IMAGEN");
-                    String SONIDO = resultSet.getString("SONIDO");
-                    int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
-                    int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
-                    String SEXO = resultSet.getString("SEXO");
-                    int VIDA = resultSet.getInt("VITALIDAD");
-                    int NIVEL = resultSet.getInt("NIVEL");
-
-
-
-                    System.out.println(NUM_POKEDEX + " " + NOM_POKEMON + " " + TIPO1 + " " + TIPO2 + " " +
-                            ImagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + SEXO);
+                    numPokedex[i] = resultSet.getInt("NUM_POKEDEX");
+                    nomPokemon[i] = resultSet.getString("NOM_POKEMON");
+                    tipo1[i] = resultSet.getString("TIPO1");
+                    tipo2[i] = resultSet.getString("TIPO2");
+                    imagenUrlPokemonGenerado[i] = resultSet.getString("IMAGEN");
+                    sexo[i] = resultSet.getString("SEXO");
+                    vida[i] = resultSet.getInt("VITALIDAD");
+                    nivel[i] = resultSet.getInt("NIVEL");
 
                     //Cambio de imagen
                     break;
@@ -161,7 +162,7 @@ public class EquipoController implements Initializable {
 
                 }
 
-                imgPok[i] = ConfigDB.URL_POK + ImagenUrlPokemonGenerado;
+                imgPok[i] = ConfigDB.URL_POK + imagenUrlPokemonGenerado[i];
 
                 System.out.println(imgPok[i]);
 
@@ -208,17 +209,26 @@ public class EquipoController implements Initializable {
         Stage stageAnterior = (Stage) cerrarEquipo.getScene().getWindow();
         stageAnterior.close();
     }
+    File fileImgPok1;
+    File fileImgPokGenero;
+
 
 
 
     @FXML
     void clickPok1(MouseEvent event) {
 
-        File fileImgPok1 = new File(img1.getImage().getUrl());
+        fileImgPok1 = new File(img1.getImage().getUrl());
             System.out.println("ruta: " + fileImgPok1);
         imgFinal.setImage(new Image(fileImgPok1.getAbsolutePath()));
 
-        lblNomPok.setText(NOM_POKEMON[0]);
+        lblNomPok.setText(nomPokemon[0]);
+        barVida.setProgress(vida[0]);
+        lblNivel.setText("Nv" + nivel[0]);
+        lblTipo1.setText(tipo1[0]);
+        lblTipo2.setText(tipo2[0]);
+
+
 
     }
 
@@ -227,27 +237,57 @@ public class EquipoController implements Initializable {
 
         File fileImgPok2 = new File(img2.getImage().getUrl());
         imgFinal.setImage(new Image(fileImgPok2.getAbsolutePath()));
-        lblNomPok.setText(NOM_POKEMON[1]);
+        lblNomPok.setText(nomPokemon[1]);
+        lblNivel.setText("Nv" + nivel[1]);
+        lblTipo1.setText(tipo1[1]);
+        lblTipo2.setText(tipo2[1]);
 
     }
 
     @FXML
-    void clickPok3(ActionEvent event) {
+    void clickPok3(MouseEvent event) {
+
+        File fileImgPok3 = new File(img3.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok3.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[2]);
+        lblNivel.setText("Nv" + nivel[2]);
+        lblTipo1.setText(tipo1[2]);
+        lblTipo2.setText(tipo2[2]);
 
     }
 
     @FXML
-    void clickPok4(ActionEvent event) {
+    void clickPok4(MouseEvent event) {
+
+        File fileImgPok4 = new File(img4.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok4.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[3]);
+        lblNivel.setText("Nv" + nivel[3]);
+        lblTipo1.setText(tipo1[3]);
+        lblTipo2.setText(tipo2[3]);
 
     }
 
     @FXML
-    void clickPok5(ActionEvent event) {
+    void clickPok5(MouseEvent event) {
 
+        File fileImgPok4 = new File(img4.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok4.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[4]);
+        lblNivel.setText("Nv" + nivel[4]);
+        lblTipo1.setText(tipo1[4]);
+        lblTipo2.setText(tipo2[4]);
     }
 
     @FXML
-    void clickPok6(ActionEvent event) {
+    void clickPok6(MouseEvent event) {
+
+        File fileImgPok5 = new File(img5.getImage().getUrl());
+        imgFinal.setImage(new Image(fileImgPok5.getAbsolutePath()));
+        lblNomPok.setText(nomPokemon[5]);
+        lblNivel.setText("Nv" + nivel[5]);
+        lblTipo1.setText(tipo1[5]);
+        lblTipo2.setText(tipo2[5]);
 
     }
 

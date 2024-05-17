@@ -69,7 +69,19 @@ public class MenuLuchaController implements Initializable {
     }
 
     @FXML
-    void btnCaptura(ActionEvent event) {
+    void btnCaptura(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/captura-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1015, 685);
+        stage.setTitle("captura-view");
+        stage.setScene(scene);
+        CapturaController capturaController = fxmlLoader.getController();
+        capturaController.setEntrenadorCaptura(entrenadorMenuLucha);
+        stage.show();
+
+        Stage stageAnterior = (Stage) cerrarLucha.getScene().getWindow();
+        stageAnterior.close();
+
 
     }
 

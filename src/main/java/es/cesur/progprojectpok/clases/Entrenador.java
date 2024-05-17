@@ -9,21 +9,21 @@ import java.sql.SQLException;
 
 public class Entrenador {
 
+    //Atributos
     private String nombreEntrenador;
-
     private String pass;
     private int idEntrenador;
     private Pokemon[] equipo;
-    private Pc caja;
     private int pokedollars;
     private Objeto[] listObjetos;
 
+
+    //Constructores
     public Entrenador() {
         this.nombreEntrenador = "";
         this.pass = "";
         this.idEntrenador = idEntrenador;
         this.equipo = null;
-        this.caja = null;
         this.pokedollars = 500;
         this.listObjetos = null;
     }
@@ -33,11 +33,11 @@ public class Entrenador {
         this.pass = pass;
         this.idEntrenador = idEntrenador;
         this.equipo = null;
-        this.caja = null;
         this.pokedollars = 500;
         this.listObjetos = null;
     }
 
+    //Getter & Setters
     public String getNombreEntrenador() {
         return nombreEntrenador;
     }
@@ -52,14 +52,6 @@ public class Entrenador {
 
     public void setEquipo(Pokemon[] equipo) {
         this.equipo = equipo;
-    }
-
-    public Pc getCaja() {
-        return caja;
-    }
-
-    public void setCaja(Pc caja) {
-        this.caja = caja;
     }
 
     public int getPokedollars() {
@@ -96,6 +88,10 @@ public class Entrenador {
         this.pass = pass;
     }
 
+
+    /**
+     *      * @param pokemonCaptura Metodo captura pokemon
+     */
     public void capturar(Pokemon pokemonCaptura){
 
         for (int i = 0; i < equipo.length; i++) {
@@ -107,17 +103,23 @@ public class Entrenador {
         }
     }
 
+    Connection connection;
+    ResultSet resultSet;
+    PreparedStatement preparedStatement = null;
 
+
+    /**
+     *      * @param idEntrenadorLogin //Obtiene informacion sobre el entrenador
+     * @return
+     */
     public int infoEntrenador(int idEntrenadorLogin){
 
-        Connection connection = DBConnection.getConnection();
-
-        ResultSet resultSet;
+        connection = DBConnection.getConnection();
 
         String sql = "SELECT * FROM ENTRENADOR WHERE ID_USER = ?";
 
-        PreparedStatement preparedStatement = null;
         try {
+            assert connection != null;
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             preparedStatement.setInt(1, idEntrenadorLogin);
@@ -127,6 +129,14 @@ public class Entrenador {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e) {
+            }
+
         }
 
         return idEntrenador;

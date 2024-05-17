@@ -2,13 +2,11 @@ package es.cesur.progprojectpok.clases;
 
 public class EstadoMov extends Movimiento {
 
-    //Atributos
     private Estado estadoMov;
     private boolean persistente;
     private int numTurnos;
 
 
-    //Constructores
     public EstadoMov(String nomMovimiento, int pp, Estado estadoMov) {
         super(nomMovimiento, pp);
         this.estadoMov = estadoMov;
@@ -21,7 +19,6 @@ public class EstadoMov extends Movimiento {
         this.numTurnos = 0;
     }
 
-    //Getters & Setters
     public Estado getEstadoMov() {
         return estadoMov;
     }
@@ -46,13 +43,6 @@ public class EstadoMov extends Movimiento {
         this.numTurnos = numTurnos;
     }
 
-
-    /**
-     * Establece el estado del pokemon
-     * @param pokemonObjetivo
-     * @param movimiento
-     * @return
-     */
     @Override
     public int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento) {
 

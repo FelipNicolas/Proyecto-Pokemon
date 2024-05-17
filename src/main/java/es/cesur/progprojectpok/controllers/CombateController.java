@@ -5,6 +5,7 @@ import es.cesur.progprojectpok.clases.*;
 import es.cesur.progprojectpok.database.ConfigDB;
 import es.cesur.progprojectpok.database.DBConnection;
 import es.cesur.progprojectpok.utils.Utils;
+import es.cesur.progprojectpok.utils.UtilsFicheros;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,7 +105,7 @@ public class CombateController implements Initializable {
     private int pokemonRandom;
     private Connection connection;
 
-    private Pokemon[] equipoEntrenador = new Pokemon[6];
+
 
     private int[] ataqueNormal = new int[6];
     private int[] ataqueEspecial = new int[6];
@@ -119,10 +120,32 @@ public class CombateController implements Initializable {
     private String[] nomPokRandom = new String[6];
     private int vidaPokRandom;
     private String imgPokRandom;
-    private String generoM = ConfigDB.GENERO_M;
-    private String generoF = ConfigDB.GENERO_F;
+
+    int pokElejido = 0;
+
+    int movElejido;
+    int movElejidoRival;
+
+    int pokElejidoRival;
+
+    Random randomMovRival = new Random();
+
 
     Pokemon pokMovimientos = new Pokemon();
+
+
+    private Pokemon[] equipoEntrenador = new Pokemon[6];
+    private Pokemon[] equipoRival = new Pokemon[6];
+    private Pokemon pokSinNada = new Pokemon();
+
+    int contadorPokemonActivo = 0;
+    int contadorRivalPokemonActivo = 0;
+    int contadorMov = 0;
+    int danioAtaqueAliado;
+    int danioAtaqueRival;
+
+    int contadorMuertesRival;
+    int contadorMuertesAliado;
 
 
 
@@ -130,7 +153,8 @@ public class CombateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        pokemonRandom = random.nextInt(25);
+
+      /*  pokemonRandom = random.nextInt(25);
 
         connection = DBConnection.getConnection();
 
@@ -142,7 +166,7 @@ public class CombateController implements Initializable {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, pokemonRandom);
 
-            System.out.println("sentencia" + sql);
+            //System.out.println("sentencia" + sql);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -153,8 +177,7 @@ public class CombateController implements Initializable {
 
             String rutaImgPokemon = ConfigDB.URL_POK + imgPokemon;
 
-            File rutaAbsolutaImgPok = new File(rutaImgPokemon);
-            System.out.println("ruta absoluta" + rutaAbsolutaImgPok);
+          //  System.out.println("ruta absoluta" + rutaAbsolutaImgPok);
 
             imgPok2.setImage(new Image(rutaAbsolutaImgPok.getAbsolutePath()));
 
@@ -165,14 +188,14 @@ public class CombateController implements Initializable {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
     }
 
     @FXML
     void btnPokemon(ActionEvent event) {
 
-        System.out.println("id equipo" + entrenadorCombate);
+       // System.out.println("id equipo" + entrenadorCombate);
 
         Connection connection = DBConnection.getConnection();
 
@@ -187,7 +210,9 @@ public class CombateController implements Initializable {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            File rutaLog = new File(Utils.PATH_BASE_SOURCES + "LogCombate.txt");
 
+            UtilsFicheros utilsFicheros = new UtilsFicheros();
 
             for (int i = 0; i < imgPok.length; i++) {
 
@@ -196,12 +221,9 @@ public class CombateController implements Initializable {
 
                     int NUM_POKEDEX = resultSet.getInt("NUM_POKEDEX");
                     nomPok[i] = resultSet.getString("NOM_POKEMON");
-                    tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1").toUpperCase());
-                    tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2").toUpperCase());
+                    tipo1[i] = Tipos.valueOf(resultSet.getString("TIPO1"));
+                    tipo2[i] = Tipos.valueOf(resultSet.getString("TIPO2"));
                     imagenUrlPokemonGenerado[i] = resultSet.getString("IMAGEN");
-                    String SONIDO = resultSet.getString("SONIDO");
-                    int NIVEL_EVOLUCION = resultSet.getInt("NIVEL_EVOLUCION");
-                    int NUM_POKEDEX_EVO = resultSet.getInt("NUM_POKEDEX_EVO");
                     sexo[i] = resultSet.getString("SEXO");
                     VIDA[i] = resultSet.getInt("VITALIDAD");
                     nivel[i] = resultSet.getInt("NIVEL");
@@ -214,8 +236,8 @@ public class CombateController implements Initializable {
                     //objeto[i] = resultSet.getInt("ID_OBJETO");
                     estadoPok[i] = Estado.valueOf(resultSet.getString("ESTADO").toUpperCase());
                     idPokemon[i] = resultSet.getInt("ID_POKEMON");
-                    System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
-                            imagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + sexo + " " + VIDA);
+                   // System.out.println(NUM_POKEDEX + " " + nomPokemon + " " + tipo1 + " " + tipo2 + " " +
+                   //         imagenUrlPokemonGenerado + " " + SONIDO + " " + NIVEL_EVOLUCION + " " + NUM_POKEDEX_EVO + " " + sexo + " " + VIDA);
 
                     //Cambio de imagen
                     break;
@@ -225,7 +247,7 @@ public class CombateController implements Initializable {
 
                 imgPok[i] = ConfigDB.URL_POK + imagenUrlPokemonGenerado[i];
 
-                System.out.println("Imagepok de I" + imgPok[i]);
+               // System.out.println("Imagepok de I" + imgPok[i]);
 
                 for (int j = 0; j < VIDA.length; j++) {
 
@@ -249,21 +271,13 @@ public class CombateController implements Initializable {
                  idBtnEquipo6.setText(nomPok[5]);
 
 
-
-                System.out.println("La chupa a:" + vidaPivote[0]);
-                System.out.println("La chupa a:" + vidaPivote[1]);
-
-
-
-
                 equipoEntrenador[i] = new Pokemon(nomPok[i], ataqueNormal[i], defensaNormal[i], ataqueEspecial[i], defensaEspecial[i],
                         velocidad[i], nivel[i], sexo[i], objeto[i], estadoPok[i], experiencia[i], tipo1[i], tipo2[i]);
 
 
-
-
                 pokMovimientos.cargarMovimientos(equipoEntrenador[i], entrenadorCombate.getIdEntrenador(), idPokemon[i]);
-                System.out.println("Equipo entrenador: " + equipoEntrenador[i]);
+                System.out.println("Equipo entrenador : " + equipoEntrenador[i].getNombrePok());
+
 
             }
 
@@ -273,20 +287,170 @@ public class CombateController implements Initializable {
             idBtnAtaque4.setText(equipoEntrenador[0].getNombreMov(3));
 
             File fileImageFondo1 = new File(imgPok[0]);
-
-
-
-            System.out.println("Posicion 1 = " + imgPok[0]);
-           //System.out.pr
+           // System.out.println("Posicion 1 = " + imgPok[0]);
 
             imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
 
+            equipoRival = pokSinNada.cargarEquipoContrarioConStats(equipoEntrenador[0]);
+
+            File fileImageFondo2 = new File(ConfigDB.URL_POK + equipoRival[0].getUrlImgPok());
+
+            System.out.println(fileImageFondo2);
+
+            imgPok2.setImage(new Image(fileImageFondo2.getAbsolutePath()));
+
+            for (int i = 0; i < equipoEntrenador.length; i++) {
+                utilsFicheros.guardarArchivoTexto(rutaLog.getAbsolutePath(),"Equipo entrenador: " + equipoEntrenador[i].getNombrePok());
+            }
+
+            System.out.println("Ruta" + rutaLog.getAbsolutePath());
+
+            for (int i = 0; i < equipoRival.length; i++) {
+                utilsFicheros.guardarArchivoTexto(rutaLog.getAbsolutePath(),"Equipo rival: " + equipoRival[i].getNombrePok());
+            }
 
         } catch (SQLException s){
             throw new RuntimeException(s);
         }
 
 
+
+
+    }
+    public void combateFinal() {
+
+
+        File imgRival = new File(ConfigDB.URL_POK + equipoRival[contadorRivalPokemonActivo].getUrlImgPok());
+
+        imgPok2.setImage(new Image(imgRival.getAbsolutePath()));
+
+        equipoEntrenador[contadorPokemonActivo].atacar(equipoRival[contadorRivalPokemonActivo], equipoEntrenador[contadorPokemonActivo].getMovimientoPok(), contadorMov);
+
+        comprobarVivo(equipoRival[contadorRivalPokemonActivo], equipoEntrenador[contadorPokemonActivo]);
+        comprobarEstadoEquipo(equipoEntrenador, equipoRival);
+
+        float vidaPokRival = (float) equipoRival[contadorRivalPokemonActivo].getVitalidadPok() / 100;
+
+        prgrsBar1.setProgress(vidaPokRival);
+
+        equipoRival[contadorRivalPokemonActivo].atacar(equipoEntrenador[contadorPokemonActivo], equipoRival[contadorRivalPokemonActivo].getMovimientoPok(), contadorMov);
+
+        comprobarVivo(equipoRival[contadorRivalPokemonActivo], equipoEntrenador[contadorPokemonActivo]);
+        comprobarEstadoEquipo(equipoEntrenador, equipoRival);
+
+        float vidaPokAliado = (float) equipoEntrenador[contadorPokemonActivo].getVitalidadPok() / 100;
+
+        prgrsBar2.setProgress(vidaPokAliado);
+
+    }
+
+
+    public static final String ESTADO_POKMUERTO = "DEBILITADO";
+
+    public void comprobarVivo(Pokemon pokemonRival, Pokemon tuPokemon) {
+
+        if (tuPokemon.getVitalidadPok() <= 0) {
+
+            tuPokemon.setEstadoPok(Estado.valueOf(ESTADO_POKMUERTO));
+
+            switch (contadorPokemonActivo) {
+
+                case 0:
+                    idBtnEquipo1.setDisable(true);
+                    break;
+                case 1:
+                    idBtnEquipo2.setDisable(true);
+                    break;
+                case 2:
+                    idBtnEquipo3.setDisable(true);
+                    break;
+                case 3:
+                    idBtnEquipo4.setDisable(true);
+                    break;
+                case 4:
+                    idBtnEquipo5.setDisable(true);
+                    break;
+                case 5:
+                    idBtnEquipo6.setDisable(true);
+                    break;
+                default:
+                    break;
+            }
+
+            idPaneAtaques.setDisable(true);
+            idPaneAtaques.setVisible(false);
+
+            idPaneEquipo.setDisable(false);
+            idPaneEquipo.setVisible(true);
+
+
+        }
+        if (pokemonRival.getVitalidadPok() <= 0) {
+
+            pokemonRival.setEstadoPok(Estado.valueOf(ESTADO_POKMUERTO));
+
+            switch (contadorRivalPokemonActivo) {
+
+                case 0:
+                    Pok1.setDisable(true);
+                    break;
+                case 1:
+                    Pok2.setDisable(true);
+                    break;
+                case 2:
+                    Pok3.setDisable(true);
+                    break;
+                case 3:
+                    Pok4.setDisable(true);
+                    break;
+                case 4:
+                    Pok5.setDisable(true);
+                    break;
+                case 5:
+                    Pok6.setDisable(true);
+                    break;
+                default:
+                    break;
+
+            }
+            contadorRivalPokemonActivo++;
+            File imagenRival = new File(ConfigDB.URL_POK + equipoRival[contadorRivalPokemonActivo].getUrlImgPok());
+            imgPok2.setImage(new Image(imagenRival.getAbsolutePath()));
+
+        }
+
+
+    }
+
+
+    public boolean comprobarEstadoEquipo(Pokemon[] tuEquipo, Pokemon[] equipoRival){
+
+        boolean seguir = true;
+
+        int contadorRival = 0;
+
+        for (int i = 0; i < equipoRival.length; i++) {
+
+            if (tuEquipo[i].getEstadoPok().equals(ESTADO_POKMUERTO)) {
+                contadorMuertesAliado++;
+                System.out.println("Contador muertos tu equipo" + contadorMuertesAliado);
+            }
+
+            if (equipoRival[i].getEstadoPok().equals(ESTADO_POKMUERTO)) {
+                contadorMuertesRival++;
+                System.out.println("Contador muertos equipo rival" + contadorMuertesRival);
+
+            }
+
+        }
+        if (contadorMuertesAliado == 6) {
+            System.out.println("Rival gana el combate");
+            seguir = false;
+        }else if (contadorMuertesRival == 6){
+            System.out.println("Has ganado el combate");
+            seguir = false;
+        }
+        return seguir;
     }
 
 
@@ -498,23 +662,35 @@ public class CombateController implements Initializable {
     @FXML
     void btnAtaque1(ActionEvent event) {
 
+        contadorMov = 0;
+        combateFinal();
 
     }
 
     @FXML
     void btnAtaque2(ActionEvent event) {
 
+        contadorMov = 1;
+        combateFinal();
+
     }
+
+
 
     @FXML
     void btnAtaque3(ActionEvent event) {
 
+        contadorMov = 2;
+        combateFinal();
     }
 
     @FXML
     void btnAtaque4(ActionEvent event) {
 
+        contadorMov = 3;
+        combateFinal();
     }
+
 
     @FXML
     void btnEquipoPok1(ActionEvent event) {
@@ -536,6 +712,7 @@ public class CombateController implements Initializable {
         idPaneMain.setDisable(false);
         idPaneMain.setVisible(true);
 
+        contadorPokemonActivo = 0;
     }
 
     @FXML
@@ -545,7 +722,7 @@ public class CombateController implements Initializable {
         lblNombre2.setText(nomPok[1]);
         prgrsBar2.setProgress(((double) VIDA[1] / 100));
 
-        System.out.println(imgPok[1]);
+       // System.out.println(imgPok[1]);
 
         File fileImageFondo1 = new File(imgPok[1]);
         imgPok1.setImage(new Image(fileImageFondo1.getAbsolutePath()));
@@ -559,6 +736,9 @@ public class CombateController implements Initializable {
         idPaneEquipo.setVisible(false);
         idPaneMain.setDisable(false);
         idPaneMain.setVisible(true);
+
+        contadorPokemonActivo = 1;
+
 
     }
 
@@ -582,6 +762,9 @@ public class CombateController implements Initializable {
         idPaneMain.setDisable(false);
         idPaneMain.setVisible(true);
 
+        contadorPokemonActivo = 2;
+
+
     }
 
     @FXML
@@ -603,6 +786,9 @@ public class CombateController implements Initializable {
         idPaneEquipo.setVisible(false);
         idPaneMain.setDisable(false);
         idPaneMain.setVisible(true);
+
+        contadorPokemonActivo = 3;
+
 
     }
 
@@ -626,6 +812,9 @@ public class CombateController implements Initializable {
         idPaneMain.setDisable(false);
         idPaneMain.setVisible(true);
 
+        contadorPokemonActivo = 4;
+
+
     }
 
     @FXML
@@ -647,6 +836,9 @@ public class CombateController implements Initializable {
         idPaneEquipo.setVisible(false);
         idPaneMain.setDisable(false);
         idPaneMain.setVisible(true);
+
+        contadorPokemonActivo = 5;
+
 
     }
 

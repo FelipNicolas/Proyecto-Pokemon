@@ -2,12 +2,10 @@ package es.cesur.progprojectpok.clases;
 
 public class MejoraMov extends Movimiento{
 
-    //Atributos
     private int mejoraStat;
     private String nombreStat;
     private int numTurnos;
 
-    //Constructores
     public MejoraMov(String nomMovimiento, int pp, int mejoraStat, String nombreStat) {
         super(nomMovimiento, pp);
         this.mejoraStat = mejoraStat;
@@ -21,12 +19,6 @@ public class MejoraMov extends Movimiento{
         this.numTurnos = 0;
     }
 
-    /**
-     * Establece mejora segun stats
-     * @param pokemonObjetivo
-     * @param movimiento
-     * @return
-     */
     @Override
     public int accionMov(Pokemon pokemonObjetivo, Movimiento movimiento) {
 
@@ -47,8 +39,6 @@ public class MejoraMov extends Movimiento{
                 break;
             case "velocidad":
                 pokemonObjetivo.setVelocidadPok(mejoraStat);
-                break;
-            default:
                 break;
         }
         return mejoraStat;

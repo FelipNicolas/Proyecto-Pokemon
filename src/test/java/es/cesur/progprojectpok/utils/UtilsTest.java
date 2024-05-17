@@ -6,11 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UtilsTest {
 
-    @Test
-    void generarNumeroAleatorio() {
-    }
-
-    @Test
+      @Test
     void generarNumeroAleatorioEntre() {
         int numAleatorioGen = Utils.generarNumeroAleatorio(1,2);
         assertTrue(numAleatorioGen >= 1);

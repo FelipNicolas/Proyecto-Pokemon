@@ -72,6 +72,8 @@ public class CapturaController implements Initializable {
 
 
 
+
+
     public Entrenador getEntrenadorCaptura() {
         return entrenadorCaptura;
     }
@@ -178,18 +180,11 @@ public class CapturaController implements Initializable {
                     throw new RuntimeException(e);
                 }
 
-                lblCaptura.setText("Pokemon capturado");
-
-                menuMote.setDisable(false);
 
 
 
 
             }else lblCaptura.setText("La captura fallo ");
-
-
-
-
 
 
     }
@@ -213,22 +208,6 @@ public class CapturaController implements Initializable {
         stageAnterior.close();
     }
 
-    @FXML
-    void btnPonerMoteNo(ActionEvent event) throws IOException {
-
-        vueltaMenuLucha();
-
-    }
-
-    @FXML
-    void btnPonerMoteSi(ActionEvent event) {
-
-        btnSi.setDisable(true);
-        btnNo.setDisable(true);
-        txtMote.setDisable(false);
-        txtPreguntaMote.setText("Escriba el mote");
-
-
 
 
 
@@ -236,7 +215,7 @@ public class CapturaController implements Initializable {
 
 
 
-    }
+
 
 
 
